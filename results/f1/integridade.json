@@ -1,0 +1,23 @@
+{
+  "sha256_csv_bruto": "044fdace33fa564e1e60453f2941dafc95539c99878b0d32746950394b9dd4d4",
+  "linhas_csv": 47837,
+  "linhas_splits": 47837,
+  "split_grupo": {
+    "treino": 38270,
+    "holdout": 9567
+  },
+  "grupos_cruzados": 0,
+  "treino_s": 41.5,
+  "acc_holdout": {
+    "acertos": 8139,
+    "n": 9567,
+    "pct": 85.0737
+  },
+  "acc_400": {
+    "acertos": 278,
+    "n": 400,
+    "pct": 69.5
+  },
+  "concordancia_pred_caso_holdout_pct": 100.0,
+  "modelo": "data/modelos/modelo_f71cfd480a50.joblib"
+}
