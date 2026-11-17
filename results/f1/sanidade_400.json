@@ -3,9 +3,9 @@
   "fulltext_zero_resultados": 0,
   "fulltext_zero_resultados_pct": 0.0,
   "latencia_p50_ms": {
-    "vetorial": 137.6,
-    "fulltext": 982.9,
-    "hibrida": 1150.3
+    "vetorial": 115.1,
+    "fulltext": 816.6,
+    "hibrida": 919.3
   },
   "obs": "n=50 candidatos; conexão psycopg reaproveitada no full-text; CPU local; 1 passada sequencial"
 }

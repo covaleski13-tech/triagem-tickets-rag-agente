@@ -1,5 +1,5 @@
 # Origem: case técnico do G4, PR #228 (https://github.com/Gestao-Quatro-Ponto-Zero/ai-master-challenge/pull/228), commit 3a880f2,
-# arquivo ai-master-challenge/submissions/gustavo-covaleski/solution/triagem.py. Copiado sem alterar a lógica; só este cabeçalho foi adicionado.
+# arquivo submissions/gustavo-covaleski/solution/triagem.py. Copiado sem alterar a lógica; só este cabeçalho foi adicionado.
 import hashlib
 import json
 import os

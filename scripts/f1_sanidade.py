@@ -29,7 +29,7 @@ def main():
            "fulltext_zero_resultados_pct": round(100 * zeros / len(textos), 2),
            "latencia_p50_ms": {k: round(1000 * float(np.median(v)), 1) for k, v in lat.items()},
            "obs": "n=50 candidatos; conexão psycopg reaproveitada no full-text; CPU local; 1 passada sequencial"}
-    (RAIZ / "results/f1/sanidade_400.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    (RAIZ / "results/f1/sanidade_400.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8", newline="\n")
     print(json.dumps(out, indent=2, ensure_ascii=False))
 
 

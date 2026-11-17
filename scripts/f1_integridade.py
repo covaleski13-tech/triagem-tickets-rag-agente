@@ -68,7 +68,7 @@ def main():
     out["modelo"] = arq.relative_to(RAIZ).as_posix()
 
     (RAIZ / "results/f1").mkdir(parents=True, exist_ok=True)
-    (RAIZ / "results/f1/integridade.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    (RAIZ / "results/f1/integridade.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8", newline="\n")
     print(json.dumps(out, indent=2, ensure_ascii=False))
 
 

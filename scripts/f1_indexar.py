@@ -60,7 +60,7 @@ def main():
     out = {"n_treino": len(tr), "n_vetorial": n_vet, "n_fulltext": n_fts, "embed_treino_s": round(t_emb, 1),
            "insercao_vetorial_s": round(t_ins, 1)}
     (RAIZ / "results/f1").mkdir(parents=True, exist_ok=True)
-    (RAIZ / "results/f1/indexacao.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+    (RAIZ / "results/f1/indexacao.json").write_text(json.dumps(out, indent=2), encoding="utf-8", newline="\n")
     print(json.dumps(out, indent=2))
 
 

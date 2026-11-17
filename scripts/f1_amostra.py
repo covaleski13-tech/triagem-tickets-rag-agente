@@ -33,13 +33,13 @@ def main():
         print("id repetido:", r, [(l["valida"], l["tokens_saida"]) for l in linhas if int(l["id"]) == r])
 
     ordem = list(dict.fromkeys(ids))
-    pd.DataFrame({"id": ordem}).to_csv(RAIZ / "data/amostra_400_ids.csv", index=False)
+    pd.DataFrame({"id": ordem}).to_csv(RAIZ / "data/amostra_400_ids.csv", index=False, lineterminator="\n")
 
     ultima = {int(l["id"]): l for l in linhas}  # dict mantém a última linha de cada id
     pred = pd.DataFrame([{"id": i, "pred_caso": validar(ultima[i]["resposta_bruta"]) or "",
                           "valida": ultima[i]["valida"]} for i in ordem])
     assert ((pred["pred_caso"] != "") == (pred["valida"] == "s")).all(), "validação diverge do campo valida do log"
-    pred.to_csv(RAIZ / "data/caso/f3_v0_pred.csv", index=False)
+    pred.to_csv(RAIZ / "data/caso/f3_v0_pred.csv", index=False, lineterminator="\n")
 
     splits = pd.read_csv(RAIZ / "data/f1_splits.csv").set_index("id")
     assert (splits.loc[ordem, "split_grupo"] == "holdout").all()
