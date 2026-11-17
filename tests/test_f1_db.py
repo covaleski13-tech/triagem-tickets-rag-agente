@@ -56,3 +56,18 @@ def test_autorrecuperacao(con):
     for i, texto in zip(amostra["id"], amostra["Document"]):
         assert buscar_vetorial(texto, 5)[0][0] == i
         assert i in [j for j, _, _ in buscar_fulltext(texto, 3, con=con)]
+
+
+def test_hibrida_csv_igual_ao_vivo(con):
+    import pandas as pd
+
+    from triagem_rag.dados import RAIZ, ds2_com_splits
+    from triagem_rag.recuperacao import buscar_hibrida
+    arq = RAIZ / "results/f2/hibrida_top5_400.csv"
+    if not arq.exists():
+        pytest.skip("results/f2/hibrida_top5_400.csv ainda não gerado")
+    hib = pd.read_csv(arq)
+    texto = ds2_com_splits().set_index("id")["Document"]
+    for i in hib["id_consulta"].drop_duplicates().iloc[:3]:
+        esperado = hib[hib.id_consulta == i].sort_values("rank")["id_vizinho"].tolist()
+        assert [j for j, _, _ in buscar_hibrida(texto[i], 5, con=con)] == esperado

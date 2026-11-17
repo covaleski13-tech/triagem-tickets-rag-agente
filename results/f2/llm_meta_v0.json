@@ -1,0 +1,12 @@
+{
+  "variante": "v0",
+  "modelo": "claude-haiku-5-5",
+  "sha256_system": "462ed6042d90eeeab89e2093227a8615ddebff36d2e02f04a8412da4b046cdd3",
+  "duracao_s": 56.8,
+  "chamadas": 400,
+  "tokens_entrada": 553381,
+  "tokens_saida": 9569,
+  "custo_usd": 0.060123,
+  "acertos": 104,
+  "acuracia": 0.26
+}

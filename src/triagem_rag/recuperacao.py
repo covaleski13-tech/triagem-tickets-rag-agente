@@ -83,6 +83,15 @@ def rrf(listas, k_rrf: int = K_RRF, top: int = 5) -> list[tuple[int, float]]:
     return [(i, score[i]) for i in ordem[:top]]
 
 
+def voto_k1(categorias_por_rank: list[str]) -> str:
+    """Categoria mais frequente; empate: vence a do vizinho de melhor rank entre as empatadas."""
+    cont = {}
+    for c in categorias_por_rank:
+        cont[c] = cont.get(c, 0) + 1
+    maximo = max(cont.values())
+    return next(c for c in categorias_por_rank if cont[c] == maximo)
+
+
 def buscar_hibrida(texto: str, k: int = 5, con=None) -> list[tuple[int, str, int]]:
     vet, fts = buscar_vetorial(texto, N_CANDIDATOS), buscar_fulltext(texto, N_CANDIDATOS, con=con)
     cat = {i: c for i, c, _ in vet + fts}

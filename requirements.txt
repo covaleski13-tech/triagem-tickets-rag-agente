@@ -1,17 +1,21 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
+anthropic==2.10.0
 huggingface_hub==1.33.0
 joblib==1.6.0
+langchain-anthropic==1.7.10
 langchain-core==1.8.1
 langchain-huggingface==1.2.3
 langchain-postgres==0.0.19
 numpy==2.5.5
 pandas==3.1.1
 pgvector==0.3.6
-psycopg==3.3.9
 psycopg-binary==3.3.9
+psycopg==3.3.9
+pydantic==2.14.3
 pytest==9.2.0
 python-dotenv==1.2.4
 scikit-learn==1.9.1
+scipy==1.18.1
 sentence-transformers==6.3.0
 SQLAlchemy==2.1.9
 torch==2.15.0+cpu

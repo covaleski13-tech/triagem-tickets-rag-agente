@@ -52,3 +52,30 @@
 - **Híbrida nativa do `langchain-postgres`:** existe na versão 0.0.19, só na API v2 (`PGVectorStore`), em
   `langchain_postgres/v2/hybrid_search_config.py` (`HybridSearchConfig`, `reciprocal_rank_fusion`,
   `weighted_sum_ranking`). A API v1 usada aqui (`PGVector`) não tem. **Não usada** (G8).
+
+## F2 (2026-11-17)
+
+### Exceção ao `CLAUDE.md` §3 ("no máximo 1 nova tentativa")
+
+- A regra vale para o agente (F4).
+- Nas variantes de experimento de Q1 (V0 a V3), a política de repetição é a do `f3_llm.py` do case: até 3
+  tentativas para erro de API (`RateLimitError`, `APIConnectionError`, `InternalServerError`, espera de 2^n s)
+  e mais 1 repetição se a saída for inválida; se continuar inválida, `falha`. Motivo: V0 é reprodução do case e
+  V1 a V3 precisam ser comparáveis a ele (F2-spec).
+
+### Cliente LLM
+
+- `ChatAnthropic` (`langchain-anthropic` 1.7.10, SDK `anthropic` 2.10.0) com `model="claude-haiku-5-5"`,
+  `max_tokens=64`, `max_retries=0`, `thinking={"type": "disabled"}`, `output_config={"effort": "low"}`, ambos
+  como campos nativos da classe. Sem `temperature`, `top_p` e `top_k`: as saídas não são determinísticas.
+- O payload montado (`_get_request_payload`) é igual ao do case; conferido em `tests/test_f2.py::test_payload_llm`.
+- Saída como texto livre, validada depois por `esquema.validar` (Pydantic), com paridade testada contra o
+  `validar` do case.
+
+### Template RAG congelado
+
+- `prompts/classificar_rag_v1.txt` = `classificar_v1.txt` com uma única linha trocada:
+  `Labeled examples (one per category):` → `Labeled examples from the training set:`.
+- O mesmo template serve para V1 (F2) e para V2 e V3 (F3). Fica congelado.
+- Ordem dos exemplos: em V1, a ordem do sorteio (`np.random.default_rng([42, id])`, 5 sem reposição sobre os ids
+  de treino em ordem crescente); em V2 e V3, a ordem de rank, com o rank 1 primeiro.

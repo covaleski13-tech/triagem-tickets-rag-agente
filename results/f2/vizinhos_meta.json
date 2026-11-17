@@ -1,0 +1,17 @@
+{
+  "n_consultas": 400,
+  "linhas_vizinhos": 40000,
+  "vizinhos_por_recuperador_min": {
+    "fulltext": 50,
+    "vetorial": 50
+  },
+  "vizinhos_por_recuperador_max": {
+    "fulltext": 50,
+    "vetorial": 50
+  },
+  "buscas_s": 539.2,
+  "total_s": 540.3,
+  "conexoes": 4,
+  "acertos_k1": 219,
+  "acertos_c": 278
+}
