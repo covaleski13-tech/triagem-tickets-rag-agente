@@ -71,3 +71,32 @@ def test_hibrida_csv_igual_ao_vivo(con):
     for i in hib["id_consulta"].drop_duplicates().iloc[:3]:
         esperado = hib[hib.id_consulta == i].sort_values("rank")["id_vizinho"].tolist()
         assert [j for j, _, _ in buscar_hibrida(texto[i], 5, con=con)] == esperado
+
+
+def _q2():
+    import pandas as pd
+
+    from triagem_rag.dados import RAIZ
+    arq = RAIZ / "results/f3/vizinhos_q2.csv"
+    if not arq.exists():
+        pytest.skip("results/f3/vizinhos_q2.csv ainda não gerado")
+    return pd.read_csv(arq)
+
+
+def test_vetorial_lote_igual_ao_vivo():
+    from triagem_rag.dados import ds2_com_splits
+    viz = _q2()
+    texto = ds2_com_splits().set_index("id")["Document"]
+    for i in viz["id_consulta"].drop_duplicates().iloc[:3]:
+        lote = viz[(viz.id_consulta == i) & (viz.recuperador == "vetorial")].sort_values("rank")["id_vizinho"]
+        assert [j for j, _, _ in buscar_vetorial(texto[i], 5)] == lote.iloc[:5].tolist()
+
+
+def test_hibrida_q2_igual_ao_vivo(con):
+    from triagem_rag.dados import ds2_com_splits
+    from triagem_rag.recuperacao import buscar_hibrida
+    viz = _q2()
+    texto = ds2_com_splits().set_index("id")["Document"]
+    for i in viz["id_consulta"].drop_duplicates().iloc[:3]:
+        hib = viz[(viz.id_consulta == i) & (viz.recuperador == "hibrida")].sort_values("rank")["id_vizinho"]
+        assert [j for j, _, _ in buscar_hibrida(texto[i], 5, con=con)] == hib.tolist()

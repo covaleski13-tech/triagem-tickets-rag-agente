@@ -1,0 +1,7 @@
+universo,par,metrica,diferenca_media,ic95_inf,ic95_sup
+recorte_400,hibrida-vetorial,precisao5,-0.0365,-0.0645,-0.009
+recorte_400,hibrida-vetorial,k1,-0.04,-0.0875,0.01
+recorte_400,hibrida-fulltext,precisao5,0.1215,0.094,0.148
+recorte_400,hibrida-fulltext,k1,0.135,0.0825,0.185
+recorte_400,fulltext-vetorial,precisao5,-0.158,-0.197,-0.117
+recorte_400,fulltext-vetorial,k1,-0.175,-0.235,-0.1125

@@ -83,6 +83,8 @@ Comparação com as hipóteses direcionais da F0 §2 (Q1):
 
 - O `f2_metricas.py` arredondava o p do McNemar para 6 casas, o que gravava 0 em duas comparações. Corrigi para gravar o p sem arredondar e rodei o script de novo. Não há chamada de API nesse script.
 - Nenhum erro de API, nenhuma saída inválida e nenhuma repetição nas 800 chamadas.
+- **Correção posterior (commit da F3):** a §8 dizia "19:57 → ~20:20, ~23 min", um fim estimado. O fim real é
+  20:16, horário do commit `dca94e9`, então a fase levou ~19 min. O início, 19:57, foi informado pelo Gustavo.
 
 ## 6. Custo de API
 
@@ -104,5 +106,5 @@ Fonte: `docs/custos.md`, preço oficial de 2026-11-17 (US$ 0,10 / US$ 0,50 por M
 
 ## 8. Tempo gasto × orçado
 
-- 19:57 → ~20:20, ~23 min de 60 min orçados.
+- 19:57 → 20:16 (horário do commit `dca94e9`), ~19 min de 60 orçados.
 - Desse tempo, ~9 min foram as buscas de vizinhos (em espera) e ~2 min as duas rodadas de LLM.

@@ -1,0 +1,11 @@
+{
+  "variante": "v2",
+  "modelo": "claude-haiku-5-5",
+  "duracao_s": 48.5,
+  "chamadas": 400,
+  "tokens_entrada": 391969,
+  "tokens_saida": 9579,
+  "custo_usd": 0.043986,
+  "acertos": 191,
+  "acuracia": 0.4775
+}

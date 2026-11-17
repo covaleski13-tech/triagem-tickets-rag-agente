@@ -1,0 +1,2001 @@
+id,ordem,id_exemplo,categoria_exemplo
+44115,1,44199,Administrative rights
+44115,2,43482,Hardware
+44115,3,39783,Administrative rights
+44115,4,43792,Administrative rights
+44115,5,46983,Hardware
+10660,1,1628,HR Support
+10660,2,21539,Miscellaneous
+10660,3,21535,HR Support
+10660,4,16306,Hardware
+10660,5,14921,Miscellaneous
+18790,1,18798,Access
+18790,2,18781,Miscellaneous
+18790,3,18924,Access
+18790,4,15157,Access
+18790,5,17701,Access
+9860,1,3250,Access
+9860,2,10351,HR Support
+9860,3,4409,Access
+9860,4,10012,Access
+9860,5,1320,Access
+17777,1,17083,HR Support
+17777,2,19833,Hardware
+17777,3,12417,HR Support
+17777,4,22521,HR Support
+17777,5,7458,HR Support
+44527,1,44285,Hardware
+44527,2,44449,Administrative rights
+44527,3,47282,Hardware
+44527,4,45478,Hardware
+44527,5,34174,Hardware
+44383,1,43695,Miscellaneous
+44383,2,44338,Miscellaneous
+44383,3,43779,Hardware
+44383,4,44389,HR Support
+44383,5,45019,Hardware
+33358,1,33376,Miscellaneous
+33358,2,10833,Miscellaneous
+33358,3,13966,Miscellaneous
+33358,4,21917,Miscellaneous
+33358,5,32572,HR Support
+1128,1,23464,Hardware
+1128,2,21392,Access
+1128,3,21391,Access
+1128,4,23080,HR Support
+1128,5,14421,Storage
+40435,1,46228,Miscellaneous
+40435,2,37961,Miscellaneous
+40435,3,38540,Miscellaneous
+40435,4,45252,HR Support
+40435,5,35909,Miscellaneous
+15744,1,1585,HR Support
+15744,2,4501,HR Support
+15744,3,1160,HR Support
+15744,4,3808,HR Support
+15744,5,1719,HR Support
+18749,1,20958,HR Support
+18749,2,20370,HR Support
+18749,3,15740,Hardware
+18749,4,11139,Hardware
+18749,5,18709,Hardware
+47079,1,44060,Hardware
+47079,2,47010,HR Support
+47079,3,46789,Hardware
+47079,4,47249,Administrative rights
+47079,5,46918,Hardware
+17969,1,30883,Miscellaneous
+17969,2,2253,HR Support
+17969,3,29360,Purchase
+17969,4,13866,HR Support
+17969,5,10610,HR Support
+47147,1,39750,Administrative rights
+47147,2,35191,Hardware
+47147,3,39289,Hardware
+47147,4,46912,Hardware
+47147,5,47140,Hardware
+36160,1,37867,Hardware
+36160,2,35976,Administrative rights
+36160,3,41346,Miscellaneous
+36160,4,36200,HR Support
+36160,5,36005,Hardware
+23178,1,23184,HR Support
+23178,2,31941,Miscellaneous
+23178,3,22273,HR Support
+23178,4,17176,Access
+23178,5,17104,Storage
+45702,1,45641,Access
+45702,2,47108,Hardware
+45702,3,46888,Access
+45702,4,42784,Hardware
+45702,5,43922,Hardware
+22626,1,10459,Hardware
+22626,2,14450,Access
+22626,3,30808,Hardware
+22626,4,30842,Access
+22626,5,13266,HR Support
+61,1,12823,HR Support
+61,2,13456,Internal Project
+61,3,5281,Internal Project
+61,4,40650,Hardware
+61,5,15939,Storage
+33691,1,19491,HR Support
+33691,2,45168,HR Support
+33691,3,23457,HR Support
+33691,4,32416,Internal Project
+33691,5,33375,HR Support
+3676,1,3311,Miscellaneous
+3676,2,29097,Miscellaneous
+3676,3,1431,Miscellaneous
+3676,4,26201,Internal Project
+3676,5,45185,Hardware
+43608,1,43245,Hardware
+43608,2,40468,Hardware
+43608,3,43370,Miscellaneous
+43608,4,45630,Hardware
+43608,5,43737,Hardware
+29073,1,17641,Hardware
+29073,2,43352,Miscellaneous
+29073,3,12933,Access
+29073,4,44410,Hardware
+29073,5,43474,Hardware
+5909,1,36967,Administrative rights
+5909,2,37034,Hardware
+5909,3,15426,Hardware
+5909,4,41962,Hardware
+5909,5,15423,Hardware
+12341,1,29607,HR Support
+12341,2,10401,HR Support
+12341,3,12083,Miscellaneous
+12341,4,31856,Miscellaneous
+12341,5,11659,HR Support
+1981,1,178,Hardware
+1981,2,8425,Access
+1981,3,8572,Access
+1981,4,1982,Access
+1981,5,4385,Access
+44763,1,23421,Hardware
+44763,2,45264,Hardware
+44763,3,43533,Storage
+44763,4,39201,Storage
+44763,5,42334,Hardware
+5993,1,30022,Miscellaneous
+5993,2,30152,Miscellaneous
+5993,3,21110,Miscellaneous
+5993,4,22861,HR Support
+5993,5,32913,Miscellaneous
+20259,1,9251,Hardware
+20259,2,19339,Miscellaneous
+20259,3,33328,Hardware
+20259,4,21762,Miscellaneous
+20259,5,32164,Internal Project
+24137,1,29359,Hardware
+24137,2,33210,HR Support
+24137,3,25284,Internal Project
+24137,4,28262,Internal Project
+24137,5,16784,Hardware
+37661,1,1373,Hardware
+37661,2,7729,Hardware
+37661,3,8400,Hardware
+37661,4,23691,Hardware
+37661,5,22167,Hardware
+3736,1,4320,Hardware
+3736,2,8321,HR Support
+3736,3,672,Hardware
+3736,4,5235,Hardware
+3736,5,10939,Hardware
+3630,1,22670,HR Support
+3630,2,3748,Miscellaneous
+3630,3,37054,Hardware
+3630,4,35904,Hardware
+3630,5,35837,Hardware
+1311,1,13914,Administrative rights
+1311,2,13741,Hardware
+1311,3,40440,Hardware
+1311,4,15756,Hardware
+1311,5,41850,Administrative rights
+27516,1,15311,Hardware
+27516,2,7255,Hardware
+27516,3,36521,Hardware
+27516,4,25428,Miscellaneous
+27516,5,22090,Miscellaneous
+13241,1,33211,Miscellaneous
+13241,2,20432,Miscellaneous
+13241,3,32584,HR Support
+13241,4,15246,Miscellaneous
+13241,5,17367,Storage
+18663,1,23977,HR Support
+18663,2,26487,Storage
+18663,3,40763,Hardware
+18663,4,21309,Miscellaneous
+18663,5,11022,Access
+2236,1,33813,HR Support
+2236,2,14072,HR Support
+2236,3,29251,Hardware
+2236,4,6313,HR Support
+2236,5,7067,Miscellaneous
+7116,1,2241,Access
+7116,2,2730,Access
+7116,3,10009,Hardware
+7116,4,33699,Hardware
+7116,5,33263,Hardware
+351,1,1435,Hardware
+351,2,40956,Miscellaneous
+351,3,17078,Access
+351,4,45206,HR Support
+351,5,41575,HR Support
+3276,1,614,HR Support
+3276,2,5385,HR Support
+3276,3,7571,Storage
+3276,4,6443,Access
+3276,5,9383,Administrative rights
+15531,1,32557,HR Support
+15531,2,13231,Miscellaneous
+15531,3,16366,Storage
+15531,4,33805,Miscellaneous
+15531,5,32595,HR Support
+31224,1,6600,Access
+31224,2,5945,Access
+31224,3,13697,Access
+31224,4,28230,Access
+31224,5,31607,Access
+13048,1,17104,Storage
+13048,2,13866,HR Support
+13048,3,23153,HR Support
+13048,4,23152,HR Support
+13048,5,34018,Miscellaneous
+8985,1,13758,Hardware
+8985,2,24481,Hardware
+8985,3,33520,Miscellaneous
+8985,4,14313,Hardware
+8985,5,18984,Hardware
+33656,1,12989,HR Support
+33656,2,33181,Internal Project
+33656,3,12525,HR Support
+33656,4,32804,HR Support
+33656,5,33086,HR Support
+45636,1,46246,Hardware
+45636,2,17549,Internal Project
+45636,3,44829,Hardware
+45636,4,43394,Hardware
+45636,5,44798,Hardware
+17578,1,7149,Hardware
+17578,2,8336,Purchase
+17578,3,21363,Hardware
+17578,4,17362,Purchase
+17578,5,32083,Purchase
+31521,1,29359,Hardware
+31521,2,16784,Hardware
+31521,3,25157,Hardware
+31521,4,27758,HR Support
+31521,5,3750,HR Support
+1880,1,26254,Purchase
+1880,2,37580,Hardware
+1880,3,45332,Hardware
+1880,4,30430,Hardware
+1880,5,20606,Purchase
+8713,1,5164,Access
+8713,2,4348,Storage
+8713,3,224,Administrative rights
+8713,4,950,Access
+8713,5,4770,Hardware
+12983,1,40133,HR Support
+12983,2,39685,HR Support
+12983,3,8358,Internal Project
+12983,4,39687,HR Support
+12983,5,12617,Internal Project
+45444,1,24899,HR Support
+45444,2,45442,HR Support
+45444,3,25155,HR Support
+45444,4,24854,HR Support
+45444,5,45680,Hardware
+33782,1,32882,Access
+33782,2,12527,Access
+33782,3,20911,Miscellaneous
+33782,4,12002,Internal Project
+33782,5,15909,Miscellaneous
+31437,1,17474,Storage
+31437,2,18679,Storage
+31437,3,28361,Miscellaneous
+31437,4,32252,HR Support
+31437,5,27477,Storage
+31820,1,15169,Hardware
+31820,2,7044,Hardware
+31820,3,33421,Hardware
+31820,4,41259,Access
+31820,5,5051,Miscellaneous
+31172,1,12004,Miscellaneous
+31172,2,40770,Hardware
+31172,3,16508,HR Support
+31172,4,14748,Hardware
+31172,5,32072,Miscellaneous
+11752,1,26903,Access
+11752,2,32747,HR Support
+11752,3,33016,Miscellaneous
+11752,4,33771,Miscellaneous
+11752,5,12408,HR Support
+9648,1,20652,HR Support
+9648,2,22842,HR Support
+9648,3,2009,HR Support
+9648,4,16549,HR Support
+9648,5,803,HR Support
+33765,1,14346,Storage
+33765,2,17108,Storage
+33765,3,19609,Storage
+33765,4,30809,HR Support
+33765,5,32926,HR Support
+29082,1,17052,Internal Project
+29082,2,25427,Purchase
+29082,3,16838,Purchase
+29082,4,33964,Purchase
+29082,5,29710,Internal Project
+44833,1,44133,Miscellaneous
+44833,2,45011,Hardware
+44833,3,30373,Internal Project
+44833,4,44553,Miscellaneous
+44833,5,39207,Hardware
+5182,1,8288,Internal Project
+5182,2,973,Internal Project
+5182,3,16048,Hardware
+5182,4,6902,Miscellaneous
+5182,5,19587,Hardware
+8852,1,9366,Access
+8852,2,10280,Storage
+8852,3,10879,Storage
+8852,4,1868,HR Support
+8852,5,15422,Storage
+25602,1,29603,HR Support
+25602,2,26491,Access
+25602,3,22171,Miscellaneous
+25602,4,27473,HR Support
+25602,5,13506,Miscellaneous
+20418,1,21644,Access
+20418,2,13602,Access
+20418,3,20003,Access
+20418,4,32191,HR Support
+20418,5,20640,Access
+30266,1,15601,Internal Project
+30266,2,16773,Internal Project
+30266,3,20864,Internal Project
+30266,4,38278,Hardware
+30266,5,16900,Internal Project
+25213,1,25212,Storage
+25213,2,25071,Internal Project
+25213,3,24501,Storage
+25213,4,27115,HR Support
+25213,5,25407,Miscellaneous
+33926,1,29125,HR Support
+33926,2,44048,Storage
+33926,3,24411,Hardware
+33926,4,21647,Hardware
+33926,5,13072,HR Support
+27640,1,41077,Hardware
+27640,2,27884,Hardware
+27640,3,42459,HR Support
+27640,4,46652,HR Support
+27640,5,35550,Hardware
+7017,1,24481,Hardware
+7017,2,13758,Hardware
+7017,3,31269,Storage
+7017,4,32322,Miscellaneous
+7017,5,28270,Hardware
+38364,1,41002,Miscellaneous
+38364,2,39003,Miscellaneous
+38364,3,5734,Miscellaneous
+38364,4,37457,Miscellaneous
+38364,5,37484,Miscellaneous
+46248,1,46287,HR Support
+46248,2,37617,HR Support
+46248,3,37275,HR Support
+46248,4,36593,HR Support
+46248,5,44915,Miscellaneous
+37706,1,41209,HR Support
+37706,2,46919,HR Support
+37706,3,34238,HR Support
+37706,4,37143,HR Support
+37706,5,47081,HR Support
+13681,1,22629,Miscellaneous
+13681,2,20611,Miscellaneous
+13681,3,23615,HR Support
+13681,4,29767,Miscellaneous
+13681,5,30464,HR Support
+22525,1,26278,Internal Project
+22525,2,19101,Access
+22525,3,17104,Storage
+22525,4,22665,Internal Project
+22525,5,17249,Internal Project
+34367,1,36403,Hardware
+34367,2,43755,Storage
+34367,3,35225,Hardware
+34367,4,35838,Hardware
+34367,5,42722,Hardware
+6517,1,1554,HR Support
+6517,2,1614,HR Support
+6517,3,19488,HR Support
+6517,4,2140,HR Support
+6517,5,14400,HR Support
+17983,1,13992,Hardware
+17983,2,31908,HR Support
+17983,3,23787,Hardware
+17983,4,16927,Hardware
+17983,5,45842,Hardware
+9988,1,35554,Hardware
+9988,2,41212,Hardware
+9988,3,41983,Hardware
+9988,4,41946,Hardware
+9988,5,42169,Hardware
+12203,1,33167,HR Support
+12203,2,9824,Miscellaneous
+12203,3,31885,Hardware
+12203,4,32862,HR Support
+12203,5,33696,Storage
+124,1,26129,Access
+124,2,5751,Access
+124,3,10181,Access
+124,4,1066,Access
+124,5,5728,Access
+2802,1,8089,Administrative rights
+2802,2,28235,Hardware
+2802,3,17974,HR Support
+2802,4,41989,Hardware
+2802,5,47372,Hardware
+21637,1,21597,Access
+21637,2,21411,Access
+21637,3,21217,Hardware
+21637,4,12683,Storage
+21637,5,40077,Storage
+20469,1,42957,Hardware
+20469,2,21142,Hardware
+20469,3,19125,Hardware
+20469,4,42158,Hardware
+20469,5,43937,Hardware
+13434,1,14267,Access
+13434,2,16966,Access
+13434,3,22383,Access
+13434,4,15824,Access
+13434,5,23155,Access
+28985,1,21419,Access
+28985,2,47127,Hardware
+28985,3,28306,Miscellaneous
+28985,4,28679,Miscellaneous
+28985,5,28321,Hardware
+13086,1,31356,Access
+13086,2,29826,HR Support
+13086,3,14135,HR Support
+13086,4,41291,HR Support
+13086,5,26440,HR Support
+42156,1,43040,HR Support
+42156,2,10800,Miscellaneous
+42156,3,46480,HR Support
+42156,4,17744,Miscellaneous
+42156,5,25215,HR Support
+39977,1,46146,HR Support
+39977,2,43425,Hardware
+39977,3,42112,Hardware
+39977,4,35603,Administrative rights
+39977,5,46181,Hardware
+46368,1,47302,Miscellaneous
+46368,2,43457,Miscellaneous
+46368,3,42626,Miscellaneous
+46368,4,43396,Miscellaneous
+46368,5,42948,Miscellaneous
+8008,1,8518,HR Support
+8008,2,8451,HR Support
+8008,3,8655,Miscellaneous
+8008,4,8270,HR Support
+8008,5,7626,Miscellaneous
+16929,1,1848,HR Support
+16929,2,29548,Internal Project
+16929,3,44400,Hardware
+16929,4,4450,Access
+16929,5,314,Hardware
+14714,1,9350,Miscellaneous
+14714,2,14998,Miscellaneous
+14714,3,8069,Miscellaneous
+14714,4,31651,Storage
+14714,5,16624,Miscellaneous
+2185,1,1189,Storage
+2185,2,1826,Storage
+2185,3,6158,Storage
+2185,4,3517,Storage
+2185,5,2632,Storage
+41211,1,45019,Hardware
+41211,2,45802,Miscellaneous
+41211,3,41490,Miscellaneous
+41211,4,47222,Miscellaneous
+41211,5,45920,Miscellaneous
+20888,1,17315,HR Support
+20888,2,20532,HR Support
+20888,3,13612,HR Support
+20888,4,21358,HR Support
+20888,5,21009,HR Support
+38421,1,39994,Administrative rights
+38421,2,39718,Administrative rights
+38421,3,45229,Administrative rights
+38421,4,44824,Miscellaneous
+38421,5,44918,Administrative rights
+7482,1,7722,HR Support
+7482,2,24931,HR Support
+7482,3,27018,HR Support
+7482,4,23322,HR Support
+7482,5,24778,Miscellaneous
+26303,1,20860,Hardware
+26303,2,22686,Hardware
+26303,3,7383,Hardware
+26303,4,10458,Hardware
+26303,5,13061,Hardware
+2349,1,34213,Hardware
+2349,2,34175,Hardware
+2349,3,35122,Internal Project
+2349,4,466,Hardware
+2349,5,39450,Hardware
+18691,1,42999,Miscellaneous
+18691,2,19456,Miscellaneous
+18691,3,13213,Purchase
+18691,4,33328,Hardware
+18691,5,18243,Administrative rights
+39583,1,40145,HR Support
+39583,2,11140,Hardware
+39583,3,36055,Hardware
+39583,4,37581,Miscellaneous
+39583,5,45043,Administrative rights
+19359,1,18965,Purchase
+19359,2,10139,Purchase
+19359,3,20053,Purchase
+19359,4,11530,Purchase
+19359,5,19837,Purchase
+12173,1,19831,HR Support
+12173,2,29599,HR Support
+12173,3,14742,Hardware
+12173,4,12219,Hardware
+12173,5,32872,Hardware
+43627,1,35916,HR Support
+43627,2,46921,HR Support
+43627,3,43696,HR Support
+43627,4,35581,HR Support
+43627,5,4298,HR Support
+45002,1,43835,Hardware
+45002,2,37074,Hardware
+45002,3,38703,Storage
+45002,4,44663,Hardware
+45002,5,31734,Storage
+2558,1,24029,HR Support
+2558,2,1955,HR Support
+2558,3,10670,Hardware
+2558,4,24772,HR Support
+2558,5,14228,Miscellaneous
+47532,1,16229,Internal Project
+47532,2,34391,Hardware
+47532,3,45637,HR Support
+47532,4,39844,HR Support
+47532,5,46487,Miscellaneous
+7065,1,15887,Miscellaneous
+7065,2,10507,Miscellaneous
+7065,3,9911,Miscellaneous
+7065,4,2090,HR Support
+7065,5,20508,Miscellaneous
+6588,1,6589,Administrative rights
+6588,2,2568,Administrative rights
+6588,3,2537,Administrative rights
+6588,4,2218,Administrative rights
+6588,5,7498,Administrative rights
+29204,1,4620,Internal Project
+29204,2,28317,Internal Project
+29204,3,28316,Internal Project
+29204,4,32232,Hardware
+29204,5,15183,Internal Project
+14409,1,17654,Storage
+14409,2,16409,Storage
+14409,3,42463,Hardware
+14409,4,19874,Storage
+14409,5,11839,Storage
+34210,1,47368,Miscellaneous
+34210,2,25252,Miscellaneous
+34210,3,46545,Miscellaneous
+34210,4,40973,Miscellaneous
+34210,5,25308,Miscellaneous
+5557,1,10670,Hardware
+5557,2,10401,HR Support
+5557,3,5740,Hardware
+5557,4,30292,Hardware
+5557,5,10876,Miscellaneous
+44164,1,39777,Hardware
+44164,2,21202,Access
+44164,3,21934,Administrative rights
+44164,4,29957,Storage
+44164,5,39901,Administrative rights
+16415,1,44700,Miscellaneous
+16415,2,31497,Miscellaneous
+16415,3,40357,Miscellaneous
+16415,4,35171,Administrative rights
+16415,5,23182,Miscellaneous
+14176,1,27242,Miscellaneous
+14176,2,1298,HR Support
+14176,3,20077,Access
+14176,4,17334,Access
+14176,5,32187,Internal Project
+21765,1,30768,Hardware
+21765,2,23229,Miscellaneous
+21765,3,23509,Internal Project
+21765,4,27343,HR Support
+21765,5,17663,HR Support
+816,1,17561,Access
+816,2,4366,Access
+816,3,1759,HR Support
+816,4,4251,Access
+816,5,1403,Access
+13827,1,13074,Access
+13827,2,29657,HR Support
+13827,3,29020,HR Support
+13827,4,13080,Access
+13827,5,1923,Access
+25652,1,10991,HR Support
+25652,2,32995,HR Support
+25652,3,27469,Miscellaneous
+25652,4,13949,Miscellaneous
+25652,5,28343,Access
+22127,1,16332,HR Support
+22127,2,23006,Hardware
+22127,3,20781,Purchase
+22127,4,12164,HR Support
+22127,5,33477,Purchase
+20824,1,29506,Hardware
+20824,2,29122,Storage
+20824,3,28585,Hardware
+20824,4,29314,Hardware
+20824,5,26640,Storage
+17417,1,4658,HR Support
+17417,2,12220,HR Support
+17417,3,11886,Internal Project
+17417,4,25473,Internal Project
+17417,5,25312,Internal Project
+35721,1,4585,HR Support
+35721,2,37664,HR Support
+35721,3,47291,HR Support
+35721,4,45589,HR Support
+35721,5,37455,HR Support
+17881,1,21864,Access
+17881,2,16094,Hardware
+17881,3,21598,HR Support
+17881,4,19611,Storage
+17881,5,42541,Hardware
+4853,1,25265,Access
+4853,2,8756,Access
+4853,3,31100,Access
+4853,4,14761,Access
+4853,5,371,Hardware
+27396,1,26826,Storage
+27396,2,27289,Storage
+27396,3,26016,Storage
+27396,4,28717,HR Support
+27396,5,32074,Storage
+19593,1,18165,Hardware
+19593,2,19677,Miscellaneous
+19593,3,19690,Hardware
+19593,4,43564,Miscellaneous
+19593,5,19974,Hardware
+34763,1,35234,Administrative rights
+34763,2,46123,Administrative rights
+34763,3,35871,Administrative rights
+34763,4,42727,Administrative rights
+34763,5,45229,Administrative rights
+1654,1,16526,HR Support
+1654,2,10998,HR Support
+1654,3,13206,HR Support
+1654,4,14209,HR Support
+1654,5,6189,HR Support
+34657,1,43835,Hardware
+34657,2,1826,Storage
+34657,3,2078,Storage
+34657,4,591,Storage
+34657,5,41023,Hardware
+3018,1,1461,Miscellaneous
+3018,2,15433,HR Support
+3018,3,32914,Hardware
+3018,4,18106,HR Support
+3018,5,32569,Hardware
+45401,1,29680,HR Support
+45401,2,46616,HR Support
+45401,3,23942,HR Support
+45401,4,2490,HR Support
+45401,5,9823,HR Support
+38357,1,46236,Miscellaneous
+38357,2,38299,Internal Project
+38357,3,47198,Hardware
+38357,4,46166,Hardware
+38357,5,47017,Hardware
+33287,1,25628,Administrative rights
+33287,2,19617,Administrative rights
+33287,3,46704,Hardware
+33287,4,15005,Miscellaneous
+33287,5,10796,HR Support
+16874,1,22692,Storage
+16874,2,23551,HR Support
+16874,3,15227,HR Support
+16874,4,19107,HR Support
+16874,5,21741,Hardware
+13499,1,10797,Miscellaneous
+13499,2,30684,Miscellaneous
+13499,3,22092,HR Support
+13499,4,31693,HR Support
+13499,5,31418,Hardware
+28141,1,33924,Storage
+28141,2,23266,Access
+28141,3,17996,HR Support
+28141,4,33113,Access
+28141,5,14884,Access
+35035,1,3311,Miscellaneous
+35035,2,6150,Miscellaneous
+35035,3,2063,Miscellaneous
+35035,4,38259,Miscellaneous
+35035,5,44282,Hardware
+21546,1,505,Hardware
+21546,2,21463,Storage
+21546,3,17104,Storage
+21546,4,21141,Access
+21546,5,27529,Storage
+4390,1,2474,Administrative rights
+4390,2,6252,Administrative rights
+4390,3,6592,Administrative rights
+4390,4,3799,Purchase
+4390,5,14331,Hardware
+12324,1,11259,Hardware
+12324,2,11913,Hardware
+12324,3,13059,Hardware
+12324,4,13060,Hardware
+12324,5,13312,Access
+33335,1,16451,HR Support
+33335,2,33596,Hardware
+33335,3,11224,HR Support
+33335,4,29265,Administrative rights
+33335,5,30938,Hardware
+32363,1,45212,Hardware
+32363,2,23211,Storage
+32363,3,32352,Storage
+32363,4,32482,Storage
+32363,5,22887,Hardware
+42612,1,45358,Hardware
+42612,2,14637,Storage
+42612,3,35416,Miscellaneous
+42612,4,45338,Storage
+42612,5,43268,Storage
+39264,1,39876,HR Support
+39264,2,44255,HR Support
+39264,3,37524,HR Support
+39264,4,46075,HR Support
+39264,5,46540,HR Support
+6038,1,7268,Miscellaneous
+6038,2,32328,Miscellaneous
+6038,3,6944,Miscellaneous
+6038,4,3217,Miscellaneous
+6038,5,36930,Miscellaneous
+13188,1,40514,Hardware
+13188,2,41414,Hardware
+13188,3,44800,Hardware
+13188,4,29983,Miscellaneous
+13188,5,42426,Miscellaneous
+20170,1,20165,Storage
+20170,2,18242,Storage
+20170,3,21400,Storage
+20170,4,19609,Storage
+20170,5,23930,Storage
+3755,1,26603,HR Support
+3755,2,16428,Internal Project
+3755,3,16229,Internal Project
+3755,4,19823,HR Support
+3755,5,32215,HR Support
+7064,1,3202,Miscellaneous
+7064,2,6322,Miscellaneous
+7064,3,38864,Hardware
+7064,4,1209,Miscellaneous
+7064,5,3221,Miscellaneous
+18320,1,15619,Miscellaneous
+18320,2,21447,Internal Project
+18320,3,11021,Hardware
+18320,4,28904,Hardware
+18320,5,13198,Hardware
+15557,1,28813,Miscellaneous
+15557,2,31871,HR Support
+15557,3,13733,HR Support
+15557,4,15538,Access
+15557,5,17164,Access
+38691,1,7687,Miscellaneous
+38691,2,40649,Miscellaneous
+38691,3,47640,Miscellaneous
+38691,4,11081,Miscellaneous
+38691,5,22111,Miscellaneous
+320,1,7570,Access
+320,2,24967,Access
+320,3,16402,Hardware
+320,4,23570,HR Support
+320,5,2532,Access
+37382,1,46326,Storage
+37382,2,14669,Storage
+37382,3,42242,Storage
+37382,4,40298,Storage
+37382,5,28104,Storage
+41153,1,42224,Hardware
+41153,2,40537,HR Support
+41153,3,42923,HR Support
+41153,4,41694,Hardware
+41153,5,42979,HR Support
+28208,1,5441,Miscellaneous
+28208,2,17697,Miscellaneous
+28208,3,42589,Miscellaneous
+28208,4,28593,Hardware
+28208,5,23772,HR Support
+20598,1,23088,HR Support
+20598,2,23720,Miscellaneous
+20598,3,21145,HR Support
+20598,4,21265,HR Support
+20598,5,24517,Miscellaneous
+41634,1,41626,HR Support
+41634,2,41685,HR Support
+41634,3,41133,HR Support
+41634,4,36503,HR Support
+41634,5,41163,HR Support
+10781,1,20361,Miscellaneous
+10781,2,11243,Internal Project
+10781,3,30711,Miscellaneous
+10781,4,4755,Miscellaneous
+10781,5,22105,Miscellaneous
+12818,1,33869,HR Support
+12818,2,11881,Hardware
+12818,3,11886,Internal Project
+12818,4,34004,Hardware
+12818,5,32463,Miscellaneous
+16824,1,23636,Miscellaneous
+16824,2,17893,HR Support
+16824,3,9574,HR Support
+16824,4,25848,Miscellaneous
+16824,5,26895,HR Support
+8673,1,41859,Access
+8673,2,12333,Access
+8673,3,32378,Hardware
+8673,4,6028,Access
+8673,5,35263,Access
+3709,1,3925,Hardware
+3709,2,271,Hardware
+3709,3,25717,Hardware
+3709,4,22312,Hardware
+3709,5,9825,Hardware
+31674,1,14666,Miscellaneous
+31674,2,31342,Internal Project
+31674,3,15099,Miscellaneous
+31674,4,16211,Miscellaneous
+31674,5,16547,Miscellaneous
+35665,1,42642,Miscellaneous
+35665,2,47400,Internal Project
+35665,3,38944,Miscellaneous
+35665,4,43987,Miscellaneous
+35665,5,34876,Miscellaneous
+21660,1,21647,Hardware
+21660,2,29125,HR Support
+21660,3,10482,Miscellaneous
+21660,4,22954,Miscellaneous
+21660,5,13072,HR Support
+29024,1,28738,Hardware
+29024,2,30397,Hardware
+29024,3,1000,HR Support
+29024,4,31703,Access
+29024,5,9421,HR Support
+29793,1,15909,Miscellaneous
+29793,2,15421,Hardware
+29793,3,17921,Miscellaneous
+29793,4,20911,Miscellaneous
+29793,5,13271,Miscellaneous
+26935,1,2835,HR Support
+26935,2,10753,HR Support
+26935,3,13822,HR Support
+26935,4,26255,HR Support
+26935,5,26350,HR Support
+43862,1,43482,Hardware
+43862,2,43851,Hardware
+43862,3,47585,HR Support
+43862,4,42128,Hardware
+43862,5,41792,Hardware
+16262,1,6906,Administrative rights
+16262,2,39071,Administrative rights
+16262,3,40530,Administrative rights
+16262,4,47319,Administrative rights
+16262,5,38870,Administrative rights
+30298,1,28813,Miscellaneous
+30298,2,22948,Miscellaneous
+30298,3,20873,Miscellaneous
+30298,4,13733,HR Support
+30298,5,19718,Miscellaneous
+23009,1,22441,Miscellaneous
+23009,2,22047,Internal Project
+23009,3,16681,Access
+23009,4,26564,HR Support
+23009,5,16277,Storage
+5871,1,15728,Access
+5871,2,885,Access
+5871,3,2487,Access
+5871,4,30176,HR Support
+5871,5,17349,Administrative rights
+3732,1,3921,Hardware
+3732,2,4986,Internal Project
+3732,3,5893,Hardware
+3732,4,6338,HR Support
+3732,5,5939,Access
+21893,1,16453,Hardware
+21893,2,16818,Hardware
+21893,3,14805,HR Support
+21893,4,16502,Hardware
+21893,5,19206,Hardware
+21565,1,44248,Hardware
+21565,2,20745,HR Support
+21565,3,13445,Access
+21565,4,125,Storage
+21565,5,21177,HR Support
+12733,1,13556,Access
+12733,2,29672,Access
+12733,3,13517,Access
+12733,4,12693,Access
+12733,5,11916,Access
+4895,1,8797,Hardware
+4895,2,16408,Hardware
+4895,3,28226,Hardware
+4895,4,13802,Hardware
+4895,5,11894,Hardware
+16861,1,1244,Hardware
+16861,2,23132,HR Support
+16861,3,14130,HR Support
+16861,4,26652,HR Support
+16861,5,19738,Miscellaneous
+39208,1,2442,HR Support
+39208,2,39086,HR Support
+39208,3,22336,HR Support
+39208,4,7947,HR Support
+39208,5,45917,Hardware
+21421,1,20108,Miscellaneous
+21421,2,24500,Hardware
+21421,3,20946,HR Support
+21421,4,20104,Hardware
+21421,5,20980,Miscellaneous
+13719,1,11022,Access
+13719,2,26487,Storage
+13719,3,14523,Hardware
+13719,4,2325,Access
+13719,5,23803,Miscellaneous
+21683,1,20326,Purchase
+21683,2,16332,HR Support
+21683,3,20692,Miscellaneous
+21683,4,23874,Administrative rights
+21683,5,33677,Administrative rights
+29048,1,32232,Hardware
+29048,2,31703,Access
+29048,3,32585,Access
+29048,4,28826,Miscellaneous
+29048,5,28321,Hardware
+25086,1,26425,Access
+25086,2,9044,Access
+25086,3,24065,Access
+25086,4,24124,Access
+25086,5,2877,Access
+19847,1,13479,Miscellaneous
+19847,2,10696,HR Support
+19847,3,16077,Miscellaneous
+19847,4,18724,Miscellaneous
+19847,5,25816,Hardware
+9408,1,9417,Access
+9408,2,30289,Access
+9408,3,1879,Hardware
+9408,4,27918,Hardware
+9408,5,28500,Access
+42086,1,42590,HR Support
+42086,2,41291,HR Support
+42086,3,47282,Hardware
+42086,4,41527,HR Support
+42086,5,44805,Miscellaneous
+3825,1,278,Hardware
+3825,2,27441,Hardware
+3825,3,16405,Hardware
+3825,4,33419,Hardware
+3825,5,27521,Purchase
+44684,1,46366,Miscellaneous
+44684,2,19320,Miscellaneous
+44684,3,41173,Miscellaneous
+44684,4,41826,Miscellaneous
+44684,5,30342,Hardware
+27960,1,20161,Hardware
+27960,2,20823,Hardware
+27960,3,20159,Miscellaneous
+27960,4,18034,HR Support
+27960,5,10215,HR Support
+502,1,832,Access
+502,2,30129,Miscellaneous
+502,3,31427,Access
+502,4,41462,Miscellaneous
+502,5,15470,Miscellaneous
+32466,1,32342,HR Support
+32466,2,32343,HR Support
+32466,3,25607,HR Support
+32466,4,3226,HR Support
+32466,5,6050,HR Support
+44846,1,45923,HR Support
+44846,2,47415,HR Support
+44846,3,41209,HR Support
+44846,4,45634,HR Support
+44846,5,40678,Hardware
+41329,1,41400,Miscellaneous
+41329,2,44338,Miscellaneous
+41329,3,42934,Miscellaneous
+41329,4,46695,Miscellaneous
+41329,5,34925,Miscellaneous
+27065,1,16809,HR Support
+27065,2,26583,HR Support
+27065,3,23533,Hardware
+27065,4,27043,HR Support
+27065,5,18688,HR Support
+25716,1,45886,Hardware
+25716,2,40410,HR Support
+25716,3,27781,Hardware
+25716,4,45911,Hardware
+25716,5,46161,Hardware
+46053,1,43574,HR Support
+46053,2,43872,HR Support
+46053,3,17822,HR Support
+46053,4,27655,HR Support
+46053,5,46782,HR Support
+17754,1,7426,Miscellaneous
+17754,2,27496,Miscellaneous
+17754,3,19320,Miscellaneous
+17754,4,36287,Hardware
+17754,5,21212,Miscellaneous
+23586,1,19078,Storage
+23586,2,96,HR Support
+23586,3,29654,HR Support
+23586,4,40814,Hardware
+23586,5,22238,Miscellaneous
+16613,1,20946,HR Support
+16613,2,21864,Access
+16613,3,17496,Access
+16613,4,22017,Access
+16613,5,22436,Access
+28041,1,28218,Access
+28041,2,27525,Administrative rights
+28041,3,17850,Access
+28041,4,28454,Administrative rights
+28041,5,27799,Administrative rights
+32997,1,31840,Storage
+32997,2,33016,Miscellaneous
+32997,3,17482,Storage
+32997,4,12458,Hardware
+32997,5,11886,Internal Project
+6452,1,6576,Access
+6452,2,15481,Access
+6452,3,40372,Hardware
+6452,4,21876,Miscellaneous
+6452,5,6577,Access
+6759,1,31212,HR Support
+6759,2,29867,Storage
+6759,3,12813,HR Support
+6759,4,39033,Access
+6759,5,43703,Hardware
+15479,1,45773,Internal Project
+15479,2,17298,Internal Project
+15479,3,4046,Internal Project
+15479,4,17658,Internal Project
+15479,5,19107,HR Support
+15058,1,15004,Internal Project
+15058,2,8535,Internal Project
+15058,3,15868,Internal Project
+15058,4,15410,Internal Project
+15058,5,19424,Internal Project
+39658,1,40574,Hardware
+39658,2,40479,Hardware
+39658,3,45325,Access
+39658,4,36639,Hardware
+39658,5,45873,Hardware
+6305,1,9161,Access
+6305,2,11021,Hardware
+6305,3,2639,Access
+6305,4,10461,Access
+6305,5,19720,Access
+35737,1,41413,Miscellaneous
+35737,2,34301,Miscellaneous
+35737,3,14094,Miscellaneous
+35737,4,36008,Miscellaneous
+35737,5,43245,Hardware
+147,1,1956,HR Support
+147,2,11063,HR Support
+147,3,2200,HR Support
+147,4,39313,Miscellaneous
+147,5,39342,Hardware
+25232,1,25358,Miscellaneous
+25232,2,45688,Hardware
+25232,3,10281,Miscellaneous
+25232,4,25569,Access
+25232,5,26407,Miscellaneous
+43829,1,2119,Storage
+43829,2,21263,Storage
+43829,3,21235,Storage
+43829,4,20782,Storage
+43829,5,19609,Storage
+30061,1,30120,HR Support
+30061,2,19579,Storage
+30061,3,23645,Miscellaneous
+30061,4,12251,Miscellaneous
+30061,5,13362,Miscellaneous
+27379,1,27427,Miscellaneous
+27379,2,28357,Hardware
+27379,3,30210,Hardware
+27379,4,29913,Hardware
+27379,5,26693,Hardware
+10935,1,42429,Hardware
+10935,2,8178,Storage
+10935,3,2039,Storage
+10935,4,4334,Storage
+10935,5,15114,Storage
+31385,1,29122,Storage
+31385,2,29119,Hardware
+31385,3,29595,Hardware
+31385,4,25606,Hardware
+31385,5,11670,Access
+23597,1,23376,Access
+23597,2,32238,Access
+23597,3,13561,Access
+23597,4,29586,Access
+23597,5,21869,Access
+31870,1,31622,Access
+31870,2,30808,Hardware
+31870,3,30842,Access
+31870,4,10459,Hardware
+31870,5,10182,Hardware
+36270,1,5821,Access
+36270,2,17821,Access
+36270,3,35494,Access
+36270,4,38253,Access
+36270,5,38289,Access
+24652,1,24996,Purchase
+24652,2,4950,HR Support
+24652,3,21558,Hardware
+24652,4,7283,HR Support
+24652,5,7281,HR Support
+13205,1,28163,HR Support
+13205,2,30007,HR Support
+13205,3,14958,HR Support
+13205,4,12194,HR Support
+13205,5,23725,HR Support
+3628,1,29473,HR Support
+3628,2,23410,HR Support
+3628,3,17868,HR Support
+3628,4,6863,HR Support
+3628,5,22531,HR Support
+28771,1,43297,Hardware
+28771,2,27792,Access
+28771,3,28006,HR Support
+28771,4,17405,Access
+28771,5,27628,Access
+37388,1,36532,Hardware
+37388,2,2474,Administrative rights
+37388,3,9914,Administrative rights
+37388,4,3245,Administrative rights
+37388,5,4592,Access
+21952,1,21305,Access
+21952,2,20082,Access
+21952,3,20504,Access
+21952,4,22383,Access
+21952,5,29525,Access
+26617,1,26616,HR Support
+26617,2,26248,HR Support
+26617,3,26275,HR Support
+26617,4,26273,HR Support
+26617,5,24705,Hardware
+12299,1,11728,Hardware
+12299,2,32613,HR Support
+12299,3,32970,HR Support
+12299,4,12566,Hardware
+12299,5,11058,Hardware
+35590,1,45058,Hardware
+35590,2,38119,Hardware
+35590,3,44688,Hardware
+35590,4,37546,Hardware
+35590,5,36090,Hardware
+31859,1,30336,Internal Project
+31859,2,38518,Internal Project
+31859,3,24596,HR Support
+31859,4,40784,HR Support
+31859,5,41072,HR Support
+37583,1,22684,HR Support
+37583,2,47691,Hardware
+37583,3,39273,Hardware
+37583,4,914,Miscellaneous
+37583,5,7952,Miscellaneous
+30138,1,29083,Hardware
+30138,2,18644,Miscellaneous
+30138,3,19061,Internal Project
+30138,4,28831,Hardware
+30138,5,24612,Internal Project
+30343,1,19062,Internal Project
+30343,2,19765,Internal Project
+30343,3,24671,Internal Project
+30343,4,24667,Internal Project
+30343,5,26379,Internal Project
+15992,1,560,HR Support
+15992,2,22605,Hardware
+15992,3,32807,HR Support
+15992,4,29103,HR Support
+15992,5,33965,HR Support
+34384,1,4940,Miscellaneous
+34384,2,37311,Hardware
+34384,3,43901,Hardware
+34384,4,14850,Hardware
+34384,5,35871,Administrative rights
+7647,1,34352,Hardware
+7647,2,17610,Hardware
+7647,3,16159,Hardware
+7647,4,23349,Hardware
+7647,5,28871,HR Support
+18399,1,18123,HR Support
+18399,2,31602,HR Support
+18399,3,19388,HR Support
+18399,4,30930,Internal Project
+18399,5,33058,Miscellaneous
+30107,1,4426,Hardware
+30107,2,2661,Hardware
+30107,3,35746,Hardware
+30107,4,1718,Hardware
+30107,5,22090,Miscellaneous
+15441,1,32036,Miscellaneous
+15441,2,19814,Miscellaneous
+15441,3,30657,Hardware
+15441,4,12169,Hardware
+15441,5,29731,Purchase
+24083,1,15504,HR Support
+24083,2,44278,Hardware
+24083,3,44957,Hardware
+24083,4,5622,Hardware
+24083,5,44107,Hardware
+26209,1,25479,HR Support
+26209,2,22516,HR Support
+26209,3,25442,HR Support
+26209,4,22417,Miscellaneous
+26209,5,23636,Miscellaneous
+35708,1,1059,Purchase
+35708,2,30371,Hardware
+35708,3,46203,Hardware
+35708,4,27310,Access
+35708,5,11272,Access
+29368,1,16803,HR Support
+29368,2,14145,HR Support
+29368,3,22715,HR Support
+29368,4,31851,Storage
+29368,5,12844,HR Support
+2460,1,29531,Purchase
+2460,2,20809,HR Support
+2460,3,7300,Access
+2460,4,14616,Purchase
+2460,5,16102,Purchase
+20856,1,27026,Miscellaneous
+20856,2,21545,Hardware
+20856,3,1595,HR Support
+20856,4,24609,Hardware
+20856,5,26640,Storage
+20789,1,19489,Administrative rights
+20789,2,22552,Administrative rights
+20789,3,28693,Internal Project
+20789,4,44143,Administrative rights
+20789,5,27497,HR Support
+35593,1,38185,Storage
+35593,2,40773,Storage
+35593,3,45300,HR Support
+35593,4,45298,HR Support
+35593,5,43103,Storage
+8041,1,18266,Hardware
+8041,2,40375,Hardware
+8041,3,43002,Hardware
+8041,4,42804,Hardware
+8041,5,17371,HR Support
+9754,1,7255,Hardware
+9754,2,15311,Hardware
+9754,3,2081,Hardware
+9754,4,12921,Miscellaneous
+9754,5,22090,Miscellaneous
+15644,1,13636,Storage
+15644,2,11022,Access
+15644,3,7725,Miscellaneous
+15644,4,15445,Storage
+15644,5,13649,Hardware
+13195,1,13540,Purchase
+13195,2,13543,Purchase
+13195,3,2277,Purchase
+13195,4,18262,Purchase
+13195,5,13834,Purchase
+21078,1,24063,HR Support
+21078,2,20079,HR Support
+21078,3,12278,Storage
+21078,4,20769,HR Support
+21078,5,22692,Storage
+39004,1,34633,HR Support
+39004,2,38935,Miscellaneous
+39004,3,46889,Miscellaneous
+39004,4,45567,Miscellaneous
+39004,5,7918,Access
+42060,1,41385,Miscellaneous
+42060,2,37170,HR Support
+42060,3,36878,Miscellaneous
+42060,4,39177,Miscellaneous
+42060,5,42055,Miscellaneous
+31059,1,17367,Storage
+31059,2,15881,HR Support
+31059,3,22598,Miscellaneous
+31059,4,45185,Hardware
+31059,5,21762,Miscellaneous
+17666,1,29020,HR Support
+17666,2,29657,HR Support
+17666,3,12635,Access
+17666,4,17915,Hardware
+17666,5,20896,HR Support
+1095,1,5532,Miscellaneous
+1095,2,11456,Hardware
+1095,3,25198,HR Support
+1095,4,45149,HR Support
+1095,5,42295,Miscellaneous
+30039,1,23674,HR Support
+30039,2,16971,Storage
+30039,3,30701,Access
+30039,4,31027,HR Support
+30039,5,12851,Access
+174,1,2511,Storage
+174,2,25661,Access
+174,3,9674,HR Support
+174,4,24023,Storage
+174,5,28414,Miscellaneous
+18340,1,19196,Miscellaneous
+18340,2,19177,HR Support
+18340,3,16849,HR Support
+18340,4,27115,HR Support
+18340,5,19667,HR Support
+40610,1,44079,Storage
+40610,2,15905,HR Support
+40610,3,45478,Hardware
+40610,4,44563,Hardware
+40610,5,5784,Storage
+23739,1,47326,HR Support
+23739,2,42444,Hardware
+23739,3,45330,Hardware
+23739,4,24281,Hardware
+23739,5,45538,Hardware
+39128,1,874,Miscellaneous
+39128,2,19572,Miscellaneous
+39128,3,28300,Miscellaneous
+39128,4,24267,Hardware
+39128,5,29821,Miscellaneous
+37077,1,7699,HR Support
+37077,2,44771,Hardware
+37077,3,10931,Miscellaneous
+37077,4,43849,HR Support
+37077,5,32932,Internal Project
+5467,1,41857,Administrative rights
+5467,2,2216,Administrative rights
+5467,3,16177,Administrative rights
+5467,4,41854,Hardware
+5467,5,7180,Administrative rights
+9104,1,9451,Hardware
+9104,2,8237,Access
+9104,3,14016,Miscellaneous
+9104,4,32009,Hardware
+9104,5,4516,HR Support
+29606,1,29653,HR Support
+29606,2,13366,Miscellaneous
+29606,3,30708,Miscellaneous
+29606,4,28713,HR Support
+29606,5,28514,HR Support
+27024,1,15550,Miscellaneous
+27024,2,24941,Miscellaneous
+27024,3,14317,HR Support
+27024,4,24308,Miscellaneous
+27024,5,25710,Miscellaneous
+31011,1,5685,Access
+31011,2,17104,Storage
+31011,3,23153,HR Support
+31011,4,26627,Storage
+31011,5,23152,HR Support
+5623,1,8299,Administrative rights
+5623,2,2661,Hardware
+5623,3,44529,Hardware
+5623,4,35746,Hardware
+5623,5,20304,Hardware
+35313,1,36064,Access
+35313,2,6036,Access
+35313,3,46409,Access
+35313,4,35634,Access
+35313,5,44990,Access
+34928,1,34900,Hardware
+34928,2,35731,Hardware
+34928,3,34793,Hardware
+34928,4,35723,Hardware
+34928,5,34747,Access
+35703,1,35433,Storage
+35703,2,12486,Storage
+35703,3,34666,Storage
+35703,4,42638,Storage
+35703,5,36633,Storage
+13166,1,22213,HR Support
+13166,2,23008,Miscellaneous
+13166,3,7924,HR Support
+13166,4,10269,HR Support
+13166,5,17692,Miscellaneous
+40870,1,41257,Miscellaneous
+40870,2,42501,Miscellaneous
+40870,3,38865,Miscellaneous
+40870,4,42342,Miscellaneous
+40870,5,40563,Miscellaneous
+13265,1,13262,Miscellaneous
+13265,2,23207,Miscellaneous
+13265,3,13645,Miscellaneous
+13265,4,12309,Miscellaneous
+13265,5,31161,Miscellaneous
+1158,1,1132,Hardware
+1158,2,11972,Hardware
+1158,3,2443,Administrative rights
+1158,4,10402,Hardware
+1158,5,4638,Hardware
+25105,1,25661,Access
+25105,2,22566,HR Support
+25105,3,2593,HR Support
+25105,4,30552,HR Support
+25105,5,31435,HR Support
+14030,1,5407,Internal Project
+14030,2,6826,Administrative rights
+14030,3,13059,Hardware
+14030,4,29751,Administrative rights
+14030,5,29607,HR Support
+34502,1,37671,HR Support
+34502,2,37684,Hardware
+34502,3,43400,HR Support
+34502,4,37938,HR Support
+34502,5,46509,Hardware
+17224,1,16701,Access
+17224,2,14426,Access
+17224,3,18190,Access
+17224,4,10527,Access
+17224,5,3716,Access
+5669,1,23199,Access
+5669,2,2208,Purchase
+5669,3,8182,Hardware
+5669,4,8336,Purchase
+5669,5,10416,Internal Project
+1504,1,23025,Internal Project
+1504,2,23038,Internal Project
+1504,3,6580,Miscellaneous
+1504,4,37486,Internal Project
+1504,5,31795,Internal Project
+17762,1,44929,Hardware
+17762,2,45992,Hardware
+17762,3,29954,Access
+17762,4,38496,Hardware
+17762,5,40431,Hardware
+12238,1,14057,Access
+12238,2,14058,Access
+12238,3,14059,Access
+12238,4,17920,Access
+12238,5,15299,Access
+1935,1,16611,Miscellaneous
+1935,2,33485,Miscellaneous
+1935,3,20415,Miscellaneous
+1935,4,6572,Miscellaneous
+1935,5,11426,Miscellaneous
+9759,1,34289,Hardware
+9759,2,35092,Hardware
+9759,3,36301,Hardware
+9759,4,40030,Hardware
+9759,5,9286,Miscellaneous
+23574,1,23631,HR Support
+23574,2,18082,Hardware
+23574,3,20193,Hardware
+23574,4,3497,HR Support
+23574,5,25041,Miscellaneous
+47388,1,32232,Hardware
+47388,2,47295,Hardware
+47388,3,47374,Hardware
+47388,4,31703,Access
+47388,5,28826,Miscellaneous
+5286,1,9645,Hardware
+5286,2,36053,Access
+5286,3,13491,Hardware
+5286,4,11781,Access
+5286,5,13472,Access
+47777,1,41133,HR Support
+47777,2,42058,HR Support
+47777,3,41162,HR Support
+47777,4,34893,HR Support
+47777,5,37331,HR Support
+45490,1,24535,Miscellaneous
+45490,2,30906,Access
+45490,3,23876,Access
+45490,4,18041,Access
+45490,5,33171,Access
+26668,1,18567,Hardware
+26668,2,26054,Hardware
+26668,3,29499,Miscellaneous
+26668,4,26592,HR Support
+26668,5,25348,Hardware
+22269,1,30146,Access
+22269,2,13623,Access
+22269,3,17465,Access
+22269,4,28024,Access
+22269,5,27598,Access
+2923,1,30800,Miscellaneous
+2923,2,19131,Miscellaneous
+2923,3,18659,Miscellaneous
+2923,4,27571,Miscellaneous
+2923,5,24958,Miscellaneous
+12843,1,12141,Hardware
+12843,2,32133,Miscellaneous
+12843,3,37588,Hardware
+12843,4,37434,Hardware
+12843,5,45094,Hardware
+21924,1,25583,Miscellaneous
+21924,2,17744,Miscellaneous
+21924,3,11403,Miscellaneous
+21924,4,22551,Miscellaneous
+21924,5,10800,Miscellaneous
+43591,1,44673,Hardware
+43591,2,43534,Storage
+43591,3,43556,Hardware
+43591,4,45313,Hardware
+43591,5,41587,Hardware
+45279,1,46051,HR Support
+45279,2,42907,HR Support
+45279,3,35550,Hardware
+45279,4,47598,Hardware
+45279,5,47599,Hardware
+44637,1,35679,Miscellaneous
+44637,2,45124,HR Support
+44637,3,42927,HR Support
+44637,4,41879,Hardware
+44637,5,40766,Miscellaneous
+43579,1,43458,HR Support
+43579,2,43582,HR Support
+43579,3,18708,HR Support
+43579,4,19968,HR Support
+43579,5,43441,HR Support
+31927,1,33659,HR Support
+31927,2,17893,HR Support
+31927,3,33115,HR Support
+31927,4,28377,HR Support
+31927,5,12461,Miscellaneous
+16122,1,18798,Access
+16122,2,17701,Access
+16122,3,15157,Access
+16122,4,16904,Access
+16122,5,18781,Miscellaneous
+17483,1,18204,Miscellaneous
+17483,2,17331,Hardware
+17483,3,15373,Access
+17483,4,22051,Access
+17483,5,21131,Access
+11322,1,12736,HR Support
+11322,2,12105,HR Support
+11322,3,8113,HR Support
+11322,4,30294,HR Support
+11322,5,10970,HR Support
+39531,1,40298,Storage
+39531,2,44278,Hardware
+39531,3,47153,Storage
+39531,4,42242,Storage
+39531,5,36633,Storage
+13549,1,20821,Hardware
+13549,2,22772,Hardware
+13549,3,26688,Hardware
+13549,4,20859,Miscellaneous
+13549,5,1817,Hardware
+6821,1,14847,Hardware
+6821,2,11002,Access
+6821,3,12001,Internal Project
+6821,4,20952,Miscellaneous
+6821,5,20728,Internal Project
+18407,1,10833,Miscellaneous
+18407,2,42026,HR Support
+18407,3,7151,Miscellaneous
+18407,4,21917,Miscellaneous
+18407,5,31979,Miscellaneous
+29819,1,29806,Miscellaneous
+29819,2,30011,Miscellaneous
+29819,3,18046,Miscellaneous
+29819,4,18169,Access
+29819,5,14896,Access
+12611,1,10797,Miscellaneous
+12611,2,11485,Miscellaneous
+12611,3,26939,Miscellaneous
+12611,4,30684,Miscellaneous
+12611,5,32414,Hardware
+29931,1,34609,Storage
+29931,2,553,Storage
+29931,3,22927,Storage
+29931,4,43197,Storage
+29931,5,30162,Miscellaneous
+2176,1,5655,Miscellaneous
+2176,2,868,HR Support
+2176,3,6073,Miscellaneous
+2176,4,300,Miscellaneous
+2176,5,645,Storage
+46052,1,45592,Hardware
+46052,2,46118,Hardware
+46052,3,36230,Hardware
+46052,4,47037,Hardware
+46052,5,46161,Hardware
+16041,1,10417,HR Support
+16041,2,13544,Access
+16041,3,31121,Access
+16041,4,33066,HR Support
+16041,5,31879,HR Support
+7011,1,32764,HR Support
+7011,2,11680,Access
+7011,3,30845,HR Support
+7011,4,30839,HR Support
+7011,5,30848,HR Support
+602,1,3685,Access
+602,2,14845,Access
+602,3,38259,Miscellaneous
+602,4,1333,Access
+602,5,30874,HR Support
+24181,1,19510,Storage
+24181,2,23516,Storage
+24181,3,15939,Storage
+24181,4,12278,Storage
+24181,5,14669,Storage
+21165,1,24254,Internal Project
+21165,2,26495,Internal Project
+21165,3,23918,Internal Project
+21165,4,15099,Miscellaneous
+21165,5,21605,Internal Project
+849,1,4160,Hardware
+849,2,15443,Storage
+849,3,2060,Hardware
+849,4,6443,Access
+849,5,7571,Storage
+18213,1,19006,HR Support
+18213,2,16848,Internal Project
+18213,3,18132,Miscellaneous
+18213,4,19507,Miscellaneous
+18213,5,19804,Internal Project
+11148,1,11478,HR Support
+11148,2,33529,HR Support
+11148,3,12437,HR Support
+11148,4,32679,HR Support
+11148,5,33736,Access
+24317,1,24478,Hardware
+24317,2,25298,HR Support
+24317,3,24056,Access
+24317,4,24771,Access
+24317,5,30320,HR Support
+28611,1,30930,Internal Project
+28611,2,19646,HR Support
+28611,3,14425,Miscellaneous
+28611,4,12094,Internal Project
+28611,5,26604,Administrative rights
+43551,1,19418,Hardware
+43551,2,13473,Hardware
+43551,3,10168,HR Support
+43551,4,26148,HR Support
+43551,5,23384,Administrative rights
+10709,1,19429,HR Support
+10709,2,13043,HR Support
+10709,3,23042,HR Support
+10709,4,16755,HR Support
+10709,5,14853,HR Support
+36753,1,10466,Internal Project
+36753,2,27404,Internal Project
+36753,3,32134,Internal Project
+36753,4,2611,Internal Project
+36753,5,40762,Hardware
+10304,1,16657,Miscellaneous
+10304,2,31049,HR Support
+10304,3,11636,Hardware
+10304,4,21195,Miscellaneous
+10304,5,25305,Internal Project
+21573,1,20498,Hardware
+21573,2,35989,Hardware
+21573,3,19821,HR Support
+21573,4,19731,Miscellaneous
+21573,5,21128,Storage
+13363,1,30208,Hardware
+13363,2,29835,HR Support
+13363,3,3965,HR Support
+13363,4,32933,HR Support
+13363,5,19464,Miscellaneous
+35242,1,38849,Hardware
+35242,2,43823,Hardware
+35242,3,38673,Hardware
+35242,4,35135,Administrative rights
+35242,5,46241,Hardware
+1937,1,17001,Hardware
+1937,2,29790,Hardware
+1937,3,25916,Hardware
+1937,4,13255,Hardware
+1937,5,5948,HR Support
+26368,1,28437,Miscellaneous
+26368,2,13405,Miscellaneous
+26368,3,27609,Miscellaneous
+26368,4,27577,Miscellaneous
+26368,5,30415,Miscellaneous
+19274,1,29475,Hardware
+19274,2,4096,Miscellaneous
+19274,3,13896,Hardware
+19274,4,15338,HR Support
+19274,5,30053,HR Support
+38939,1,39594,Miscellaneous
+38939,2,38095,Miscellaneous
+38939,3,6421,Miscellaneous
+38939,4,35158,Hardware
+38939,5,26966,Miscellaneous
+604,1,6669,HR Support
+604,2,4986,Internal Project
+604,3,3921,Hardware
+604,4,20105,Miscellaneous
+604,5,7075,Hardware
+15217,1,14097,Access
+15217,2,26680,Hardware
+15217,3,39986,Hardware
+15217,4,45638,Hardware
+15217,5,35181,Hardware
+2712,1,20317,Hardware
+2712,2,15442,HR Support
+2712,3,20105,Miscellaneous
+2712,4,25051,Storage
+2712,5,30112,HR Support
+25831,1,26748,Storage
+25831,2,27781,Hardware
+25831,3,23761,HR Support
+25831,4,20276,Hardware
+25831,5,26225,Miscellaneous
+236,1,3606,HR Support
+236,2,1240,HR Support
+236,3,526,HR Support
+236,4,195,HR Support
+236,5,7917,HR Support
+19472,1,15157,Access
+19472,2,17496,Access
+19472,3,16127,Internal Project
+19472,4,17701,Access
+19472,5,18798,Access
+41796,1,35477,Hardware
+41796,2,6531,Hardware
+41796,3,35887,Access
+41796,4,36060,Hardware
+41796,5,14453,Hardware
+2591,1,3009,Administrative rights
+2591,2,6592,Administrative rights
+2591,3,6428,Administrative rights
+2591,4,7580,Administrative rights
+2591,5,6833,Administrative rights
+38536,1,8507,HR Support
+38536,2,8192,HR Support
+38536,3,1900,HR Support
+38536,4,34273,HR Support
+38536,5,6668,HR Support
+22537,1,14783,Purchase
+22537,2,10276,Purchase
+22537,3,19809,HR Support
+22537,4,27421,Purchase
+22537,5,13470,Purchase
+42171,1,42671,Hardware
+42171,2,40351,Hardware
+42171,3,13940,HR Support
+42171,4,44675,Hardware
+42171,5,46428,Hardware
+46249,1,36521,Hardware
+46249,2,44178,Access
+46249,3,37210,Access
+46249,4,44643,Hardware
+46249,5,27918,Hardware
+18486,1,13879,Access
+18486,2,20201,Access
+18486,3,17692,Miscellaneous
+18486,4,24283,Internal Project
+18486,5,29356,Miscellaneous
+3775,1,41246,HR Support
+3775,2,13023,HR Support
+3775,3,18926,HR Support
+3775,4,7432,Access
+3775,5,2933,Storage
+41377,1,45349,Hardware
+41377,2,47105,Hardware
+41377,3,37821,Access
+41377,4,37400,Administrative rights
+41377,5,42986,Hardware
+39465,1,12177,HR Support
+39465,2,11504,Internal Project
+39465,3,11338,Hardware
+39465,4,42454,Hardware
+39465,5,43610,Miscellaneous
+22468,1,18572,Miscellaneous
+22468,2,24892,Miscellaneous
+22468,3,17384,HR Support
+22468,4,30014,Hardware
+22468,5,22076,Hardware
+40294,1,40902,Purchase
+40294,2,34279,Hardware
+40294,3,28605,Miscellaneous
+40294,4,22086,Internal Project
+40294,5,12755,Miscellaneous
+1809,1,4811,Miscellaneous
+1809,2,15619,Miscellaneous
+1809,3,45212,Hardware
+1809,4,1955,HR Support
+1809,5,27903,Miscellaneous
+37611,1,6873,Access
+37611,2,12589,Access
+37611,3,5124,Access
+37611,4,3375,Access
+37611,5,23155,Access
+9634,1,11060,HR Support
+9634,2,9067,HR Support
+9634,3,633,HR Support
+9634,4,29134,HR Support
+9634,5,996,HR Support
+9636,1,7886,HR Support
+9636,2,6462,HR Support
+9636,3,28670,Access
+9636,4,16751,Hardware
+9636,5,7486,Access
+46530,1,4451,HR Support
+46530,2,39811,HR Support
+46530,3,26736,HR Support
+46530,4,37341,HR Support
+46530,5,40072,HR Support
+43138,1,44508,Administrative rights
+43138,2,40140,Administrative rights
+43138,3,45152,Administrative rights
+43138,4,45979,Administrative rights
+43138,5,39763,Administrative rights
+42301,1,47319,Administrative rights
+42301,2,23758,Administrative rights
+42301,3,44697,Administrative rights
+42301,4,6906,Administrative rights
+42301,5,39960,Administrative rights
+506,1,17715,Hardware
+506,2,21317,Hardware
+506,3,19992,Hardware
+506,4,42470,Hardware
+506,5,31189,Hardware
+26586,1,25430,HR Support
+26586,2,40337,Access
+26586,3,13024,Hardware
+26586,4,1944,Internal Project
+26586,5,26952,HR Support
+9997,1,22384,Miscellaneous
+9997,2,23246,Hardware
+9997,3,26683,Hardware
+9997,4,25824,Miscellaneous
+9997,5,12871,Miscellaneous
+39060,1,25707,Hardware
+39060,2,45705,Hardware
+39060,3,42803,Miscellaneous
+39060,4,35012,HR Support
+39060,5,40088,Hardware
+12356,1,32872,Hardware
+12356,2,14357,Hardware
+12356,3,28005,Hardware
+12356,4,11995,Hardware
+12356,5,11917,Hardware
+33952,1,32438,Hardware
+33952,2,32456,Miscellaneous
+33952,3,33611,Hardware
+33952,4,33795,HR Support
+33952,5,33015,Hardware
+4185,1,27291,Hardware
+4185,2,6154,Hardware
+4185,3,10566,Hardware
+4185,4,22862,Hardware
+4185,5,46315,Hardware
+9613,1,9740,Hardware
+9613,2,9614,Hardware
+9613,3,4007,Hardware
+9613,4,1466,Hardware
+9613,5,7119,Storage
+37934,1,7595,HR Support
+37934,2,36021,HR Support
+37934,3,3896,HR Support
+37934,4,3863,HR Support
+37934,5,45886,Hardware
+27446,1,27509,Miscellaneous
+27446,2,28856,HR Support
+27446,3,32595,HR Support
+27446,4,28794,Storage
+27446,5,17118,HR Support
+10535,1,39989,HR Support
+10535,2,11742,HR Support
+10535,3,12892,Storage
+10535,4,33527,HR Support
+10535,5,11771,HR Support
+18966,1,19914,Hardware
+18966,2,39443,Hardware
+18966,3,43332,Hardware
+18966,4,12305,Hardware
+18966,5,16679,Hardware
+17944,1,27628,Access
+17944,2,7105,Access
+17944,3,16322,Access
+17944,4,13964,Access
+17944,5,14769,Access
+39048,1,39589,Administrative rights
+39048,2,44550,Administrative rights
+39048,3,46123,Administrative rights
+39048,4,42098,Hardware
+39048,5,46058,Administrative rights
+43016,1,43469,Hardware
+43016,2,38225,HR Support
+43016,3,47269,Hardware
+43016,4,42175,HR Support
+43016,5,45652,Administrative rights
+32186,1,13289,HR Support
+32186,2,16012,Storage
+32186,3,32270,Internal Project
+32186,4,4168,HR Support
+32186,5,34391,Hardware
+5007,1,2106,Miscellaneous
+5007,2,5067,Miscellaneous
+5007,3,36298,Hardware
+5007,4,36126,Hardware
+5007,5,38887,Hardware
+15349,1,15294,Access
+15349,2,12989,HR Support
+15349,3,1912,Hardware
+15349,4,563,HR Support
+15349,5,17382,Access
+3074,1,27696,Hardware
+3074,2,25045,HR Support
+3074,3,25103,HR Support
+3074,4,24935,Hardware
+3074,5,37447,Miscellaneous
+10880,1,15421,Hardware
+10880,2,20952,Miscellaneous
+10880,3,20728,Internal Project
+10880,4,31460,Internal Project
+10880,5,4199,Internal Project
+12467,1,27907,Miscellaneous
+12467,2,27580,Miscellaneous
+12467,3,33633,Miscellaneous
+12467,4,33200,Miscellaneous
+12467,5,4199,Internal Project
+27768,1,19843,HR Support
+27768,2,24243,HR Support
+27768,3,16239,Storage
+27768,4,17452,Hardware
+27768,5,14631,Storage
+39984,1,13251,Miscellaneous
+39984,2,26086,Miscellaneous
+39984,3,7274,Miscellaneous
+39984,4,12934,Miscellaneous
+39984,5,39588,Miscellaneous
+40212,1,40366,Hardware
+40212,2,41142,Hardware
+40212,3,40746,Hardware
+40212,4,40088,Hardware
+40212,5,32677,Hardware
+12287,1,32325,Hardware
+12287,2,32473,Hardware
+12287,3,12804,Hardware
+12287,4,33618,Hardware
+12287,5,33971,Miscellaneous
+21029,1,21392,Access
+21029,2,21391,Access
+21029,3,21446,Hardware
+21029,4,20861,HR Support
+21029,5,21918,Hardware
+25170,1,24958,Miscellaneous
+25170,2,9011,Miscellaneous
+25170,3,19131,Miscellaneous
+25170,4,27571,Miscellaneous
+25170,5,30800,Miscellaneous
+31165,1,17190,HR Support
+31165,2,23152,HR Support
+31165,3,30464,HR Support
+31165,4,23153,HR Support
+31165,5,14051,Access
+29296,1,29309,Miscellaneous
+29296,2,28286,Miscellaneous
+29296,3,23645,Miscellaneous
+29296,4,25517,Miscellaneous
+29296,5,29049,Miscellaneous
+34625,1,34900,Hardware
+34625,2,34747,Access
+34625,3,35731,Hardware
+34625,4,35723,Hardware
+34625,5,45571,Administrative rights
+30243,1,15905,HR Support
+30243,2,8470,Miscellaneous
+30243,3,21647,Hardware
+30243,4,14871,Miscellaneous
+30243,5,14889,HR Support
+3600,1,45808,Access
+3600,2,41798,Access
+3600,3,40443,Administrative rights
+3600,4,15811,HR Support
+3600,5,33315,HR Support
+9405,1,9417,Access
+9405,2,1879,Hardware
+9405,3,30289,Access
+9405,4,27918,Hardware
+9405,5,1882,Hardware
+19769,1,21459,Miscellaneous
+19769,2,1550,Miscellaneous
+19769,3,20911,Miscellaneous
+19769,4,23991,Miscellaneous
+19769,5,676,Miscellaneous

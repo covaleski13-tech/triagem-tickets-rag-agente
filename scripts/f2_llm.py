@@ -1,5 +1,6 @@
-"""F2 passos 1, 6 e 7: V0 (prompt do case) e V1 (5 exemplos aleatórios do treino) nos 400.
-Uso: python scripts/f2_llm.py --variante v0|v1 [--estimar]"""
+"""F2 passos 1, 6 e 7 (V0, V1) e F3 passo 2 (V2, V3) nos 400.
+V2: top 5 vetorial; V3: top 5 híbrida; ambos lidos dos CSV da F2, sem nova consulta ao banco.
+Uso: python scripts/f2_llm.py --variante v0|v1|v2|v3 [--estimar]"""
 import argparse
 import hashlib
 import json
@@ -17,7 +18,12 @@ from triagem_rag.dados import ds2_com_splits, ids_amostra_400  # noqa: E402
 from triagem_rag.llm import (MODELO, checar_tracing, classificar, cliente, mensagens, sortear_v1,  # noqa: E402
                              system_rag, system_v0)
 
-OUT = RAIZ / "results/f2"
+OUT_F2 = RAIZ / "results/f2"
+OUT_F3 = RAIZ / "results/f3"
+
+
+def saida(variante: str) -> Path:
+    return OUT_F2 if variante in ("v0", "v1") else OUT_F3
 PRECO_IN, PRECO_OUT = 0.10, 0.50  # US$/MTok, página oficial consultada em 2026-11-17 (docs/custos.md)
 
 
@@ -26,6 +32,7 @@ def preparar(variante: str):
     treino = df[df["split_grupo"] == "treino"]
     texto = df.set_index("id")["Document"]
     ids = ids_amostra_400()
+    OUT = saida(variante)
     OUT.mkdir(parents=True, exist_ok=True)
     meta = {"variante": variante, "modelo": MODELO}
     if variante == "v0":
@@ -36,6 +43,26 @@ def preparar(variante: str):
                                                                       lineterminator="\n")
         meta["sha256_system"] = hashlib.sha256(system.encode("utf-8")).hexdigest()
         systems = {i: system for i in ids}
+    elif variante in ("v2", "v3"):
+        # exemplos em ordem de rank, rank 1 primeiro (regra congelada na F2)
+        if variante == "v2":
+            v = pd.read_csv(OUT_F2 / "vizinhos_400.csv")
+            v = v[(v.recuperador == "vetorial") & (v["rank"] <= 5)]
+        else:
+            v = pd.read_csv(OUT_F2 / "hibrida_top5_400.csv")
+        v = v.sort_values(["id_consulta", "rank"])
+        ex = pd.DataFrame({"id": v["id_consulta"].values, "ordem": v["rank"].values,
+                           "id_exemplo": v["id_vizinho"].values, "categoria_exemplo": v["categoria_vizinho"].values})
+        ix = df.set_index("id")
+        assert set(ex["id"]) == set(ids) and (ex.groupby("id").size() == 5).all()
+        assert (ex.groupby("id")["ordem"].apply(list) == pd.Series([[1, 2, 3, 4, 5]] * 400, index=sorted(ids))).all()
+        assert (ix.loc[ex["id_exemplo"], "split_grupo"] == "treino").all() and (ex["id"] != ex["id_exemplo"]).all()
+        assert (ix.loc[ex["id_exemplo"], "group_id"].values != ix.loc[ex["id"], "group_id"].values).all()
+        assert (ix.loc[ex["id_exemplo"], "Topic_group"].values == ex["categoria_exemplo"].values).all()
+        ex = ex.set_index("id").loc[ids].reset_index()
+        ex.to_csv(OUT / f"exemplos_{variante}.csv", index=False, lineterminator="\n")
+        systems = {i: system_rag([(texto[j], c) for j, c in zip(g["id_exemplo"], g["categoria_exemplo"])])
+                   for i, g in ex.groupby("id", sort=False)}
     else:
         ids_treino = np.sort(treino["id"].to_numpy())
         cat = treino.set_index("id")["Topic_group"]
@@ -68,6 +95,7 @@ def estimar(variante: str):
 def rodar(variante: str):
     checar_tracing()
     ids, texto, systems, meta = preparar(variante)
+    OUT = saida(variante)
     llm = cliente()
     t0 = time.perf_counter()
     with ThreadPoolExecutor(8) as ex:
@@ -97,7 +125,7 @@ def rodar(variante: str):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--variante", choices=["v0", "v1"], required=True)
+    ap.add_argument("--variante", choices=["v0", "v1", "v2", "v3"], required=True)
     ap.add_argument("--estimar", action="store_true")
     a = ap.parse_args()
     estimar(a.variante) if a.estimar else rodar(a.variante)

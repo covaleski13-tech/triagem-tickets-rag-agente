@@ -1,0 +1,85 @@
+{
+  "amostra_q2": "pendente: F3b (q2_tempos.json)",
+  "recorte_400": {
+    "n": 400,
+    "por_recuperador": {
+      "vetorial": {
+        "precisao5_media": 0.5145,
+        "precisao5_ic95": [
+          0.482,
+          0.5465
+        ],
+        "k1_acertos": 235,
+        "k1_acuracia": 0.5875,
+        "sem_resultado": 0,
+        "sem_resultado_pct": 0.0
+      },
+      "fulltext": {
+        "precisao5_media": 0.3565,
+        "precisao5_ic95": [
+          0.327,
+          0.389
+        ],
+        "k1_acertos": 165,
+        "k1_acuracia": 0.4125,
+        "sem_resultado": 0,
+        "sem_resultado_pct": 0.0
+      },
+      "hibrida": {
+        "precisao5_media": 0.478,
+        "precisao5_ic95": [
+          0.447,
+          0.509
+        ],
+        "k1_acertos": 219,
+        "k1_acuracia": 0.5475,
+        "sem_resultado": 0,
+        "sem_resultado_pct": 0.0
+      }
+    },
+    "diferencas": [
+      {
+        "par": "hibrida-vetorial",
+        "metrica": "precisao5",
+        "diferenca_media": -0.0365,
+        "ic95_inf": -0.0645,
+        "ic95_sup": -0.009
+      },
+      {
+        "par": "hibrida-vetorial",
+        "metrica": "k1",
+        "diferenca_media": -0.04,
+        "ic95_inf": -0.0875,
+        "ic95_sup": 0.01
+      },
+      {
+        "par": "hibrida-fulltext",
+        "metrica": "precisao5",
+        "diferenca_media": 0.1215,
+        "ic95_inf": 0.094,
+        "ic95_sup": 0.148
+      },
+      {
+        "par": "hibrida-fulltext",
+        "metrica": "k1",
+        "diferenca_media": 0.135,
+        "ic95_inf": 0.0825,
+        "ic95_sup": 0.185
+      },
+      {
+        "par": "fulltext-vetorial",
+        "metrica": "precisao5",
+        "diferenca_media": -0.158,
+        "ic95_inf": -0.197,
+        "ic95_sup": -0.117
+      },
+      {
+        "par": "fulltext-vetorial",
+        "metrica": "k1",
+        "diferenca_media": -0.175,
+        "ic95_inf": -0.235,
+        "ic95_sup": -0.1125
+      }
+    ]
+  }
+}

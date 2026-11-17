@@ -1,0 +1,15 @@
+{
+  "threads": 1,
+  "limite_min": 35.0,
+  "shared_buffers": "128MB",
+  "rodada_anterior": {
+    "vetorial_s": 236.4,
+    "sonda_fulltext_s": 172.5,
+    "extrapolacao_total_min": 61.4,
+    "status": "parado: extrapola\u00e7\u00e3o > 30 min"
+  },
+  "vetorial_s": 198.6,
+  "sonda_fulltext_s": 190.0,
+  "extrapolacao_total_min": 66.6,
+  "status": "parado: extrapola\u00e7\u00e3o > 35.0 min"
+}

@@ -43,3 +43,37 @@ Fonte: tokens de `usage_metadata` somados em `results/f2/llm_log_v0.jsonl` e `ll
   estimativa, e não houve repetição (1,0 chamada por ticket).
 - O teste `@pytest.mark.api` (`test_fumaca_api`) não foi executado.
 - **Acumulado do projeto: US$ 0,103379** de US$ 3.
+
+## F3 — teste de fumaça (`pytest -m api`, 2026-11-17)
+
+- Resultado: 1 passed (`tests/test_f2.py::test_fumaca_api`), 1 chamada.
+- Os tokens não foram registrados pelo teste. Para não repetir a chamada, calculei o teto: entrada de 48 tokens
+  (`count_tokens` do mesmo system e da mesma mensagem) + saída de até 64 tokens (`max_tokens`) =
+  **≤ US$ 0,0000368**. Esse teto entra no acumulado.
+
+## F3 — estimativa (antes das chamadas)
+
+Fonte: `python scripts/f2_llm.py --variante v2|v3 --estimar` (`count_tokens` nos 5 primeiros ids). Mesmo preço e
+mesma fórmula da F2.
+
+| Variante | Tokens de entrada (5 tickets) | Média | Chamadas | Estimativa |
+|---|---|---|---|---|
+| V2 | 739, 858, 1.152, 585, 1.107 | 888,2 | 420 | US$ 0,0507 |
+| V3 | 692, 680, 1.094, 528, 776 | 754,0 | 420 | US$ 0,0451 |
+| **Total F3** | | | 840 | **US$ 0,0958** |
+
+- Acumulado antes da F3: US$ 0,103379 + ≤ US$ 0,0000368 (fumaça) = US$ 0,1034. Somado à estimativa, dá
+  US$ 0,1992 < US$ 3. Pode rodar.
+
+## F3 — custo real
+
+Fonte: tokens de `results/f3/llm_log_v2.jsonl` e `llm_log_v3.jsonl` (`scripts/f3_familia.py` → `results/f3/metricas_f3.json`).
+
+| Variante | Chamadas | Tokens de entrada | Tokens de saída | Custo real |
+|---|---|---|---|---|
+| V2 | 400 | 391.969 | 9.579 | US$ 0,043986 |
+| V3 | 400 | 306.495 | 9.615 | US$ 0,035457 |
+| Fumaça (teto) | 1 | 48 | ≤ 64 | ≤ US$ 0,0000368 |
+| **Total F3** | 801 | | | **≤ US$ 0,079480** |
+
+- **Acumulado do projeto: ≤ US$ 0,182859** de US$ 3 (F2 US$ 0,103379 + F3 ≤ US$ 0,079480).

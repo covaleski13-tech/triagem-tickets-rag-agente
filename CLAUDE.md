@@ -117,7 +117,9 @@ triagem-tickets-rag-agente/
 5. **Erros e correções durante a execução.**
 6. **Custo de API da fase e acumulado.**
 7. **Pendências e decisões que dependem do Gustavo.**
-8. **Tempo gasto** × orçado na spec.
+8. **Tempo gasto** × orçado na spec. Início e fim vêm de timestamps (relógio no início da execução, horário do commit ou do último arquivo gerado), nunca de estimativa. Cite a fonte.
+
+Erro encontrado num report ou num arquivo já commitado é corrigido num commit novo e registrado na §5. "Precisaria de outro commit" não é motivo para manter um erro.
 
 ## 9. Não faça
 

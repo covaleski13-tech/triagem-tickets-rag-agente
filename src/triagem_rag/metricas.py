@@ -38,6 +38,49 @@ def mcnemar_exato(acertos_a, acertos_b) -> dict:
     return {"b": b, "c": c, "p": p}
 
 
+FAMILIA_Q1 = [("v3", "v1"), ("v3", "k1"), ("v3", "c"), ("v2", "v3")]  # F0 §2: primária primeiro; não alterar
+
+
+def familia(acertos: dict) -> list[dict]:
+    """McNemar exato + Holm sobre exatamente as 4 comparações pré-registradas, nesta ordem."""
+    linhas = []
+    for a, b in FAMILIA_Q1:
+        m = mcnemar_exato(acertos[a], acertos[b])
+        acc_a, acc_b = float(np.mean(acertos[a])), float(np.mean(acertos[b]))
+        linhas.append({"comparacao": f"{a}_x_{b}", "a": a, "b_variante": b, "acuracia_a": acc_a, "acuracia_b": acc_b,
+                       "diferenca_pp": 100 * (acc_a - acc_b), "b": m["b"], "c": m["c"], "p_bruto": m["p"]})
+    for l, p in zip(linhas, holm([l["p_bruto"] for l in linhas])):
+        l["p_holm"] = p
+    return linhas
+
+
+def veredictos(fam) -> dict:
+    """Critérios da F0 §2 aplicados mecanicamente a partir da tabela da família (DataFrame ou lista de dicts)."""
+    linhas = fam.to_dict("records") if hasattr(fam, "to_dict") else fam
+    f = {l["comparacao"]: l for l in linhas}
+    assert [l["comparacao"] for l in linhas] == [f"{a}_x_{b}" for a, b in FAMILIA_Q1]
+    v31, v3k, v3c = f["v3_x_v1"], f["v3_x_k1"], f["v3_x_c"]
+    return {
+        "rag_ajuda": bool(v31["acuracia_a"] > v31["acuracia_b"] and v31["p_holm"] < 0.05),
+        "llm_agrega": bool(v3k["acuracia_a"] > v3k["acuracia_b"] and v3k["p_holm"] < 0.05),
+        # F0 não definiu teste para este critério: comparação pontual; o p de Holm fica ao lado, só informativo
+        "vale_para_producao": bool(v3c["acuracia_a"] >= v3c["acuracia_b"]),
+        "vale_para_producao_p_holm_v3_x_c": float(v3c["p_holm"]),
+    }
+
+
+def precisao_rotulo(rotulo: str, categorias_vizinhos: list[str]) -> float:
+    return sum(c == rotulo for c in categorias_vizinhos) / len(categorias_vizinhos)
+
+
+def bootstrap_ic_media(valores, n_boot=2000, seed=42) -> tuple[float, float]:
+    """IC 95% percentil da média, reamostrando as consultas."""
+    x = np.asarray(valores, float)
+    rng = np.random.default_rng(seed)
+    medias = x[rng.integers(0, len(x), (n_boot, len(x)))].mean(axis=1)
+    return (float(np.percentile(medias, 2.5)), float(np.percentile(medias, 97.5)))
+
+
 def holm(pvalores) -> list[float]:
     p = np.asarray(pvalores, float)
     m = len(p)
