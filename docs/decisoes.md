@@ -119,3 +119,13 @@ Tomadas **depois** de ver os resultados da F3; não alteram a família pré-regi
   `ffc25ce7d56cd341281c263da7044d597ada86752fb73eb6efbeb4752d079bd8`.
 - `results/f4/diagnostico_json.jsonl` fora do git (frases do LLM com fragmentos curtos de tickets do treino);
   versionado só o resumo sem texto `results/f4/diagnostico_resumo.json`.
+
+## Emenda 2 da F4 — uma tool por rodada (Gustavo, 2026-11-17, opção b)
+
+- Rodadas 1 e 2: `tool_choice` `any` com `disable_parallel_tool_use: true` (`bind_tools(..., parallel_tool_calls=False)`
+  no `langchain-anthropic` 1.7.10; aceito pela API, conferido com `count_tokens`). Rodada 3 sem mudança
+  (`{"type": "tool", "name": "responder"}`).
+- Sai a regra 3 da emenda 1 ("`responder` junto com outra tool: vale `responder`"). Mais de uma tool numa resposta é
+  erro de tool: 1 nova tentativa da rodada e depois "humano decide" ("erro de tool: chamada múltipla").
+- Prompt, guarda, busca, política, log e limites: sem mudança.
+- **Agente congelado para a F5** depois da fumaça desta emenda, qualquer que tenha sido o resultado.

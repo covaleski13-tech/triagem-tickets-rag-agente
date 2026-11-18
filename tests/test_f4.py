@@ -263,7 +263,7 @@ def test_golden_agente(caso, monkeypatch, isolado):
 
 
 def _payload(rodada):
-    b = agente.cliente_agente(api_key="sem-rede").bind_tools(agente.TOOLS, tool_choice=agente.tool_choice(rodada))
+    b = agente.cliente_agente(api_key="sem-rede").bind_tools(agente.TOOLS, **agente.bind_kwargs(rodada))
     return b.bound._get_request_payload([SystemMessage("S"), HumanMessage("<ticket>x</ticket>")], **b.kwargs)
 
 
@@ -277,7 +277,7 @@ def test_payload_agente():
         assert sorted(t["name"] for t in p["tools"]) == ["consultar_politica", "recuperar_exemplos", "responder"]
         rec = next(t for t in p["tools"] if t["name"] == "recuperar_exemplos")
         assert rec["input_schema"].get("properties", {}) == {}
-        assert p["tool_choice"] == {"type": "any"}
+        assert p["tool_choice"] == {"type": "any", "disable_parallel_tool_use": True}  # emenda 2
 
 
 def test_rodada3_forca_responder(tickets_treino):
@@ -325,15 +325,31 @@ def test_responder_invalido(caso, tickets_treino, isolado):
 def test_texto_livre_descartado(tickets_treino, isolado):
     i, txt, cat, f = ticket_nao_ia_decide(tickets_treino)
     frase = "FRASE-LIVRE-DO-LLM: os exemplos parecidos indicam esta categoria com bastante clareza"
-    llm = fake(AIMessage(content=frase, tool_calls=[
-        {"name": "responder", "args": {"categoria": cat, "confianca": 0.7}, "id": "r", "type": "tool_call"},
-        {"name": "recuperar_exemplos", "args": {}, "id": "x", "type": "tool_call"}]))
-    b = buscar_falso(TREINO5)
-    s = agente.triar_agente({"texto": txt}, llm=llm, buscar=b)
-    assert s["categoria_llm"] == cat and b.textos == []  # a outra tool foi ignorada, não executada
+    s = agente.triar_agente({"texto": txt}, llm=fake(resp(cat, 0.7, texto=frase)))
+    assert s["categoria_llm"] == cat
     assert "FRASE-LIVRE" not in json.dumps(s, ensure_ascii=False)
     assert "FRASE-LIVRE" not in (isolado / "agente_log.jsonl").read_text(encoding="utf-8")
-    assert {"nome": "recuperar_exemplos", "argumentos": {"n_args": 0}, "rodada": 1, "ignorada": True} in s["tool_calls"]
+
+
+def _duas(cat):
+    return AIMessage(content="", tool_calls=[
+        {"name": "recuperar_exemplos", "args": {}, "id": "x", "type": "tool_call"},
+        {"name": "responder", "args": {"categoria": cat, "confianca": 0.7}, "id": "r", "type": "tool_call"}])
+
+
+def test_duas_tools_erro(tickets_treino, isolado):
+    """Emenda 2: mais de uma tool numa resposta é erro de tool -> 1 nova tentativa -> humano decide."""
+    i, txt, cat, f = ticket_nao_ia_decide(tickets_treino)
+    b = buscar_falso(TREINO5)
+    llm = fake(_duas(cat), _duas(cat), resp(cat))
+    s = agente.triar_agente({"texto": txt}, llm=llm, buscar=b)
+    assert llm.chamadas == 2 and b.textos == []  # nenhuma das duas executada
+    assert s["faixa_final"] == "humano decide" and s["motivo_final"] == "escalado: erro de tool: chamada múltipla"
+    assert len(_log(isolado)[-1]["erros"]) == 2
+    # na nova tentativa uma tool só: segue normalmente
+    llm = fake(_duas(cat), resp(cat))
+    s = agente.triar_agente({"texto": txt + " outra"}, llm=llm, buscar=b)
+    assert llm.chamadas == 2 and s["categoria_llm"] == cat and s["motivo_final"].endswith("LLM concorda")
 
 
 def test_modelo_f1_no_adaptador():
@@ -370,16 +386,17 @@ def test_fumaca_agente(monkeypatch):
     """F4 passo 5: execução real com 5 tickets do treino (seed 42) fora de "IA decide". Não é métrica (F5).
     Precisa do Postgres, mas só tem o marcador `api`: com `db` também, `pytest -m db` a rodaria (aconteceu na F4)."""
     # emenda F4 (responder): arquivos próprios; os da fumaça original ficam como histórico
-    log = Path("results/f4/emenda_agente_log.jsonl")
+    log = Path("results/f4/emenda2_agente_log.jsonl")  # emenda 2; os da emenda 1 ficam como histórico
     log.parent.mkdir(parents=True, exist_ok=True)
     log.unlink(missing_ok=True)
     monkeypatch.setenv("TRIAGEM_AGENTE_LOG", str(log))
     saidas = [agente.triar_agente({"texto": txt, "event_id": f"fumaca-f4-{i}"}) for i, txt in _cinco_fora_de_ia_decide()]
     resumo = [{"faixa_politica": s["faixa_politica"], "faixa_final": s["faixa_final"], "motivo_final":
                s["motivo_final"] if s["motivo_final"].startswith(("escalado", "divergência")) else "outro",
+               "categoria_classico": s["categoria_classico"], "categoria_llm": s["categoria_llm"],
                "llm_rodou": s["llm_rodou"], "rodadas": s["rodadas"], "tools": [c["nome"] for c in s["tool_calls"]],
                "erros": s["erros"], "tokens": (s["tokens_entrada"], s["tokens_saida"])} for s in saidas]
-    Path("results/f4/emenda_fumaca_resumo.json").write_text(json.dumps(resumo, indent=2, ensure_ascii=False),
+    Path("results/f4/emenda2_fumaca_resumo.json").write_text(json.dumps(resumo, indent=2, ensure_ascii=False),
                                                             encoding="utf-8", newline="\n")
     assert all(s["faixa_final"] != "IA decide" for s in saidas if s["llm_rodou"])
     assert all(pc.ORDEM.index(s["faixa_final"]) <= pc.ORDEM.index(s["faixa_politica"]) for s in saidas)

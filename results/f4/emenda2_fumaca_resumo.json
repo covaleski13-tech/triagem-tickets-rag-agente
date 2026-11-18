@@ -1,0 +1,90 @@
+[
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "outro",
+    "categoria_classico": "Hardware",
+    "categoria_llm": "Hardware",
+    "llm_rodou": true,
+    "rodadas": 2,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      2978,
+      84
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "categoria_classico": "Storage",
+    "categoria_llm": "HR Support",
+    "llm_rodou": true,
+    "rodadas": 2,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      2763,
+      84
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "categoria_classico": "Hardware",
+    "categoria_llm": "Miscellaneous",
+    "llm_rodou": true,
+    "rodadas": 2,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      3098,
+      87
+    ]
+  },
+  {
+    "faixa_politica": "IA sugere",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "categoria_classico": "HR Support",
+    "categoria_llm": "Access",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      1207,
+      62
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "categoria_classico": "Administrative rights",
+    "categoria_llm": "Access",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      1238,
+      62
+    ]
+  }
+]

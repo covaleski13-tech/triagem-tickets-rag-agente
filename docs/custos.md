@@ -129,3 +129,16 @@ Fonte: tokens de `results/f4/emenda_agente_log.jsonl` / `emenda_fumaca_resumo.js
 `pytest -m api -k fumaca_agente`): 7.971 de entrada e 434 de saída = **US$ 0,001014**.
 
 - **Acumulado do projeto: ≤ US$ 0,187762** de US$ 3.
+
+## F4 — emenda 2 (uma tool por rodada): fumaça, estimativa (antes da chamada)
+
+Mesmos 5 tickets do treino, 1 execução. A conta do teto não muda: até 4 chamadas por ticket (3 rodadas + 1 nova
+tentativa), entrada ≤ 7.230 tokens e saída ≤ 1.024 por ticket, ×2 por erro de API: **≤ US$ 0,0124**.
+Acumulado antes: ≤ US$ 0,187762; acumulado + estimativa ≤ US$ 0,2002 < US$ 3.
+
+## F4 — emenda 2: fumaça, custo real
+
+Fonte: tokens de `results/f4/emenda2_fumaca_resumo.json` / `emenda2_agente_log.jsonl` (1 execução,
+`pytest -m api -k fumaca_agente`): 11.284 de entrada e 379 de saída = **US$ 0,001318**.
+
+- **Acumulado do projeto: ≤ US$ 0,189080** de US$ 3.

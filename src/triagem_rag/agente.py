@@ -53,6 +53,14 @@ def tool_choice(rodada: int):
     return "any" if rodada < MAX_RODADAS else "responder"
 
 
+def bind_kwargs(rodada: int) -> dict:
+    # emenda 2: rodadas 1 e 2 com uma tool por resposta (disable_parallel_tool_use); rodada 3 sem mudança
+    kw = {"tool_choice": tool_choice(rodada)}
+    if rodada < MAX_RODADAS:
+        kw["parallel_tool_calls"] = False
+    return kw
+
+
 def validar_responder(args) -> Classificacao | None:
     """Argumentos do LLM são dado não confiável: exatamente categoria e confianca, tipos estritos (sem bool/string)."""
     if not isinstance(args, dict) or set(args) != {"categoria", "confianca"}:
@@ -156,12 +164,9 @@ def _nome_log(tc: dict) -> str:
 
 
 def _ler_responder(r, rodada: int, chamadas: list) -> Classificacao | None:
-    """Resposta final = a 1ª chamada a responder. Outras tool calls da mesma resposta são ignoradas e registradas.
+    """Resposta final = a chamada a responder (a resposta já tem no máximo 1 tool call; emenda 2).
     O texto livre do modelo (r.text) nunca é lido aqui: não é validado, logado nem guardado no estado."""
     principal = next((tc for tc in r.tool_calls if tc.get("name") == "responder"), None)
-    for tc in r.tool_calls:
-        if tc is not principal:
-            chamadas.append({"nome": _nome_log(tc), "argumentos": _args_log(tc), "rodada": rodada, "ignorada": True})
     if principal is None:
         return None
     obj = validar_responder(principal.get("args"))
@@ -187,6 +192,13 @@ def _invocar(modelo, msgs, estado_tok, erros):
                 raise FalhaLLM("timeout" if timeout else "erro de API")
 
 
+def _registrar_multipla(r, rodada, chamadas, erros, tentativa):
+    erros.append(f"chamada múltipla ({len(r.tool_calls)} tools), tentativa {tentativa}")
+    for tc in r.tool_calls:
+        chamadas.append({"nome": _nome_log(tc), "argumentos": _args_log(tc), "rodada": rodada,
+                         "erro": "chamada múltipla"})
+
+
 def no_sugerir(estado: Estado, llm=None, buscar=None) -> dict:
     erros, chamadas, tok = [], [], {"entrada": 0, "saida": 0}
     rodadas, sugestao, falha = 0, None, None
@@ -196,9 +208,16 @@ def no_sugerir(estado: Estado, llm=None, buscar=None) -> dict:
                 HumanMessage(f"<ticket>{estado['texto_mascarado']}</ticket>")]
         while True:
             rodadas += 1
-            modelo = base.bind_tools(TOOLS, tool_choice=tool_choice(rodadas))
+            modelo = base.bind_tools(TOOLS, **bind_kwargs(rodadas))
             r = _invocar(modelo, msgs, tok, erros)
-            if not r.tool_calls or any(tc.get("name") == "responder" for tc in r.tool_calls):
+            if len(r.tool_calls) > 1:
+                # emenda 2: mais de uma tool numa resposta é erro de tool; 1 nova tentativa da rodada
+                _registrar_multipla(r, rodadas, chamadas, erros, 1)
+                r = _invocar(modelo, msgs, tok, erros)
+                if len(r.tool_calls) > 1:
+                    _registrar_multipla(r, rodadas, chamadas, erros, 2)
+                    raise FalhaLLM("erro de tool: chamada múltipla")
+            if not r.tool_calls or r.tool_calls[0].get("name") == "responder":
                 obj = _ler_responder(r, rodadas, chamadas)
                 if obj is None:
                     erros.append("responder inválido ou ausente, tentativa 1")

@@ -203,3 +203,88 @@ Fonte: `docs/custos.md`.
 - **Início:** 22:30:11 (`date` no início).
 - **Fim:** 22:34:54 (`date` depois dos testes finais) + este report e o commit (horário no `git log`).
 - **Total:** ~5 min com timestamp, de 30 orçados.
+
+---
+
+# Emenda 2 — uma tool por rodada (`docs/planning/F4-emenda-spec.md`, opção b aprovada)
+
+Status: **concluída. O agente está congelado para a F5.** Commit local, sem push.
+
+## 1. O que foi feito
+
+1. Antes de codar, conferi que `bind_tools(..., parallel_tool_calls=False)` gera `tool_choice: {"type": "any", "disable_parallel_tool_use": true}` e que a API aceita esse payload (`count_tokens`, sem custo).
+2. Mudanças no `src/triagem_rag/agente.py`:
+   - `bind_kwargs(rodada)`: rodadas 1 e 2 com `tool_choice` `any` e chamadas paralelas desligadas; rodada 3 sem mudança;
+   - a regra "vale `responder`, as outras são ignoradas" saiu;
+   - mais de uma tool numa resposta conta como erro de tool, com 1 nova tentativa da rodada e depois "escalado: erro de tool: chamada múltipla".
+3. Testes:
+   - `test_payload_agente` agora exige `disable_parallel_tool_use` nas rodadas 1 e 2;
+   - `test_duas_tools_erro` substitui o teste da regra antiga;
+   - `test_texto_livre_descartado` passou a usar uma única chamada a `responder` com texto.
+4. Estimei o custo e rodei a fumaça real uma vez (`pytest -m api -k fumaca_agente`, seleção conferida com `--collect-only`), gravando em arquivos próprios da emenda 2.
+
+## 2. Resultados
+
+| Item | Valor | Fonte |
+|---|---|---|
+| `pytest` | 76 passed, 10 deselected | `.venv/Scripts/python -m pytest -q` |
+| `pytest -m db` | 8 passed | `.venv/Scripts/python -m pytest -q -m db` |
+| Testes da F4 sem rede | 38 passed | `tests/test_f4.py` |
+
+**Fumaça da emenda 2.** Mesmos 5 tickets do treino, 1 execução (`results/f4/emenda2_fumaca_resumo.json`, `results/f4/emenda2_agente_log.jsonl`):
+
+| Ticket | Sequência de tools | Rodadas | LLM | Clássico | Política → final | Escalonamento (causa) |
+|---|---|---|---|---|---|---|
+| 18556 | `recuperar_exemplos` → `responder` | 2 | Hardware | Hardware | humano → humano | não (LLM concorda) |
+| 22958 | `recuperar_exemplos` → `responder` | 2 | HR Support | Storage | humano → humano | não (divergência LLM × clássico) |
+| 34269 | `recuperar_exemplos` → `responder` | 2 | Miscellaneous | Hardware | humano → humano | não (divergência) |
+| 9983 | `responder` | 1 | Access | HR Support | IA sugere → **humano** | não (divergência) |
+| 35859 | `responder` | 1 | Access | Administrative rights | humano → humano | não (divergência) |
+
+**Resumo:**
+
+- **Recuperação antes de responder:** **3 de 5** tickets. Na emenda 1, o efeito foi de 1 de 5, porque as outras 3 chamadas de recuperação foram descartadas.
+- **Escalonamentos por formato:** **0**.
+- **Escalonamentos por chamada múltipla:** **0**. Também não houve erro de API nem `responder` inválido.
+- **Concordância com o clássico:** 1 de 5 (18556).
+- **Guarda:** nenhuma promoção.
+- **Tokens e custo:** 11.284 de entrada e 379 de saída = US$ 0,001318.
+
+## 3. O que contraria a hipótese ou a expectativa
+
+- **O defeito da emenda 1 foi corrigido.** Com uma tool por rodada, os 3 tickets em que o modelo queria recuperar exemplos passaram a recuperar antes de responder. Nenhuma chamada múltipla chegou ao agente.
+- **Nos tickets que não recuperaram, a resposta foi "Access",** o mesmo padrão do V0 da F2. O ticket 9983 (HR Support no clássico), que na fumaça original da F4 recuperou e concordou, desta vez respondeu direto "Access" e caiu para "humano decide".
+- **A decisão de recuperar continua com o LLM (G7)** e varia entre execuções do mesmo ticket. Isso é esperado sem `temperature` (F0 §2) e fica para a F5 medir.
+- **Amostra mínima:** são 5 tickets do treino. Nenhum número desta fumaça é métrica.
+
+## 4. Desvios da spec
+
+- **`test_texto_livre_descartado`:** passou a usar uma única chamada a `responder` com texto livre, porque a versão anterior dependia da regra removida. O descarte do texto continua testado.
+- **Fumaça da emenda 2 em arquivos próprios** (`emenda2_*`): os das fumaças anteriores ficam como histórico.
+- **Chamada múltipla no log:** as tools da resposta rejeitada são registradas com `"erro": "chamada múltipla"`, só com nome, categoria da lista fechada e número de argumentos.
+
+## 5. Erros e correções durante a execução
+
+Nenhum.
+
+## 6. Custo de API
+
+| | Estimado | Real |
+|---|---|---|
+| Fumaça da emenda 2 | ≤ US$ 0,0124 | US$ 0,001318 |
+| **Acumulado do projeto** | | **≤ US$ 0,189080** de US$ 3 |
+
+Fonte: `docs/custos.md`.
+
+## 7. Pendências e decisões que dependem do Gustavo
+
+- **Agente congelado para a F5,** como a spec da emenda 2 determina. Nenhuma pendência de código.
+- **Para a spec da F5,** continuam valendo os pontos da F4 §7:
+  - o log do agente grava sem lock (execução sequencial ou lock);
+  - `consultar_politica` foi chamada 1 vez em 4 execuções reais.
+
+## 8. Tempo gasto × orçado
+
+- **Início:** 22:37:59 (`date` no início).
+- **Fim:** 22:40:42 (`date` depois dos testes finais) + este report e o commit (horário no `git log`).
+- **Total:** ~3 min com timestamp, de 20 orçados.
