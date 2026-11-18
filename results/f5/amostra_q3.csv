@@ -1,0 +1,201 @@
+id,estrato,categoria_classico,p_max
+44552,IA decide,Access,0.9717
+39865,IA decide,Access,0.8127
+17288,IA decide,Purchase,0.9996
+23168,IA decide,Access,0.8622
+21778,IA decide,Access,0.8037
+11902,IA decide,Purchase,0.9983
+31481,IA decide,Access,0.8694
+31464,IA decide,Access,0.773
+24644,IA decide,Purchase,0.9913
+33737,IA decide,Purchase,0.9744
+39780,IA decide,Access,0.9802
+14611,IA decide,Access,0.8342
+2150,IA decide,Purchase,0.9957
+1220,IA decide,Purchase,0.9961
+10881,IA decide,Access,0.9307
+14865,IA decide,Access,0.9775
+8840,IA decide,Access,0.9995
+33299,IA decide,Purchase,0.9684
+7667,IA decide,Purchase,0.9976
+12673,IA decide,Purchase,0.9988
+29994,IA decide,Access,0.9713
+24288,IA decide,Purchase,0.9998
+7021,IA decide,Access,0.9274
+9213,IA decide,Access,0.857
+16655,IA decide,Purchase,0.9241
+30899,IA decide,Access,0.9356
+34466,IA decide,Access,0.7671
+21957,IA decide,Access,0.9996
+33132,IA decide,Purchase,0.96
+27861,IA decide,Access,0.9989
+6684,IA decide,Access,0.9999
+29706,IA decide,Purchase,0.9997
+14943,IA decide,Purchase,0.9993
+4025,IA decide,Access,0.9696
+10603,IA decide,Purchase,0.9939
+34783,IA decide,Purchase,0.8365
+1569,IA decide,Access,0.9108
+8787,IA decide,Purchase,0.7404
+34334,IA decide,Access,0.976
+20012,IA decide,Purchase,0.9987
+13444,IA decide,Purchase,0.8226
+14897,IA decide,Access,0.9968
+24473,IA decide,Access,0.9703
+627,IA decide,Access,0.958
+17191,IA decide,Access,0.8147
+31468,IA decide,Access,0.8037
+10583,IA decide,Access,0.9368
+1211,IA decide,Access,0.997
+35009,IA decide,Access,0.9372
+47550,IA decide,Access,0.9904
+26071,IA decide,Purchase,0.9995
+24205,IA decide,Access,0.8765
+2520,IA decide,Access,0.9947
+2004,IA decide,Access,0.9594
+3898,IA decide,Purchase,0.8355
+15587,IA decide,Access,0.9992
+2483,IA decide,Access,0.9956
+35741,IA decide,Access,0.9389
+29572,IA decide,Access,0.9971
+33446,IA decide,Access,0.9702
+9972,IA decide,Purchase,0.9875
+6986,IA decide,Access,0.9975
+30242,IA decide,Access,0.8631
+35010,IA decide,Access,0.8953
+18948,IA decide,Access,0.9626
+25914,IA decide,Purchase,0.9993
+33757,IA decide,Purchase,0.9493
+39340,IA sugere,HR Support,0.8997
+23882,IA sugere,HR Support,0.8342
+35927,IA sugere,Miscellaneous,0.8251
+2533,IA sugere,HR Support,0.6967
+3007,IA sugere,Internal Project,0.6792
+41030,IA sugere,HR Support,0.9851
+27370,IA sugere,HR Support,0.9982
+27789,IA sugere,HR Support,0.9925
+25271,IA sugere,HR Support,0.9707
+25732,IA sugere,HR Support,0.6666
+36689,IA sugere,HR Support,0.6766
+37242,IA sugere,HR Support,0.9921
+6985,IA sugere,HR Support,0.9415
+45382,IA sugere,Access,0.7019
+5846,IA sugere,Purchase,0.6834
+3292,IA sugere,HR Support,0.9134
+45200,IA sugere,HR Support,0.8341
+1380,IA sugere,Storage,0.9522
+22003,IA sugere,Miscellaneous,0.8397
+29343,IA sugere,HR Support,0.9868
+33312,IA sugere,HR Support,0.9465
+18882,IA sugere,HR Support,0.7753
+21722,IA sugere,HR Support,0.9994
+41284,IA sugere,HR Support,0.6569
+3348,IA sugere,HR Support,0.9407
+33241,IA sugere,HR Support,0.9044
+7409,IA sugere,HR Support,0.9182
+14384,IA sugere,HR Support,0.6943
+3674,IA sugere,HR Support,0.7477
+7535,IA sugere,HR Support,0.7864
+46256,IA sugere,HR Support,0.839
+34696,IA sugere,HR Support,0.9261
+45833,IA sugere,HR Support,0.9917
+29349,IA sugere,Miscellaneous,0.9474
+2336,IA sugere,Internal Project,0.7021
+16468,IA sugere,Miscellaneous,0.8839
+18952,IA sugere,Internal Project,0.9601
+5339,IA sugere,HR Support,0.9932
+1742,IA sugere,Miscellaneous,0.8951
+40109,IA sugere,Miscellaneous,0.7726
+22750,IA sugere,HR Support,0.9576
+16201,IA sugere,Miscellaneous,0.8941
+3045,IA sugere,HR Support,0.9016
+42741,IA sugere,HR Support,0.777
+8970,IA sugere,HR Support,0.9958
+22873,IA sugere,Internal Project,0.7576
+41697,IA sugere,HR Support,0.9789
+33784,IA sugere,Miscellaneous,0.874
+17079,IA sugere,Miscellaneous,0.9851
+4809,IA sugere,Internal Project,0.9998
+13933,IA sugere,Miscellaneous,0.9573
+25870,IA sugere,HR Support,0.6646
+884,IA sugere,Access,0.6977
+7466,IA sugere,HR Support,0.9735
+26497,IA sugere,HR Support,0.9261
+38950,IA sugere,HR Support,0.6633
+24324,IA sugere,Miscellaneous,0.8554
+44151,IA sugere,HR Support,0.8938
+4538,IA sugere,Internal Project,0.872
+20688,IA sugere,Internal Project,0.9437
+24094,IA sugere,HR Support,0.9638
+13646,IA sugere,HR Support,0.6871
+10310,IA sugere,Miscellaneous,0.7271
+653,IA sugere,Storage,0.9635
+7407,IA sugere,HR Support,0.9263
+32221,IA sugere,HR Support,0.9231
+4379,IA sugere,HR Support,0.9177
+19911,humano decide,Hardware,0.5783
+9280,humano decide,Hardware,0.9704
+43016,humano decide,Hardware,0.4712
+44426,humano decide,Administrative rights,0.6274
+16762,humano decide,Hardware,0.4869
+44352,humano decide,Hardware,0.9218
+9445,humano decide,Hardware,0.8023
+13512,humano decide,Miscellaneous,0.2689
+12292,humano decide,Hardware,0.5736
+12028,humano decide,Hardware,0.7945
+45410,humano decide,Hardware,0.7277
+5924,humano decide,Internal Project,0.3366
+42231,humano decide,Miscellaneous,0.5462
+36207,humano decide,HR Support,0.4605
+18307,humano decide,Miscellaneous,0.5859
+40590,humano decide,Hardware,0.9508
+13781,humano decide,Access,0.5248
+29073,humano decide,Hardware,0.7221
+223,humano decide,Hardware,0.3336
+35834,humano decide,Hardware,0.7446
+47132,humano decide,Hardware,0.4735
+24004,humano decide,Hardware,0.7373
+5739,humano decide,Hardware,0.346
+26586,humano decide,Access,0.31
+42132,humano decide,Hardware,0.4525
+19622,humano decide,Hardware,0.9834
+36441,humano decide,Hardware,0.3015
+7184,humano decide,HR Support,0.4862
+1998,humano decide,Hardware,0.7324
+3755,humano decide,Miscellaneous,0.3097
+36109,humano decide,Administrative rights,0.6252
+35360,humano decide,Access,0.5418
+40897,humano decide,Hardware,0.962
+39530,humano decide,Hardware,0.8697
+40444,humano decide,Hardware,0.8756
+35880,humano decide,Hardware,0.6257
+31207,humano decide,Access,0.359
+4141,humano decide,HR Support,0.4457
+9471,humano decide,Hardware,0.9069
+23923,humano decide,Hardware,0.8481
+36281,humano decide,Hardware,0.658
+44609,humano decide,Hardware,0.9287
+42703,humano decide,Hardware,0.6807
+11470,humano decide,Purchase,0.4577
+8398,humano decide,Hardware,0.9781
+5468,humano decide,Hardware,0.3341
+15669,humano decide,Hardware,0.727
+12792,humano decide,Hardware,0.6078
+5383,humano decide,Hardware,0.459
+45139,humano decide,Hardware,0.5053
+31569,humano decide,HR Support,0.5252
+46599,humano decide,Hardware,0.8992
+933,humano decide,Hardware,0.9605
+7469,humano decide,Storage,0.5562
+15077,humano decide,HR Support,0.5018
+6662,humano decide,Miscellaneous,0.369
+19544,humano decide,Miscellaneous,0.6287
+34607,humano decide,HR Support,0.6302
+24061,humano decide,Hardware,0.4817
+40565,humano decide,Hardware,0.4933
+16385,humano decide,Storage,0.44
+4602,humano decide,Access,0.5752
+46997,humano decide,Hardware,0.736
+31488,humano decide,Miscellaneous,0.3443
+10967,humano decide,Miscellaneous,0.5055
+41953,humano decide,Miscellaneous,0.3224

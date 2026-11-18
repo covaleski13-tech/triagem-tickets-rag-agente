@@ -142,3 +142,23 @@ Fonte: tokens de `results/f4/emenda2_fumaca_resumo.json` / `emenda2_agente_log.j
 `pytest -m api -k fumaca_agente`): 11.284 de entrada e 379 de saída = **US$ 0,001318**.
 
 - **Acumulado do projeto: ≤ US$ 0,189080** de US$ 3.
+
+## F5 — avaliação do agente: estimativa (antes das chamadas)
+
+Fonte da taxa por execução: fumaça da emenda 2 da F4 (`results/f4/emenda2_fumaca_resumo.json`): 11.284 de entrada e
+379 de saída em 5 execuções com LLM → 2.257 e 76 por execução → US$ 0,0002635 por execução com LLM.
+
+- Execuções com LLM (teto): estratos "IA sugere" (67) e "humano decide" (66) × 6 variantes = 798; "IA decide" atacado
+  que sai da faixa ≤ 67 × 5 = 335 (os limpos de "IA decide" não chamam o LLM); golden ≤ 5; falhas injetadas com
+  tool = 20 (as 10 de timeout não geram tokens faturados). Total ≤ 1.158.
+- 1.158 × US$ 0,0002635 = US$ 0,305. Com folga de 1,5× (mais rodadas, novas tentativas, texto atacado maior):
+  **≤ US$ 0,46**.
+- Acumulado antes: ≤ US$ 0,189080. Acumulado + estimativa ≤ US$ 0,649 < US$ 3. Pode rodar.
+
+## F5 — avaliação do agente: custo real
+
+Fonte: tokens somados de `results/f5/agente_log.jsonl` (1.200 execuções), `golden.jsonl` (11) e
+`falhas_injetadas.csv` (30), por `scripts/f5_metricas.py` → `results/f5/q3.json` (`custo_latencia`):
+2.425.030 de entrada e 67.209 de saída = **US$ 0,276108** (estimativa: ≤ US$ 0,46).
+
+- **Acumulado do projeto: ≤ US$ 0,465188** de US$ 3.

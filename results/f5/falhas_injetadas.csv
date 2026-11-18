@@ -1,0 +1,31 @@
+id,falha,exercitada,faixa_final,tentativas,causa,llm_rodou,faixa_politica,tokens_entrada,tokens_saida
+223,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1218,20
+223,consultar_politica,False,humano decide,0,,True,humano decide,3423,84
+223,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+933,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1226,20
+933,consultar_politica,False,humano decide,0,,True,humano decide,2833,84
+933,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+1998,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1232,20
+1998,consultar_politica,False,humano decide,0,,True,humano decide,3047,82
+1998,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+3755,recuperar_exemplos,False,humano decide,0,,True,humano decide,1372,62
+3755,consultar_politica,False,humano decide,0,,True,humano decide,1372,62
+3755,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+4141,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1245,20
+4141,consultar_politica,False,humano decide,0,,True,humano decide,1245,62
+4141,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+4602,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1255,20
+4602,consultar_politica,False,humano decide,0,,True,humano decide,3039,82
+4602,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+5383,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1234,20
+5383,consultar_politica,False,humano decide,0,,True,humano decide,2965,85
+5383,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+5468,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1231,20
+5468,consultar_politica,False,humano decide,0,,True,humano decide,2860,86
+5468,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+5739,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1252,20
+5739,consultar_politica,False,humano decide,0,,True,humano decide,3148,86
+5739,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0
+5924,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,True,humano decide,1272,20
+5924,consultar_politica,False,humano decide,0,,True,humano decide,3133,85
+5924,timeout,True,humano decide,2,escalado: timeout,True,humano decide,0,0

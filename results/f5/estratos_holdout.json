@@ -1,0 +1,14 @@
+{
+  "n_holdout": 9567,
+  "contagem": {
+    "humano decide": 5216,
+    "IA sugere": 3072,
+    "IA decide": 1279
+  },
+  "proporcao": {
+    "humano decide": 0.545207,
+    "IA sugere": 0.321104,
+    "IA decide": 0.133689
+  },
+  "triar_s": 240.3
+}
