@@ -1,5 +1,86 @@
 {
-  "amostra_q2": "pendente: F3b (q2_tempos.json)",
+  "amostra_q2": {
+    "n": 2000,
+    "por_recuperador": {
+      "vetorial": {
+        "precisao5_media": 0.7406,
+        "precisao5_ic95": [
+          0.7264,
+          0.7546
+        ],
+        "k1_acertos": 1606,
+        "k1_acuracia": 0.803,
+        "sem_resultado": 0,
+        "sem_resultado_pct": 0.0
+      },
+      "fulltext": {
+        "precisao5_media": 0.5388,
+        "precisao5_ic95": [
+          0.5233,
+          0.5543
+        ],
+        "k1_acertos": 1225,
+        "k1_acuracia": 0.6125,
+        "sem_resultado": 0,
+        "sem_resultado_pct": 0.0
+      },
+      "hibrida": {
+        "precisao5_media": 0.6892,
+        "precisao5_ic95": [
+          0.6748,
+          0.703
+        ],
+        "k1_acertos": 1542,
+        "k1_acuracia": 0.771,
+        "sem_resultado": 0,
+        "sem_resultado_pct": 0.0
+      }
+    },
+    "diferencas": [
+      {
+        "par": "hibrida-vetorial",
+        "metrica": "precisao5",
+        "diferenca_media": -0.0514,
+        "ic95_inf": -0.0616,
+        "ic95_sup": -0.0418
+      },
+      {
+        "par": "hibrida-vetorial",
+        "metrica": "k1",
+        "diferenca_media": -0.032,
+        "ic95_inf": -0.049,
+        "ic95_sup": -0.0155
+      },
+      {
+        "par": "hibrida-fulltext",
+        "metrica": "precisao5",
+        "diferenca_media": 0.1504,
+        "ic95_inf": 0.1391,
+        "ic95_sup": 0.1616
+      },
+      {
+        "par": "hibrida-fulltext",
+        "metrica": "k1",
+        "diferenca_media": 0.1585,
+        "ic95_inf": 0.138,
+        "ic95_sup": 0.1795
+      },
+      {
+        "par": "fulltext-vetorial",
+        "metrica": "precisao5",
+        "diferenca_media": -0.2018,
+        "ic95_inf": -0.2177,
+        "ic95_sup": -0.186
+      },
+      {
+        "par": "fulltext-vetorial",
+        "metrica": "k1",
+        "diferenca_media": -0.1905,
+        "ic95_inf": -0.2145,
+        "ic95_sup": -0.1675
+      }
+    ]
+  },
   "recorte_400": {
     "n": 400,
     "por_recuperador": {
@@ -81,5 +162,59 @@
         "ic95_sup": -0.1125
       }
     ]
+  },
+  "tempos": {
+    "status": "concluído",
+    "execucao": {
+      "threads": 4,
+      "consultas": 2000,
+      "parede_s": 4785.3,
+      "nota": "a F4 rodou ao mesmo tempo no mesmo Postgres (testes db e fumaça do agente); a parede inclui essa concorrência"
+    },
+    "shared_buffers": "128MB",
+    "sondas_historico": [
+      {
+        "vetorial_s": 236.4,
+        "sonda_fulltext_s": 172.5,
+        "extrapolacao_total_min": 61.4,
+        "status": "parado: extrapolação > 30 min",
+        "threads": 4,
+        "limite_min": 30.0
+      },
+      {
+        "threads": 1,
+        "limite_min": 35.0,
+        "vetorial_s": 198.6,
+        "sonda_fulltext_s": 190.0,
+        "extrapolacao_total_min": 66.6,
+        "status": "parado: extrapolação > 35.0 min"
+      }
+    ]
+  },
+  "exploratorio_classico_vs_k1_amostra": {
+    "rotulo": "exploratório, fora do pré-registro de Q2; sem teste",
+    "n": 2000,
+    "classico": {
+      "acertos": 1710,
+      "acuracia": 0.855,
+      "wilson95": [
+        0.8389,
+        0.8698
+      ]
+    },
+    "k1": {
+      "vetorial": {
+        "k1_acertos": 1606,
+        "k1_acuracia": 0.803
+      },
+      "fulltext": {
+        "k1_acertos": 1225,
+        "k1_acuracia": 0.6125
+      },
+      "hibrida": {
+        "k1_acertos": 1542,
+        "k1_acuracia": 0.771
+      }
+    }
   }
 }

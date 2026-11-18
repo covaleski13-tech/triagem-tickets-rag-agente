@@ -1,4 +1,10 @@
 universo,par,metrica,diferenca_media,ic95_inf,ic95_sup
+amostra_q2,hibrida-vetorial,precisao5,-0.0514,-0.0616,-0.0418
+amostra_q2,hibrida-vetorial,k1,-0.032,-0.049,-0.0155
+amostra_q2,hibrida-fulltext,precisao5,0.1504,0.1391,0.1616
+amostra_q2,hibrida-fulltext,k1,0.1585,0.138,0.1795
+amostra_q2,fulltext-vetorial,precisao5,-0.2018,-0.2177,-0.186
+amostra_q2,fulltext-vetorial,k1,-0.1905,-0.2145,-0.1675
 recorte_400,hibrida-vetorial,precisao5,-0.0365,-0.0645,-0.009
 recorte_400,hibrida-vetorial,k1,-0.04,-0.0875,0.01
 recorte_400,hibrida-fulltext,precisao5,0.1215,0.094,0.148
