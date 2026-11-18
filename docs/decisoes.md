@@ -129,3 +129,22 @@ Tomadas **depois** de ver os resultados da F3; não alteram a família pré-regi
   erro de tool: 1 nova tentativa da rodada e depois "humano decide" ("erro de tool: chamada múltipla").
 - Prompt, guarda, busca, política, log e limites: sem mudança.
 - **Agente congelado para a F5** depois da fumaça desta emenda, qualquer que tenha sido o resultado.
+
+## Complemento da F6 (2026-11-18): decisões registradas em outros documentos
+
+Acrescentado na F6 para reunir aqui decisões que estavam só no pré-registro, nas specs ou nos reports. Nada acima foi
+reescrito.
+
+- **G1 a G8 (portão F0, Gustavo, 2026-11-17):** a tabela completa está em `docs/planning/F0-escopo.md` §10. As que
+  mudaram o plano:
+  - **G4:** embeddings `BAAI/bge-small-en-v1.5`, sem comparação com outros modelos;
+  - **G5:** F7 (MCP) cortada; V1 sempre mantido; o corte de LLM começa pelo V2;
+  - **G7:** agente com grafo fixo; tool calling real no nó `sugerir`; a guarda "nunca promove" fica no código;
+  - **G8:** RRF própria; a híbrida nativa do `langchain-postgres` foi citada e não usada.
+- **G9 (antes da F3, Gustavo):** Q2 medida numa amostra aleatória simples de 2.000 tickets do holdout por grupo
+  (seed 42), gravada antes de qualquer consulta, mais o recorte dos 400 (`docs/planning/F3-spec.md`, G9-a).
+- **F3b (Gustavo, 2026-11-17):** depois de duas sondas acima do limite de tempo (61,4 min com 4 threads; 66,6 min com
+  1 conexão), a F3 fechou com Q2 no recorte dos 400, e a amostra de 2.000 rodou depois, como F3b, sem alteração do
+  pré-registro (`docs/planning/F3-report.md`).
+- **Sensibilidade a k: cortada** (Gustavo, 2026-11-17), pela ordem de corte da F0 §7 (2º item).
+- **V0z: não rodado** (G3: só com folga; não foi pedido).

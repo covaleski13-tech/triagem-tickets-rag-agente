@@ -162,3 +162,19 @@ Fonte: tokens somados de `results/f5/agente_log.jsonl` (1.200 execuções), `gol
 2.425.030 de entrada e 67.209 de saída = **US$ 0,276108** (estimativa: ≤ US$ 0,46).
 
 - **Acumulado do projeto: ≤ US$ 0,465188** de US$ 3.
+
+## Total final do projeto (F6)
+
+Soma conferida por `python scripts/f6_somar_custos.py`, que procura cada parcela de custo real neste arquivo e compara
+o total com o último acumulado registrado. Preço: US$ 0,10 / US$ 0,50 por MTok (Haiku 5.5, prompts de até 100.000
+tokens), https://platform.claude.com/docs/en/about-claude/pricing.md, consultado em 2026-11-17.
+
+| Fase | Custo real |
+|---|---|
+| F1 | US$ 0 (sem API) |
+| F2 (V0, V1) | US$ 0,103379 |
+| F3 (V2, V3, teste de fumaça com teto de US$ 0,0000368) | ≤ US$ 0,079480 |
+| F4 (2 fumaças, diagnóstico, emendas 1 e 2) | US$ 0,006221 |
+| F5 (avaliação do agente) | US$ 0,276108 |
+| F6 | US$ 0 (sem API) |
+| **Total** | **≤ US$ 0,465188** de US$ 3 |

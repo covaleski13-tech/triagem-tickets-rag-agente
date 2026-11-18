@@ -50,9 +50,11 @@ def test_amostra_q3_estratos(av):
     assert a["id"].is_unique
     sp = ler_splits().set_index("id")
     assert (sp.loc[a["id"], "split_grupo"] == "holdout").all()
-    log = RAIZ / "results/f5/agente_log.jsonl"
-    if log.exists():
-        assert arq.stat().st_mtime < min(log.stat().st_mtime, log.stat().st_ctime)
+    # ordem garantida no script (não por mtime: num clone, os mtimes refletem o checkout, não a geração)
+    import inspect
+    assert "assert not LOG.exists()" in inspect.getsource(av.fase_estratos)
+    fonte_main = inspect.getsource(av.main)
+    assert fonte_main.index("fase_estratos(") < fonte_main.index("executar(")
     # seed 42 dentro de cada estrato, sobre o holdout ordenado por id: refeito a partir das faixas gravadas
     for e, g in a.groupby("estrato"):
         assert len(g) == av.N_POR_ESTRATO[e]
