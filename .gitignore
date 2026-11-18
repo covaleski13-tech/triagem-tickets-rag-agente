@@ -4,3 +4,4 @@ data/raw/
 __pycache__/
 *.joblib
 results/**/*.log
+runtime_agente/

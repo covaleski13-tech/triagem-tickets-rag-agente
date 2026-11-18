@@ -116,7 +116,7 @@ As hipóteses ficam registradas **antes** de qualquer execução. O report de ca
 | Embeddings | `sentence-transformers` local, `BAAI/bge-small-en-v1.5` **[G4]**, revisão registrada, **sem o prefixo de instrução de consulta** | Grátis e reproduzível; a tarefa é ticket contra ticket (simétrica), e o prefixo do BGE é para consulta curta contra passagem |
 | LangChain | Embeddings, vector store `langchain-postgres` e retriever | Requisito da vaga; ver o ponto fraco 6 |
 | LLM | `claude-haiku-5-5` via `langchain-anthropic`, saída validada com Pydantic, `max_tokens` 64, sem `temperature` | Mesmo modelo do case |
-| Agente | LangGraph, grafo fixo; no nó `sugerir`, o LLM recebe `recuperar_exemplos` e `consultar_politica` via `bind_tools` e decide se chama **[G7]** | Tool calling real onde há escolha; a faixa continua sendo atribuída por código |
+| Agente | LangGraph, grafo fixo; no nó `sugerir`, o LLM recebe `recuperar_exemplos` e `consultar_politica` via `bind_tools` e decide se chama **[G7]** (D-F3-1: recuperação vetorial) | Tool calling real onde há escolha; a faixa continua sendo atribuída por código |
 | Telemetria | `LANGCHAIN_TRACING_V2` desligado | Nenhum texto de ticket vai para serviço externo |
 
 ## 6. Custo de API (premissa; preço a reconferir na página oficial antes da F2)

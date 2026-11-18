@@ -79,3 +79,28 @@
 - O mesmo template serve para V1 (F2) e para V2 e V3 (F3). Fica congelado.
 - Ordem dos exemplos: em V1, a ordem do sorteio (`np.random.default_rng([42, id])`, 5 sem reposição sobre os ids
   de treino em ordem crescente); em V2 e V3, a ordem de rank, com o rank 1 primeiro.
+
+## Decisões posteriores aos resultados da F3 (Gustavo, 2026-11-17)
+
+Tomadas **depois** de ver os resultados da F3; não alteram a família pré-registrada de Q1 nem os veredictos.
+
+- **D-F3-1 — `recuperar_exemplos` do agente usa a busca vetorial, não a híbrida.** Evidência (recorte dos 400):
+  precisão@5 da híbrida − vetorial = −0,0365 (IC 95% −0,0645 a −0,009); V2 47,75% × V3 45,25% (p Holm 0,229).
+- **D-F3-2 — o agente existe para responder a Q3** (segurança da execução da política sob tool calling), não
+  acurácia. O README dirá que, em acurácia, o voto dos vizinhos (K1) supera o LLM com os mesmos vizinhos.
+  Evidência: V3 × K1 = −9,5 pp, p Holm 9,5e-04.
+
+## F4 (2026-11-17)
+
+- `langgraph` 1.2.22 instalado e fixado.
+- Política do case reutilizada via `triar()` por um adaptador (`src/triagem_rag/politica_caso.py`), sem alterar
+  `src/triagem_rag/caso/*.py`: `triagem.OUT_DIR` → `data/caso`; `TRIAGEM_CACHE_DIR=data/modelos`;
+  `TRIAGEM_MODELO_VERSAO` = versão do joblib da F1 (calculada pela fórmula do case, `versao_atual`, sobre
+  `data/f1_splits.csv`); `TRIAGEM_RUNTIME_DIR=runtime_agente/` (fora do git).
+- O joblib da F1 já está no formato do case (`{"pipeline", "versao", "treino_s"}`): nenhuma conversão foi necessária.
+- **Versão do modelo:** `TRIAGEM_MODELO_VERSAO=f71cfd480a50`, lida do nome do joblib da F1. A fórmula do case
+  (`sha256(sha256(f1_splits.csv) + PARAMS)[:12]`) aplicada ao `data/f1_splits.csv` atual dá `d2522e1b9442`. Na F1,
+  o hash foi calculado sobre a cópia do checkout do case no Windows (CRLF), antes da correção para LF; o conteúdo
+  dos splits é o mesmo, só os fins de linha diferem. O modelo carregado pelo adaptador continua com 278/400.
+- Prompt do agente: `prompts/agente_sugerir_v1.txt`, congelado, SHA-256
+  `a9201dd9aa2b49271b50de31a11a74dfc469321f38b4a964e8d9a20aed98858e`.

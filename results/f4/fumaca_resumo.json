@@ -1,0 +1,72 @@
+[
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "llm_rodou": true,
+    "rodadas": 2,
+    "tools": [
+      "recuperar_exemplos"
+    ],
+    "erros": [
+      "json inválido, tentativa 1",
+      "json inválido, tentativa 2"
+    ],
+    "tokens": [
+      3876,
+      259
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [],
+    "erros": [
+      "json inválido, tentativa 1",
+      "json inválido, tentativa 2"
+    ],
+    "tokens": [
+      1820,
+      131
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [],
+    "erros": [],
+    "tokens": [
+      953,
+      23
+    ]
+  },
+  {
+    "faixa_politica": "IA sugere",
+    "faixa_final": "IA sugere",
+    "llm_rodou": true,
+    "rodadas": 2,
+    "tools": [
+      "recuperar_exemplos"
+    ],
+    "erros": [],
+    "tokens": [
+      2134,
+      74
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [],
+    "erros": [],
+    "tokens": [
+      930,
+      22
+    ]
+  }
+]

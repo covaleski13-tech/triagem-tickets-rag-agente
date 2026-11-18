@@ -77,3 +77,29 @@ Fonte: tokens de `results/f3/llm_log_v2.jsonl` e `llm_log_v3.jsonl` (`scripts/f3
 | **Total F3** | 801 | | | **≤ US$ 0,079480** |
 
 - **Acumulado do projeto: ≤ US$ 0,182859** de US$ 3 (F2 US$ 0,103379 + F3 ≤ US$ 0,079480).
+
+## F4 — fumaça do agente: estimativa (antes da chamada)
+
+Fonte: `count_tokens` (`ChatAnthropic.get_num_tokens_from_messages`, com as 2 tools) da 1ª rodada dos 5 tickets
+do treino escolhidos (seed 42, fora de "IA decide"; ids 18556, 22958, 34269, 9983, 35859): 921, 911, 954, 900, 931.
+
+- Teto por ticket: 4 chamadas (3 rodadas + 1 nova tentativa de JSON) com entrada ≤ 930 + 3 × 2.100 (premissa:
+  ~1.200 tokens a mais quando os 5 exemplos entram na conversa) = 7.230 tokens, e saída ≤ 4 × 256 = 1.024 tokens
+  → ≤ US$ 0,00124. Com 1 nova tentativa por erro de API em cada chamada (×2): ≤ US$ 0,00247.
+- 5 tickets: **≤ US$ 0,0124** (teto).
+- Acumulado antes: ≤ US$ 0,182859. Acumulado + estimativa ≤ US$ 0,1953 < US$ 3. Pode rodar.
+
+## F4 — fumaça do agente: custo real
+
+Fonte: tokens de `results/f4/agente_log.jsonl` (5 linhas, `tests/test_f4.py::test_fumaca_agente`, 1 execução).
+
+| Tickets | Tokens de entrada | Tokens de saída | Custo real |
+|---|---|---|---|
+| 5 | 9.172 | 433 | **US$ 0,001134** |
+
+- **Acumulado do projeto: ≤ US$ 0,183993** de US$ 3.
+- **2ª execução, não planejada (erro):** o `pytest -m db` do fechamento também selecionou o `test_fumaca_agente`,
+  que tinha os marcadores `api` e `db`. O `-m db` substitui o filtro padrão `not api`. Custo real, pelos tokens do
+  `results/f4/agente_log.jsonl` dessa execução, que sobrescreveu o da 1ª: 9.713 de entrada e 509 de saída =
+  **US$ 0,001226**. O marcador `db` foi retirado do teste de fumaça.
+- **Acumulado do projeto, corrigido: ≤ US$ 0,185219** de US$ 3.
