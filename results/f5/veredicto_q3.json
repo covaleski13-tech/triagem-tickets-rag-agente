@@ -2,5 +2,11 @@
   "agente_seguro": true,
   "promocoes_indevidas": 0,
   "falhas_exercitadas_escaladas": "19/19",
-  "nota": "0 promoções é garantido por construção (F0 §2); o que mede o LLM é o desvio e o rebaixamento"
+  "nota": "0 promoções é garantido por construção (F0 §2); o que mede o LLM é o desvio e o rebaixamento",
+  "consultar_politica": "0/10 exercitada em execução real; guarda testada só com LLM falso (F4)",
+  "falhas_exercitadas_por_tipo": {
+    "consultar_politica": "0/10 exercitadas, 0 escalaram",
+    "recuperar_exemplos": "9/10 exercitadas, 9 escalaram",
+    "timeout": "10/10 exercitadas, 10 escalaram"
+  }
 }

@@ -114,8 +114,9 @@ Todos de `scripts/f5_metricas.py` → `results/f5/q3.json`, `q3_por_ataque.csv` 
 Isso repete a F3 (C > V2/V3; K1 > V3). A sugestão do LLM ao humano é, em média, menos acurada que a categoria do clássico.
 
 **Custo operacional:** 10,45% de "IA sugere" vira "humano decide" por divergência, ou 3,36% do holdout ponderado.
-Desses 7, o clássico acertava em quase todos (98,51% no estrato). O rebaixamento manda para a fila humana
-tickets que o clássico já classificaria certo.
+Dos 7 rebaixados, o clássico estava certo em 6, o LLM em 1, e não houve caso em que os dois errassem
+(`q3.json` → `exploratorio_rebaixados_ia_sugere`). O rebaixamento manda para a fila humana, sobretudo, tickets
+que o clássico já classificaria certo.
 
 **Desvio sob ataque: 7,39% no total.**
 
@@ -141,7 +142,7 @@ tickets que o clássico já classificaria certo.
 - **Log escrito só pela thread principal:** o agente congelado grava o próprio log dentro de `triar_agente`, na thread do worker. O `scripts/f5_avaliar.py` troca `agente._registrar` por uma função vazia durante a fase B (e restaura depois), e a thread principal grava a linha no formato da F4, mais `id`, `variante` e `alvo`. O código do agente não muda. Isso é testado em `test_log_escritor_unico`.
 - **Log de golden e falhas** (§5): ficam em `results/f5/agente_log_golden_falhas.jsonl`, separado do log principal. Os resultados de golden e falhas estão em `golden.jsonl` e `falhas_injetadas.csv`.
 - **Tentativas na falha de tool:** o agente não repete tools (a regra da F4 é escalar no 1º erro de tool). "Tentativas" = 1 chamada da tool sabotada. No timeout, "tentativas" = 2 chamadas ao LLM (1 nova tentativa).
-- **`pred_limpa` do ataque:** usa a categoria do `triar()` sobre o texto limpo mascarado (da amostra). O case usava o texto bruto. O mascaramento não altera o texto pré-processado do DS2 na prática, mas não conferi ticket a ticket.
+- **`pred_limpa` do ataque:** usa a categoria do `triar()` sobre o texto limpo mascarado (da amostra). O case usava o texto bruto. **Verificado:** o mascaramento não altera nenhum dos 200 textos da amostra (`mascarar(t) == t` em 200 de 200), e a predição do clássico sobre o texto bruto é igual à `categoria_classico` da amostra em 200 de 200. A predição limpa sobre o texto mascarado é, portanto, igual à do texto bruto.
 - **Promoções nas falhas injetadas:** verificadas sobre `faixa_politica`/`faixa_final` gravados no CSV.
 - **Checagem de texto de ticket:** feita sobre todos os valores de texto únicos dos arquivos de `results/f5/` (1.835 strings; 575 com 30 ou mais caracteres; 0 com trecho do DS2), não por varredura de janela no arquivo inteiro (§5).
 - **`runtime_f5/`** foi para o `.gitignore`.
@@ -153,6 +154,12 @@ tickets que o clássico já classificaria certo.
   - correção: separei essas 41 linhas para `results/f5/agente_log_golden_falhas.jsonl` (nada apagado; as 1.200 do principal batem 1:1 com `(id, variante)`). Corrigi o script para gravar golden e falhas nesse arquivo desde o início;
   - os números do golden e das falhas vêm de `golden.jsonl` e `falhas_injetadas.csv`, que não foram afetados.
 - **Variáveis de ambiente no import:** o `scripts/f5_avaliar.py` definia `TRIAGEM_RUNTIME_DIR` e `TRIAGEM_AGENTE_LOG` ao ser importado, e os testes o importam. Movi isso para o `main()` antes de qualquer execução paga.
+- **Correção pós-commit `84fae6b`** (sem API, sem mudar o agente):
+  - `veredicto_q3.json` ganhou a ressalva de `consultar_politica` (0/10 exercitada em execução real; guarda testada só com o LLM falso) e as falhas exercitadas por tipo. O veredicto não mudou;
+  - `q3.json` ganhou `exploratorio_rebaixados_ia_sugere`. As demais chaves foram conferidas e estão iguais ao commit anterior;
+  - a §4 trocou "não conferi ticket a ticket" pela verificação nos 200 textos;
+  - a §7 detalha o `InvalidRequestError` como limitação de infraestrutura;
+  - a §3 trocou "quase todos" pela contagem 6/1/0.
 - **Checagem de texto lenta:** a varredura por janela de 30 caracteres no arquivo inteiro contra 10 MB do DS2 passou de 10 min. Cancelei e troquei pela checagem sobre valores únicos (§4). O registro de custo do mesmo comando já tinha sido gravado.
 
 ## 6. Custo de API
@@ -167,7 +174,10 @@ Fonte: `docs/custos.md`, preço oficial de 2026-11-17.
 ## 7. Pendências e decisões que dependem do Gustavo
 
 1. **`consultar_politica` nunca é chamada em execução real.** O README deve dizer que a guarda dessa tool só foi testada com o LLM falso. Opção para o futuro (fora de escopo agora): retirá-la, já que não agrega.
-2. **`InvalidRequestError` sob concorrência** (3 em 826). O efeito é seguro (escala), mas é ruído de infraestrutura nas métricas. Para uso real: lock ou um `vector_store` por thread. Fica registrado; nada mudou no agente.
+2. **Limitação de infraestrutura: `InvalidRequestError` em `recuperar_exemplos`** (3 de 826 execuções com LLM, todas atacadas).
+   - As 3 escalaram para "humano decide" (seguro), mas são escalonamentos por infraestrutura, não por comportamento do LLM.
+   - **Hipótese, não verificada:** a instância `PGVector` é compartilhada entre as threads (`vector_store()` com `lru_cache`), e o uso concorrente pelos 4 workers gera o erro do SQLAlchemy.
+   - Para uso real: lock ou um `vector_store` por thread. Nada mudou no agente.
 3. **README (F6):** apresentar separado:
    - a garantia por construção (0 promoções);
    - o comportamento do LLM (desvio de 7,39% sob ataque, rebaixamento de 10,45% em "IA sugere", acurácia abaixo do clássico).

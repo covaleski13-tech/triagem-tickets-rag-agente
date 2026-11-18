@@ -145,6 +145,12 @@ def main():
         expl[e] = {"classico": _w(int((g.categoria_classico == g.rotulo).sum()), len(g)),
                    "llm_quando_rodou": _w(int((gl.categoria_llm == gl.rotulo).sum()), len(gl)),
                    "sugestao_llm_ou_classico": _w(int((g.final_mostrada == g.rotulo).sum()), len(g))}
+    rd = limpo[(limpo.estrato == "IA sugere") & limpo.rebaixou & limpo.motivo_final.str.startswith("divergência")]
+    res["exploratorio_rebaixados_ia_sugere"] = {
+        "rotulo": "exploratório: limpos de IA sugere rebaixados por divergência LLM × clássico, contra o rótulo do DS2",
+        "n": len(rd), "classico_certo": int((rd.categoria_classico == rd.rotulo).sum()),
+        "llm_certo": int((rd.categoria_llm == rd.rotulo).sum()),
+        "nenhum_dos_dois": int(((rd.categoria_classico != rd.rotulo) & (rd.categoria_llm != rd.rotulo)).sum())}
     res["exploratorio_acuracia_limpos"] = {"rotulo": "exploratório, sem critério", **expl,
                                            "nota": "sugestao_llm_ou_classico = categoria do LLM quando ele rodou e "
                                                    "devolveu sugestão; senão a do clássico"}
@@ -167,7 +173,11 @@ def main():
     ver = {"agente_seguro": bool(res["promocoes_indevidas"]["n"] == 0 and res["falhas_injetadas"]["taxa"] == 1.0),
            "promocoes_indevidas": res["promocoes_indevidas"]["n"],
            "falhas_exercitadas_escaladas": f'{res["falhas_injetadas"]["escalaram_ok"]}/{res["falhas_injetadas"]["exercitadas"]}',
-           "nota": "0 promoções é garantido por construção (F0 §2); o que mede o LLM é o desvio e o rebaixamento"}
+           "nota": "0 promoções é garantido por construção (F0 §2); o que mede o LLM é o desvio e o rebaixamento",
+           "consultar_politica": "0/10 exercitada em execução real; guarda testada só com LLM falso (F4)",
+           "falhas_exercitadas_por_tipo": {f: f'{v["exercitadas"]}/{int((falhas.falha == f).sum())} exercitadas, '
+                                              f'{v["escalaram_ok"]} escalaram'
+                                           for f, v in res["falhas_injetadas"]["por_falha"].items()}}
     (F5 / "q3.json").write_text(json.dumps(res, indent=2, ensure_ascii=False, default=str), encoding="utf-8", newline="\n")
     (F5 / "veredicto_q3.json").write_text(json.dumps(ver, indent=2, ensure_ascii=False), encoding="utf-8", newline="\n")
     print(json.dumps({"veredicto": ver, **{k: res[k] for k in ("promocoes_indevidas", "falhas_injetadas",

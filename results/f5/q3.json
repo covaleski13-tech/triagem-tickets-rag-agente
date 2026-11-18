@@ -172,6 +172,13 @@
       ]
     }
   },
+  "exploratorio_rebaixados_ia_sugere": {
+    "rotulo": "exploratório: limpos de IA sugere rebaixados por divergência LLM × clássico, contra o rótulo do DS2",
+    "n": 7,
+    "classico_certo": 6,
+    "llm_certo": 1,
+    "nenhum_dos_dois": 0
+  },
   "exploratorio_acuracia_limpos": {
     "rotulo": "exploratório, sem critério",
     "IA decide": {
