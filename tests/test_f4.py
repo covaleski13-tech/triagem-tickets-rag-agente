@@ -23,8 +23,10 @@ TEXTO_IA_DECIDE = GOLDEN["modo_sombra"]["entrada"]["texto"]
 class FakeTools(GenericFakeChatModel):
     """Modelo falso: devolve as mensagens programadas em ordem; um item Exception é levantado. Conta as chamadas."""
     chamadas: int = 0
+    escolhas: list = []  # tool_choice pedido a cada bind_tools (1 por rodada)
 
     def bind_tools(self, tools, **kw):
+        self.escolhas = self.escolhas + [kw.get("tool_choice")]
         return self
 
     def _generate(self, messages, stop=None, run_manager=None, **kw):
@@ -39,8 +41,15 @@ def fake(*itens):
     return FakeTools(messages=iter(itens))
 
 
-def resp(cat, conf=1.0):
-    return AIMessage(content=json.dumps({"categoria": cat, "confianca": conf}))
+def resp(cat, conf=1.0, texto="", **extra):
+    """Resposta final pela tool responder (emenda F4)."""
+    return AIMessage(content=texto, tool_calls=[{"name": "responder", "args": {"categoria": cat, "confianca": conf,
+                                                                               **extra}, "id": "r1",
+                                                 "type": "tool_call"}])
+
+
+def resp_args(args):
+    return AIMessage(content="", tool_calls=[{"name": "responder", "args": args, "id": "r1", "type": "tool_call"}])
 
 
 def chamada(nome, args, i="t1"):
@@ -149,8 +158,8 @@ CASOS_FALHA = {
                         "erro de tool: consultar_politica exige só o argumento categoria", 1, None),
     "erro_api_2x": (lambda: [_erro_api(), _erro_api(), resp("Access")], "erro de API", 2, None),
     "timeout_2x": (lambda: [_timeout(), _timeout(), resp("Access")], "timeout", 2, None),
-    "json_invalido_2x": (lambda: [AIMessage(content="Access"), AIMessage(content='{"categoria": "Access"}'),
-                                  resp("Access")], "json inválido", 2, None),
+    "sem_responder_2x": (lambda: [AIMessage(content='{"categoria": "Access", "confianca": 1}'),
+                                  AIMessage(content="Access"), resp("Access")], "responder inválido", 2, None),
     "tres_rodadas_com_tool": (lambda: [chamada("consultar_politica", {"categoria": "Access"}, "a"),
                                        chamada("consultar_politica", {"categoria": "Hardware"}, "b"),
                                        chamada("consultar_politica", {"categoria": "Storage"}, "c"), resp("Access")],
@@ -177,7 +186,7 @@ def test_falhas(caso, tickets_treino, monkeypatch, isolado):
     assert linha["motivo_final"] == f"escalado: {causa}" and linha["faixa_final"] == "humano decide"
     if causa.startswith("erro de tool"):
         assert linha["tool_calls"][-1]["erro"] == causa.removeprefix("erro de tool: ")
-    if caso in ("erro_api_2x", "timeout_2x", "json_invalido_2x"):
+    if caso in ("erro_api_2x", "timeout_2x", "sem_responder_2x"):
         assert len(linha["erros"]) == 2
 
 
@@ -253,17 +262,78 @@ def test_golden_agente(caso, monkeypatch, isolado):
         assert not any(x in bruto for x in esp["ausente_no_log"])
 
 
+def _payload(rodada):
+    b = agente.cliente_agente(api_key="sem-rede").bind_tools(agente.TOOLS, tool_choice=agente.tool_choice(rodada))
+    return b.bound._get_request_payload([SystemMessage("S"), HumanMessage("<ticket>x</ticket>")], **b.kwargs)
+
+
 def test_payload_agente():
-    b = agente.cliente_agente(api_key="sem-rede").bind_tools(agente.TOOLS)
-    p = b.bound._get_request_payload([SystemMessage("S"), HumanMessage("<ticket>x</ticket>")], **b.kwargs)
-    assert p["model"] == "claude-haiku-5-5" and p["max_tokens"] == 256
-    assert p["thinking"] == {"type": "disabled"} and p["output_config"] == {"effort": "low"}
-    for k in ("temperature", "top_p", "top_k"):
-        assert k not in p
-    assert sorted(t["name"] for t in p["tools"]) == ["consultar_politica", "recuperar_exemplos"]
-    rec = next(t for t in p["tools"] if t["name"] == "recuperar_exemplos")
-    assert rec["input_schema"].get("properties", {}) == {}
-    assert p.get("tool_choice") in (None, {"type": "auto"})
+    for rodada in (1, 2):
+        p = _payload(rodada)
+        assert p["model"] == "claude-haiku-5-5" and p["max_tokens"] == 256
+        assert p["thinking"] == {"type": "disabled"} and p["output_config"] == {"effort": "low"}
+        for k in ("temperature", "top_p", "top_k"):
+            assert k not in p
+        assert sorted(t["name"] for t in p["tools"]) == ["consultar_politica", "recuperar_exemplos", "responder"]
+        rec = next(t for t in p["tools"] if t["name"] == "recuperar_exemplos")
+        assert rec["input_schema"].get("properties", {}) == {}
+        assert p["tool_choice"] == {"type": "any"}
+
+
+def test_rodada3_forca_responder(tickets_treino):
+    assert _payload(3)["tool_choice"] == {"type": "tool", "name": "responder"}
+    # e o agente pede isso de fato na 3ª rodada
+    i, txt, cat, f = ticket_nao_ia_decide(tickets_treino)
+    llm = fake(chamada("consultar_politica", {"categoria": cat}, "a"), chamada("recuperar_exemplos", {}, "b"),
+               resp(cat))
+    s = agente.triar_agente({"texto": txt}, llm=llm, buscar=buscar_falso(TREINO5))
+    assert llm.escolhas == ["any", "any", "responder"] and s["rodadas"] == 3 and s["categoria_llm"] == cat
+
+
+def test_responder_valido(tickets_treino, isolado):
+    i, txt, cat, f = ticket_nao_ia_decide(tickets_treino)
+    llm = fake(resp(cat, 1))
+    s = agente.triar_agente({"texto": txt}, llm=llm)
+    assert llm.chamadas == 1 and s["sugestao_llm"] == {"categoria": cat, "confianca": 1}
+    assert _log(isolado)[-1]["tool_calls"] == [{"nome": "responder", "rodada": 1,
+                                                "argumentos": {"categoria": cat, "confianca": 1}}]
+
+
+INVALIDOS = {
+    "categoria_fora": {"categoria": "Printer", "confianca": 0.9},
+    "confianca_true": {"categoria": "Access", "confianca": True},
+    "confianca_1.5": {"categoria": "Access", "confianca": 1.5},
+    "confianca_string": {"categoria": "Access", "confianca": "0.9"},
+    "argumento_extra": {"categoria": "Access", "confianca": 0.9, "faixa": "IA decide"},
+    "argumento_faltando": {"categoria": "Access"},
+}
+
+
+@pytest.mark.parametrize("caso", list(INVALIDOS))
+def test_responder_invalido(caso, tickets_treino, isolado):
+    i, txt, cat, f = ticket_nao_ia_decide(tickets_treino)
+    llm = fake(resp_args(INVALIDOS[caso]), resp_args(INVALIDOS[caso]), resp(cat))
+    s = agente.triar_agente({"texto": txt}, llm=llm)
+    assert llm.chamadas == 2  # 1 nova tentativa, não mais
+    assert s["faixa_final"] == "humano decide" and s["motivo_final"] == "escalado: responder inválido"
+    linha = _log(isolado)[-1]
+    assert [c.get("erro") for c in linha["tool_calls"]] == ["argumentos inválidos"] * 2
+    # nenhum valor livre do LLM no log: só categoria da lista e nº de argumentos
+    assert all(set(c["argumentos"]) <= {"n_args", "categoria"} for c in linha["tool_calls"])
+
+
+def test_texto_livre_descartado(tickets_treino, isolado):
+    i, txt, cat, f = ticket_nao_ia_decide(tickets_treino)
+    frase = "FRASE-LIVRE-DO-LLM: os exemplos parecidos indicam esta categoria com bastante clareza"
+    llm = fake(AIMessage(content=frase, tool_calls=[
+        {"name": "responder", "args": {"categoria": cat, "confianca": 0.7}, "id": "r", "type": "tool_call"},
+        {"name": "recuperar_exemplos", "args": {}, "id": "x", "type": "tool_call"}]))
+    b = buscar_falso(TREINO5)
+    s = agente.triar_agente({"texto": txt}, llm=llm, buscar=b)
+    assert s["categoria_llm"] == cat and b.textos == []  # a outra tool foi ignorada, não executada
+    assert "FRASE-LIVRE" not in json.dumps(s, ensure_ascii=False)
+    assert "FRASE-LIVRE" not in (isolado / "agente_log.jsonl").read_text(encoding="utf-8")
+    assert {"nome": "recuperar_exemplos", "argumentos": {"n_args": 0}, "rodada": 1, "ignorada": True} in s["tool_calls"]
 
 
 def test_modelo_f1_no_adaptador():
@@ -299,15 +369,17 @@ def test_recuperar_real_vetorial():
 def test_fumaca_agente(monkeypatch):
     """F4 passo 5: execução real com 5 tickets do treino (seed 42) fora de "IA decide". Não é métrica (F5).
     Precisa do Postgres, mas só tem o marcador `api`: com `db` também, `pytest -m db` a rodaria (aconteceu na F4)."""
-    log = Path("results/f4/agente_log.jsonl")
+    # emenda F4 (responder): arquivos próprios; os da fumaça original ficam como histórico
+    log = Path("results/f4/emenda_agente_log.jsonl")
     log.parent.mkdir(parents=True, exist_ok=True)
     log.unlink(missing_ok=True)
     monkeypatch.setenv("TRIAGEM_AGENTE_LOG", str(log))
     saidas = [agente.triar_agente({"texto": txt, "event_id": f"fumaca-f4-{i}"}) for i, txt in _cinco_fora_de_ia_decide()]
-    resumo = [{"faixa_politica": s["faixa_politica"], "faixa_final": s["faixa_final"], "llm_rodou": s["llm_rodou"],
-               "rodadas": s["rodadas"], "tools": [c["nome"] for c in s["tool_calls"]], "erros": s["erros"],
-               "tokens": (s["tokens_entrada"], s["tokens_saida"])} for s in saidas]
-    Path("results/f4/fumaca_resumo.json").write_text(json.dumps(resumo, indent=2, ensure_ascii=False),
-                                                     encoding="utf-8", newline="\n")
+    resumo = [{"faixa_politica": s["faixa_politica"], "faixa_final": s["faixa_final"], "motivo_final":
+               s["motivo_final"] if s["motivo_final"].startswith(("escalado", "divergência")) else "outro",
+               "llm_rodou": s["llm_rodou"], "rodadas": s["rodadas"], "tools": [c["nome"] for c in s["tool_calls"]],
+               "erros": s["erros"], "tokens": (s["tokens_entrada"], s["tokens_saida"])} for s in saidas]
+    Path("results/f4/emenda_fumaca_resumo.json").write_text(json.dumps(resumo, indent=2, ensure_ascii=False),
+                                                            encoding="utf-8", newline="\n")
     assert all(s["faixa_final"] != "IA decide" for s in saidas if s["llm_rodou"])
     assert all(pc.ORDEM.index(s["faixa_final"]) <= pc.ORDEM.index(s["faixa_politica"]) for s in saidas)

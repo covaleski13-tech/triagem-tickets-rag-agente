@@ -104,3 +104,18 @@ Tomadas **depois** de ver os resultados da F3; não alteram a família pré-regi
   dos splits é o mesmo, só os fins de linha diferem. O modelo carregado pelo adaptador continua com 278/400.
 - Prompt do agente: `prompts/agente_sugerir_v1.txt`, congelado, SHA-256
   `a9201dd9aa2b49271b50de31a11a74dfc469321f38b4a964e8d9a20aed98858e`.
+
+## Emenda F4 — resposta final pela tool `responder` (Gustavo, 2026-11-17)
+
+- Motivo: na fumaça e no diagnóstico (5 tickets do treino), o LLM com tools escreveu texto antes do JSON em 3 de 7
+  respostas finais; a validação estrita rejeita. Leitura tolerante do JSON rejeitada (ataque `json_pronto`, paridade
+  com a F2). Evidência só do treino; congelada antes da F5.
+- Nova tool `responder(categoria, confianca)` com o schema de `esquema.Classificacao`, validada no código (exatamente as
+  2 chaves, tipos estritos). `tool_choice`: `any` nas rodadas 1 e 2; `{"type": "tool", "name": "responder"}` na 3ª.
+  Aceito pela API com `thinking` desligado (conferido com `count_tokens` e na fumaça).
+- Texto livre do modelo descartado (não validado, não logado, fora do estado). `responder` junto com outra tool na
+  mesma resposta: vale `responder`; as outras são ignoradas e registradas como `ignorada`.
+- Prompt `prompts/agente_sugerir_v2.txt` (v1 fica como histórico), SHA-256
+  `ffc25ce7d56cd341281c263da7044d597ada86752fb73eb6efbeb4752d079bd8`.
+- `results/f4/diagnostico_json.jsonl` fora do git (frases do LLM com fragmentos curtos de tickets do treino);
+  versionado só o resumo sem texto `results/f4/diagnostico_resumo.json`.

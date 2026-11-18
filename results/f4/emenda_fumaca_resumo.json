@@ -1,0 +1,81 @@
+[
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      1225,
+      93
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      1215,
+      93
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "llm_rodou": true,
+    "rodadas": 2,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      3092,
+      91
+    ]
+  },
+  {
+    "faixa_politica": "IA sugere",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [
+      "recuperar_exemplos",
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      1204,
+      93
+    ]
+  },
+  {
+    "faixa_politica": "humano decide",
+    "faixa_final": "humano decide",
+    "motivo_final": "divergência LLM × clássico",
+    "llm_rodou": true,
+    "rodadas": 1,
+    "tools": [
+      "responder"
+    ],
+    "erros": [],
+    "tokens": [
+      1235,
+      64
+    ]
+  }
+]

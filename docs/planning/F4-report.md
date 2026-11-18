@@ -105,3 +105,101 @@ Fonte: `docs/custos.md`, preço oficial de 2026-11-17.
 - **Início:** 22:02:42 (`date` no início da execução).
 - **Fim:** 22:18:05 (`date` depois dos testes finais) + escrita deste report e commit (horário no `git log`).
 - **Total:** ~16 min com timestamp, de 90 orçados.
+
+---
+
+# Emenda — resposta final pela tool `responder` (`docs/planning/F4-emenda-spec.md`)
+
+Status: **concluída.** O objetivo foi atingido: **0 escalonamento por formato** na fumaça. Há um efeito colateral
+novo, registrado na §3 e na §7 desta seção. Commit local, sem push.
+
+## 1. O que foi feito
+
+1. Conferi, com `count_tokens` (sem custo), que a API aceita `tool_choice` `{"type": "any"}` e `{"type": "tool", "name": "responder"}` com `thinking` desligado. Aceitou os dois.
+2. Criei `prompts/agente_sugerir_v2.txt` = v1 com uma única troca: o parágrafo do JSON vira "Give your final answer by calling the tool responder…", com a descrição dos argumentos. A v1 fica como histórico.
+3. Mudanças no `src/triagem_rag/agente.py`:
+   - tool `responder` com o `args_schema` de `esquema.Classificacao` e validação no código (`validar_responder`: exatamente as 2 chaves, tipos estritos);
+   - `tool_choice` por rodada: `any`, `any`, `responder`;
+   - a resposta final é a chamada a `responder`; o texto livre do modelo é descartado;
+   - outras tools na mesma resposta que `responder` ficam como `ignorada`.
+   A guarda, o roteamento, as tools de busca e política, o limite de rodadas, a regra de repetição e o contrato não mudaram.
+4. Testes atualizados: `test_responder_valido`, `test_responder_invalido` (6 casos), `test_texto_livre_descartado`, `test_rodada3_forca_responder` e `test_payload_agente`. O caso de falha "JSON inválido 2×" virou "sem `responder` 2×".
+5. Diagnóstico anterior: `results/f4/diagnostico_json.jsonl` foi para o `.gitignore`. Versionei `scripts/f4_diagnostico_json.py` (com `--resumo`) e `results/f4/diagnostico_resumo.json`, sem texto.
+6. Estimei o custo e rodei a fumaça real uma vez (`pytest -m api -k fumaca_agente`, só o marcador `api`), gravando em arquivos próprios da emenda.
+
+## 2. Resultados
+
+| Item | Valor | Fonte |
+|---|---|---|
+| `pytest` | 75 passed, 10 deselected | `.venv/Scripts/python -m pytest -q` |
+| `pytest -m db` | 8 passed | `.venv/Scripts/python -m pytest -q -m db` |
+| Testes da F4 sem rede | 37 passed (nunca promove, falhas, contrato e golden incluídos) | `tests/test_f4.py` |
+| SHA-256 do prompt v2 | `ffc25ce7d56cd341281c263da7044d597ada86752fb73eb6efbeb4752d079bd8` | `sha256sum prompts/agente_sugerir_v2.txt` |
+| Diagnóstico anterior (agente v1) | 11 chamadas, 7 respostas finais, 3 com texto antes do JSON, 1 escalonamento por "json inválido"; `recuperar_exemplos` 3×, `consultar_politica` 1×; US$ 0,001529 | `scripts/f4_diagnostico_json.py --resumo` → `results/f4/diagnostico_resumo.json` |
+
+**Fumaça da emenda.** Mesmos 5 tickets do treino, 1 execução (`results/f4/emenda_fumaca_resumo.json`, `results/f4/emenda_agente_log.jsonl`):
+
+| Ticket (classe do clássico) | Política → final | Rodadas | Tools (destino) | Sugestão do LLM | Escalonamento por formato |
+|---|---|---|---|---|---|
+| 18556 (Hardware) | humano → humano | 1 | `recuperar_exemplos` (**ignorada**), `responder` | Access | não |
+| 22958 (Storage) | humano → humano | 1 | `recuperar_exemplos` (**ignorada**), `responder` | Access | não |
+| 34269 (Hardware) | humano → humano | 2 | `recuperar_exemplos` (executada), depois `responder` | Miscellaneous | não |
+| 9983 (HR Support) | IA sugere → **humano** | 1 | `recuperar_exemplos` (**ignorada**), `responder` | Access | não |
+| 35859 (Administrative rights) | humano → humano | 1 | `responder` | Access | não |
+
+- **Escalonamentos por formato:** **0** de 5. O objetivo da emenda foi atingido.
+- **Erros:** nenhum erro de API e nenhum `responder` inválido.
+- **Guarda:** nenhuma promoção. Os 5 tickets divergem do clássico e, portanto, ficam em "humano decide".
+- **Tokens e custo:** 7.971 de entrada e 434 de saída = US$ 0,001014.
+
+## 3. O que contraria a hipótese ou a expectativa
+
+**A regra "vale `responder`, as outras são ignoradas" anulou a recuperação na maioria dos tickets.**
+
+- Com `tool_choice: any`, o modelo chamou `recuperar_exemplos` e `responder` **na mesma resposta** em 3 dos 5 tickets. Pela regra da emenda, a recuperação foi ignorada, e o LLM respondeu sem ver os exemplos.
+- Só em 1 ticket (34269) ele recuperou primeiro e respondeu na rodada seguinte.
+- Sem exemplos, 4 das 5 respostas foram "Access", a mesma superprevisão do V0 da F2 (159 de 400).
+- Os 5 divergiram do clássico. Isso inclui o ticket 9983: na fumaça original o LLM concordava (HR Support) e o ticket ficava em "IA sugere"; agora cai para "humano decide".
+
+O comportamento é **seguro**, porque a guarda só rebaixa. Mas a sugestão do LLM perde valor, e a F5 mediria um agente que quase nunca usa os exemplos. A emenda resolveu o formato e criou esse efeito de ordem das chamadas. Não mexi no prompt nem na regra; a spec proíbe iterar.
+
+Fora isso: o diagnóstico anterior confirmou a hipótese da emenda. O texto em volta do JSON era uma justificativa ou um anúncio, e o JSON em si estava correto.
+
+## 4. Desvios da spec
+
+- **Resposta sem nenhuma tool call:** tratada como `responder` ausente, com 1 nova tentativa e depois "escalado: responder inválido". Com `tool_choice` `any` ou `tool`, isso não deveria acontecer. A causa no log não distingue "inválido" de "ausente", mas os `erros` dizem "responder inválido ou ausente".
+- **Fumaça da emenda em arquivos próprios** (`emenda_agente_log.jsonl`, `emenda_fumaca_resumo.json`): os da fumaça original ficam como histórico.
+- **`scripts/f4_diagnostico_json.py`:** o docstring registra que ele rodou com o agente v1. Com o agente atual, não há mais texto bruto na resposta final para gravar.
+- **Schema enviado ao modelo para `confianca`:** `anyOf integer/number`, sem limites. A faixa [0, 1] é validada só no código, pelo `Classificacao`.
+
+## 5. Erros e correções durante a execução
+
+- **Indentação:** ao trocar o laço do `no_sugerir`, o bloco das tools ficou com indentação errada. O `py_compile` acusou, e eu corrigi antes de rodar os testes.
+- **Heredoc:** a 1ª tentativa de acrescentar esta seção via heredoc no bash falhou no parser, e nada foi gravado. Acrescentei com edição direta.
+- **Seleção da fumaça:** para evitar repetir o erro da F4, rodei com `-m api -k fumaca_agente` e conferi antes, com `--collect-only`, que só esse teste seria selecionado. O `-m api` sozinho pegaria também a fumaça da F2.
+
+## 6. Custo de API
+
+| | Estimado | Real |
+|---|---|---|
+| Diagnóstico do JSON (emenda anterior) | ≤ US$ 0,0124 | US$ 0,001529 |
+| Fumaça da emenda `responder` | ≤ US$ 0,0124 | US$ 0,001014 |
+| **Acumulado do projeto** | | **≤ US$ 0,187762** de US$ 3 |
+
+Fonte: `docs/custos.md`.
+
+## 7. Pendências e decisões que dependem do Gustavo
+
+1. **Chamadas paralelas `recuperar_exemplos` + `responder` (§3).** Opções:
+   - a) manter: é seguro, e a F5 mede o agente assim;
+   - b) `disable_parallel_tool_use: true` (compatível com `tool_choice` `any`): o modelo teria de escolher uma tool por rodada;
+   - c) trocar a regra para "outra tool junto com `responder` → executa a outra e ignora o `responder` da rodada", o que força recuperar antes de responder;
+   - d) `tool_choice` `{"type": "tool", "name": "recuperar_exemplos"}` na rodada 1.
+   - b, c e d mudam a emenda congelada. Exigem decisão e uma nova fumaça no treino antes da F5.
+2. **`consultar_politica`:** foi chamada só 1 vez em 3 execuções reais.
+
+## 8. Tempo gasto × orçado
+
+- **Início:** 22:30:11 (`date` no início).
+- **Fim:** 22:34:54 (`date` depois dos testes finais) + este report e o commit (horário no `git log`).
+- **Total:** ~5 min com timestamp, de 30 orçados.

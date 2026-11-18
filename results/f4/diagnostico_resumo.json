@@ -1,0 +1,27 @@
+{
+  "fonte": "results/f4/diagnostico_json.jsonl (fora do git), 1 execução, 5 tickets do treino",
+  "ids": [
+    9983,
+    18556,
+    22958,
+    34269,
+    35859
+  ],
+  "chamadas": 11,
+  "respostas_finais": 7,
+  "respostas_finais_com_texto_antes_do_json": 3,
+  "escalonamentos": {
+    "divergência LLM × clássico": 3,
+    "escalado: json inválido": 1,
+    "outro": 1
+  },
+  "tools_chamadas": {
+    "recuperar_exemplos": 3,
+    "consultar_politica": 1
+  },
+  "tokens": {
+    "entrada": 12433,
+    "saida": 571
+  },
+  "custo_usd": 0.001529
+}

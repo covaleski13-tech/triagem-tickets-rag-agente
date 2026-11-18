@@ -103,3 +103,29 @@ Fonte: tokens de `results/f4/agente_log.jsonl` (5 linhas, `tests/test_f4.py::tes
   `results/f4/agente_log.jsonl` dessa execução, que sobrescreveu o da 1ª: 9.713 de entrada e 509 de saída =
   **US$ 0,001226**. O marcador `db` foi retirado do teste de fumaça.
 - **Acumulado do projeto, corrigido: ≤ US$ 0,185219** de US$ 3.
+
+## F4 — emenda de diagnóstico (JSON inválido): estimativa
+
+Mesmos 5 tickets do treino da fumaça (ids 18556, 22958, 34269, 9983, 35859), mesmo agente, 1 execução. Mesmo teto
+da fumaça (mesma conta): **≤ US$ 0,0124**. As duas fumaças reais custaram US$ 0,001134 e US$ 0,001226.
+Acumulado antes: ≤ US$ 0,185219; acumulado + estimativa ≤ US$ 0,1976 < US$ 3.
+
+## F4 — emenda de diagnóstico: custo real
+
+Fonte: tokens de `results/f4/diagnostico_json.jsonl` (`python scripts/f4_diagnostico_json.py`, 1 execução,
+11 chamadas): 12.433 de entrada e 571 de saída = **US$ 0,001529**.
+
+- **Acumulado do projeto: ≤ US$ 0,186748** de US$ 3.
+
+## F4 — emenda `responder`: fumaça, estimativa (antes da chamada)
+
+Mesmos 5 tickets do treino, 1 execução. A conta do teto não muda: até 4 chamadas por ticket (3 rodadas + 1 nova
+tentativa de `responder`), entrada ≤ 7.230 tokens e saída ≤ 1.024 por ticket, ×2 por erro de API: **≤ US$ 0,0124**.
+Acumulado antes: ≤ US$ 0,186748; acumulado + estimativa ≤ US$ 0,1991 < US$ 3.
+
+## F4 — emenda `responder`: fumaça, custo real
+
+Fonte: tokens de `results/f4/emenda_agente_log.jsonl` / `emenda_fumaca_resumo.json` (1 execução,
+`pytest -m api -k fumaca_agente`): 7.971 de entrada e 434 de saída = **US$ 0,001014**.
+
+- **Acumulado do projeto: ≤ US$ 0,187762** de US$ 3.

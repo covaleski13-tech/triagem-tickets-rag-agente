@@ -14,10 +14,13 @@ from langgraph.graph import END, START, StateGraph
 
 from triagem_rag import politica_caso as pc
 from triagem_rag.dados import CATEGORIAS, RAIZ
-from triagem_rag.esquema import validar
+from pydantic import ValidationError
+
+from triagem_rag.esquema import Classificacao
 from triagem_rag.llm import MODELO, checar_tracing, exemplo
 
-PROMPT = RAIZ / "prompts" / "agente_sugerir_v1.txt"
+# emenda F4: a resposta final vem pela tool `responder`; v1 fica como histórico
+PROMPT = RAIZ / "prompts" / "agente_sugerir_v2.txt"
 MAX_RODADAS = 3
 MAX_TOKENS = 256  # 64 (F2) não cabe uma chamada de tool
 TIMEOUT_S = 30
@@ -36,7 +39,28 @@ def consultar_politica(categoria: str) -> str:
     raise RuntimeError("executada só pelo agente")
 
 
-TOOLS = [recuperar_exemplos, consultar_politica]
+@tool(args_schema=Classificacao)
+def responder(categoria: str, confianca: float) -> str:
+    """Gives the final answer: categoria is one of the 8 categories; confianca is a number between 0 and 1."""
+    raise RuntimeError("lida só pelo agente")
+
+
+TOOLS = [recuperar_exemplos, consultar_politica, responder]
+
+
+def tool_choice(rodada: int):
+    # rodadas 1 e 2: alguma tool é obrigatória; rodada 3: só responder
+    return "any" if rodada < MAX_RODADAS else "responder"
+
+
+def validar_responder(args) -> Classificacao | None:
+    """Argumentos do LLM são dado não confiável: exatamente categoria e confianca, tipos estritos (sem bool/string)."""
+    if not isinstance(args, dict) or set(args) != {"categoria", "confianca"}:
+        return None
+    try:
+        return Classificacao.model_validate(args)
+    except ValidationError:
+        return None
 
 
 class ErroTool(Exception):
@@ -128,7 +152,23 @@ def _args_log(tc: dict) -> dict:
 
 def _nome_log(tc: dict) -> str:
     n = tc.get("name")
-    return n if n in ("recuperar_exemplos", "consultar_politica") else "<desconhecida>"
+    return n if n in ("recuperar_exemplos", "consultar_politica", "responder") else "<desconhecida>"
+
+
+def _ler_responder(r, rodada: int, chamadas: list) -> Classificacao | None:
+    """Resposta final = a 1ª chamada a responder. Outras tool calls da mesma resposta são ignoradas e registradas.
+    O texto livre do modelo (r.text) nunca é lido aqui: não é validado, logado nem guardado no estado."""
+    principal = next((tc for tc in r.tool_calls if tc.get("name") == "responder"), None)
+    for tc in r.tool_calls:
+        if tc is not principal:
+            chamadas.append({"nome": _nome_log(tc), "argumentos": _args_log(tc), "rodada": rodada, "ignorada": True})
+    if principal is None:
+        return None
+    obj = validar_responder(principal.get("args"))
+    chamadas.append({"nome": "responder", "rodada": rodada,
+                     **({"argumentos": {"categoria": obj.categoria, "confianca": obj.confianca}} if obj else
+                        {"argumentos": _args_log(principal), "erro": "argumentos inválidos"})})
+    return obj
 
 
 def _invocar(modelo, msgs, estado_tok, erros):
@@ -151,38 +191,38 @@ def no_sugerir(estado: Estado, llm=None, buscar=None) -> dict:
     erros, chamadas, tok = [], [], {"entrada": 0, "saida": 0}
     rodadas, sugestao, falha = 0, None, None
     try:
-        modelo = (llm or cliente_agente()).bind_tools(TOOLS)  # tool_choice automático
+        base = llm or cliente_agente()
         msgs = [SystemMessage(PROMPT.read_text(encoding="utf-8")),
                 HumanMessage(f"<ticket>{estado['texto_mascarado']}</ticket>")]
         while True:
             rodadas += 1
+            modelo = base.bind_tools(TOOLS, tool_choice=tool_choice(rodadas))
             r = _invocar(modelo, msgs, tok, erros)
-            if r.tool_calls:
-                if rodadas >= MAX_RODADAS:
-                    raise FalhaLLM("limite de rodadas")  # a 3ª rodada não executa tools
-                msgs.append(r)
-                for tc in r.tool_calls:
-                    t0 = time.perf_counter()
-                    reg = {"nome": _nome_log(tc), "argumentos": _args_log(tc), "rodada": rodadas}
-                    try:
-                        conteudo, resumo, _ = executar_tool(tc, estado["texto_mascarado"], buscar or _buscar_padrao)
-                    except Exception as e:
-                        causa = str(e) if isinstance(e, ErroTool) else type(e).__name__
-                        chamadas.append({**reg, "erro": causa, "latencia_ms": round((time.perf_counter() - t0) * 1000, 1)})
-                        raise FalhaLLM(f"erro de tool: {causa}")
-                    chamadas.append({**reg, "resultado": resumo, "latencia_ms": round((time.perf_counter() - t0) * 1000, 1)})
-                    msgs.append(ToolMessage(conteudo, tool_call_id=tc.get("id")))
-                continue
-            obj = validar(r.text)
-            if obj is None:
-                erros.append("json inválido, tentativa 1")
-                r = _invocar(modelo, msgs, tok, erros)  # 1 nova tentativa da rodada final
-                obj = None if r.tool_calls else validar(r.text)
+            if not r.tool_calls or any(tc.get("name") == "responder" for tc in r.tool_calls):
+                obj = _ler_responder(r, rodadas, chamadas)
                 if obj is None:
-                    erros.append("json inválido, tentativa 2")
-                    raise FalhaLLM("json inválido")
-            sugestao = {"categoria": obj.categoria, "confianca": obj.confianca}
-            break
+                    erros.append("responder inválido ou ausente, tentativa 1")
+                    r = _invocar(modelo, msgs, tok, erros)  # 1 nova tentativa da rodada
+                    obj = _ler_responder(r, rodadas, chamadas)
+                    if obj is None:
+                        erros.append("responder inválido ou ausente, tentativa 2")
+                        raise FalhaLLM("responder inválido")
+                sugestao = {"categoria": obj.categoria, "confianca": obj.confianca}
+                break
+            if rodadas >= MAX_RODADAS:
+                raise FalhaLLM("limite de rodadas")  # a 3ª rodada não executa tools
+            msgs.append(r)
+            for tc in r.tool_calls:
+                t0 = time.perf_counter()
+                reg = {"nome": _nome_log(tc), "argumentos": _args_log(tc), "rodada": rodadas}
+                try:
+                    conteudo, resumo, _ = executar_tool(tc, estado["texto_mascarado"], buscar or _buscar_padrao)
+                except Exception as e:
+                    causa = str(e) if isinstance(e, ErroTool) else type(e).__name__
+                    chamadas.append({**reg, "erro": causa, "latencia_ms": round((time.perf_counter() - t0) * 1000, 1)})
+                    raise FalhaLLM(f"erro de tool: {causa}")
+                chamadas.append({**reg, "resultado": resumo, "latencia_ms": round((time.perf_counter() - t0) * 1000, 1)})
+                msgs.append(ToolMessage(conteudo, tool_call_id=tc.get("id")))
     except FalhaLLM as e:
         falha = str(e)
     except Exception as e:
