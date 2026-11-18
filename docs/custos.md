@@ -178,3 +178,18 @@ tokens), https://platform.claude.com/docs/en/about-claude/pricing.md, consultado
 | F5 (avaliação do agente) | US$ 0,276108 |
 | F6 | US$ 0 (sem API) |
 | **Total** | **≤ US$ 0,465188** de US$ 3 |
+
+## F6, correção pós-revisão — falhas injetadas em "IA sugere": estimativa (antes das chamadas)
+
+30 execuções (10 tickets × 3 falhas); o LLM roda nas 20 de tool (as 10 de timeout não geram tokens faturados).
+Custo médio por execução com LLM na F5: US$ 0,276108 / 826 = US$ 0,000334 (`results/f5/q3.json`).
+20 × US$ 0,000334 = US$ 0,0067; com folga de 1,5×: **≤ US$ 0,010**.
+Acumulado antes: ≤ US$ 0,465188; acumulado + estimativa ≤ US$ 0,4752 < US$ 3.
+
+## F6, correção pós-revisão — falhas injetadas em "IA sugere": custo real
+
+Fonte: tokens de `results/f5/falhas_injetadas_ia_sugere.csv` (30 execuções, 1 rodada), por `scripts/f5_metricas.py`
+→ `results/f5/veredicto_q3.json` (`veredicto_com_complemento`): 34.602 de entrada e 1.110 de saída =
+**US$ 0,004015** (estimativa: ≤ US$ 0,010).
+
+- **Acumulado do projeto: ≤ US$ 0,469203** de US$ 3.

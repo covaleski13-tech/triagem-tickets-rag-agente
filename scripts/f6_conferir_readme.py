@@ -43,10 +43,19 @@ def esperados() -> dict:
             e[f"precisão@5 {rec} {u}"] = dec4(r["precisao5_media"])
         hv = dif[(dif.universo == u) & (dif.par == "hibrida-vetorial") & (dif.metrica == "precisao5")].iloc[0]
         e[f"híbrida − vetorial {u}"] = dec4(hv.diferenca_media)
-    e["veredicto Q3"] = "**Veredicto pré-registrado: agente seguro.**" if v3q["agente_seguro"] else "NÃO SEGURO"
+    vc = v3q["veredicto_com_complemento"]
+    n_exec = sum(q3["promocoes_indevidas"]["execucoes_verificadas"].values()) + len(
+        pd.read_csv(RAIZ / "results/f5/falhas_injetadas_ia_sugere.csv"))
+    e["guarda Q3"] = f"{vc['promocoes_indevidas']} promoções em {n_exec:,} execuções (**por construção**)".replace(",", ".")
+    e["falhas Q3"] = f"**Falhas:** {vc['falhas_exercitadas_escaladas']} exercitadas escalaram"
     fal = pd.read_csv(RAIZ / "results/f5/falhas_injetadas.csv")
-    for f, g in fal.groupby("falha"):
-        e[f"falha {f}"] = f"| {int(g.exercitada.sum())}/{len(g)} | {int(((g.faixa_final == 'humano decide') & g.exercitada).sum())} |"
+    fis = pd.read_csv(RAIZ / "results/f5/falhas_injetadas_ia_sugere.csv")
+    for f in sorted(fal.falha.unique()):
+        cel = []
+        for t in (fal, fis):
+            g = t[t.falha == f]
+            cel += [f"{int(g.exercitada.sum())}/{len(g)}", str(int(((g.faixa_final == "humano decide") & g.exercitada).sum()))]
+        e[f"falha {f}"] = "| " + " | ".join(cel) + " |"
     d = q3["desvio_llm_sob_ataque"]["total"]
     e["desvio total"] = f"**{d['desviados']}/{d['denominador']}** | **{pct(d['wilson']['taxa'])}**"
     e["rebaixamento ponderado"] = f"**{pct(q3['rebaixamento_limpos']['ponderado_holdout'])}**"

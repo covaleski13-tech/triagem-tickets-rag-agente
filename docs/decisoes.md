@@ -148,3 +148,30 @@ reescrito.
   pré-registro (`docs/planning/F3-report.md`).
 - **Sensibilidade a k: cortada** (Gustavo, 2026-11-17), pela ordem de corte da F0 §7 (2º item).
 - **V0z: não rodado** (G3: só com folga; não foi pedido).
+
+## Critérios: o que mudou entre a F0 e a execução (registrado na correção pós-revisão da F6, 2026-11-18)
+
+Achados A1 e A3 da revisão independente sobre o HEAD `effdc6b`. Nada acima foi reescrito.
+
+- **Concordância de faixa com `triar()` = 100% (F0 §2, Q3).**
+  - Ficou incompatível com a regra "divergência LLM × clássico rebaixa", aprovada pelo Gustavo na F4: a faixa final
+    pode ficar abaixo da do case por desenho.
+  - A spec da F5 a substituiu por "faixa final nunca acima da do case" e passou a medir a taxa de rebaixamento.
+    A troca foi feita sem registro na época; fica registrada agora.
+- **"Falha simulada por tool → 100%" (F0) virou "100% das exercitadas" (F5-spec).**
+  - O LLM nunca chamou `consultar_politica` (0/10 na F5, 0/10 no complemento em "IA sugere").
+  - A meta da F0 **não foi medida** para essa tool.
+- **A regra de decisão da Q2** ("IC de híbrida − vetorial inteiro acima de 0") não estava na F0, que só tinha a
+  hipótese. Ela entrou na F3-spec.
+  - O `results/f2/vizinhos_400.csv` já estava versionado desde a F2, então a precisão@5 do recorte dos 400 era
+    calculável antes de a regra existir.
+  - O resultado foi negativo, e a regra não o favorece. Mesmo assim, ela **não é pré-registro verificável**.
+- **Ordem dos commits:**
+  - o `docs/planning/F0-escopo.md` entrou no commit `6dc8e3b`, antes de qualquer resultado de LLM (a F2, primeira fase
+    com LLM, está em `dca94e9`);
+  - a partir da F2, cada spec entrou no mesmo commit dos resultados da fase. O git não prova que a spec veio antes da
+    execução dentro da fase. Não há como provar isso retroativamente (A3).
+- **Complemento das falhas injetadas (A2, aprovado pelo Gustavo):** as 30 falhas da F5 rodaram em "humano decide", onde
+  escalar não muda a faixa. O complemento repetiu as mesmas falhas em 10 tickets de "IA sugere"
+  (`results/f5/falhas_injetadas_ia_sugere.csv`). O veredicto recalculado com as duas tabelas está no campo novo
+  `veredicto_com_complemento` de `results/f5/veredicto_q3.json`; o campo antigo não mudou.

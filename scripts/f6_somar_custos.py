@@ -20,6 +20,7 @@ PARCELAS = [
     ("F4", "fumaça da emenda 1", "US$ 0,001014"),
     ("F4", "fumaça da emenda 2", "US$ 0,001318"),
     ("F5", "avaliação do agente", "US$ 0,276108"),
+    ("F6", "falhas injetadas em IA sugere (correção pós-revisão)", "US$ 0,004015"),
 ]
 
 

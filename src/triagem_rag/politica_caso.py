@@ -9,6 +9,9 @@ from triagem_rag.dados import DATA_DIR, RAIZ
 CASO_DIR = RAIZ / "src" / "triagem_rag" / "caso"
 RUNTIME_AGENTE = RAIZ / "runtime_agente"
 
+# antes de importar o case: sem DATA_DIR, o comum.py do case resolve caminhos fora deste repositório (B2)
+os.environ.setdefault("DATA_DIR", str(RAIZ / "data"))
+
 # o case importa `from comum import ...` como módulo de topo
 if str(CASO_DIR) not in sys.path:
     sys.path.insert(0, str(CASO_DIR))

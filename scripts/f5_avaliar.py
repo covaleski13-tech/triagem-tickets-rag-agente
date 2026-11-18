@@ -142,16 +142,18 @@ def _buscar_quebra(texto, k):
     raise RuntimeError("falha injetada em recuperar_exemplos")
 
 
-def fase_falhas(amostra: pd.DataFrame, texto: pd.Series):
-    arq = F5 / "falhas_injetadas.csv"
+def fase_falhas(amostra: pd.DataFrame, texto: pd.Series, estrato: str = "humano decide",
+                arq_nome: str = "falhas_injetadas.csv", prefixo: str = "f5-falha"):
+    # padrões = F5; o complemento da correção pós-revisão usa estrato "IA sugere" e prefixo "f5c"
+    arq = F5 / arq_nome
     if arq.exists():
         return
-    ids = sorted(amostra.loc[amostra.estrato == "humano decide", "id"])[:10]
+    ids = sorted(amostra.loc[amostra.estrato == estrato, "id"])[:10]
     llm_lento = agente.cliente_agente().model_copy(update={"default_request_timeout": 0.001})
     linhas = []
     for i in ids:
         for falha in ("recuperar_exemplos", "consultar_politica", "timeout"):
-            ev = {"texto": str(texto[i]), "event_id": f"f5-falha-{i}-{falha}"}
+            ev = {"texto": str(texto[i]), "event_id": f"{prefixo}-{i}-{falha}"}
             original = agente._politica
             try:
                 if falha == "consultar_politica":
@@ -185,6 +187,12 @@ def main():
     amostra = fase_estratos(df)
     print("amostra:", amostra["estrato"].value_counts().to_dict(), flush=True)
     if "--so-amostra" in sys.argv:
+        return
+    if "--falhas-ia-sugere" in sys.argv:
+        # correção pós-revisão da F6 (A2): mesmas falhas, 10 primeiros ids de "IA sugere", runtime e log próprios
+        os.environ["TRIAGEM_RUNTIME_DIR"] = str(RT / "f5c")
+        os.environ["TRIAGEM_AGENTE_LOG"] = str(F5 / "agente_log_falhas_ia_sugere.jsonl")
+        fase_falhas(amostra, texto, "IA sugere", "falhas_injetadas_ia_sugere.csv", "f5c")
         return
     n = executar(tarefas_principais(amostra, texto), rodar_agente, LOG)
     t1 = time.perf_counter()

@@ -22,4 +22,17 @@ def test_readme_numeros():
 
 def test_custos_somados():
     s = _carregar("f6_somar_custos").somar()
-    assert abs(s["total"] - 0.4651878) < 5e-7
+    assert abs(s["total"] - 0.4692028) < 5e-7
+
+
+def test_adaptador_data_dir_padrao(tmp_path):
+    """B2: sem DATA_DIR no ambiente, o adaptador faz o comum do case resolver para o data/ do repositório."""
+    import os
+    import subprocess
+    import sys
+    amb = {k: v for k, v in os.environ.items() if k != "DATA_DIR"}
+    codigo = ("import sys; sys.path.insert(0, 'src'); from triagem_rag import politica_caso; import comum; "
+              "print(comum.DATA_DIR)")
+    # cwd = raiz, mas sem .env carregado antes do adaptador
+    r = subprocess.run([sys.executable, "-c", codigo], cwd=RAIZ, env=amb, capture_output=True, text=True, check=True)
+    assert Path(r.stdout.strip()) == (RAIZ / "data").resolve()
