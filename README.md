@@ -5,7 +5,7 @@ baseline e controle.
 
 - **O que é:** RAG (LangChain + pgvector), busca híbrida (full-text do Postgres + vetorial, fusão RRF) e um agente LangGraph com tool calling, cada um comparado com baseline e controle no holdout do case.
 - **Stack:** Python · LangChain · LangGraph · Claude API · Postgres/pgvector · Docker · pytest.
-- **Principais achados:** com vizinhos recuperados, o LLM passa de 23,75% (exemplos aleatórios) para 45,25% (+21,5 pp), mas o voto desses vizinhos sem LLM (54,75%) e o classificador clássico (69,50%) acertam mais; a busca híbrida recupera pior que a vetorial; o agente não promoveu nenhum ticket indevidamente (0 em 1.271 execuções, por construção).
+- **Principais achados:** com vizinhos da busca híbrida, o LLM passa de 23,75% (exemplos aleatórios) para 45,25% (+21,5 pp), mas o voto desses vizinhos sem LLM (54,75%) e o classificador clássico (69,50%) acertam mais; a busca híbrida recupera pior que a vetorial; o agente não promoveu nenhum ticket indevidamente (0 em 1.271 execuções, por construção).
 
 O agente **não é recomendado para produção**. Ele existe para medir a Q3. Em acurácia, o classificador clássico é
 melhor que qualquer variante com LLM (Q1), e quase todo rebaixamento do agente foi alarme falso (6 de 7, n pequeno).
