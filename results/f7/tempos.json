@@ -1,0 +1,30 @@
+[
+  {
+    "execucoes_novas": 804,
+    "aquecimento_s": 73.1,
+    "principal_s": 339.7,
+    "total_s": 431.6,
+    "runtime": {
+      "langgraph": {
+        "chaves": 402,
+        "esperadas": 402,
+        "iguais": true
+      },
+      "adk": {
+        "chaves": 402,
+        "esperadas": 402,
+        "iguais": true
+      }
+    },
+    "aquecimento_tokens": {
+      "langgraph": [
+        5889,
+        166
+      ],
+      "adk": [
+        5997,
+        168
+      ]
+    }
+  }
+]

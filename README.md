@@ -4,8 +4,9 @@ Extensão pessoal do case técnico do G4 (PR #228): RAG, busca híbrida e agente
 baseline e controle.
 
 - **O que é:** RAG (LangChain + pgvector), busca híbrida (full-text do Postgres + vetorial, fusão RRF) e um agente LangGraph com tool calling, cada um comparado com baseline e controle no holdout do case.
-- **Stack:** Python · LangChain · LangGraph · Claude API · Postgres/pgvector · Docker · pytest.
+- **Stack:** Python · LangChain · LangGraph · Google ADK 2.0 · Claude API · Postgres/pgvector · Docker · pytest.
 - **Principais achados:** com vizinhos da busca híbrida, o LLM passa de 23,75% (exemplos aleatórios) para 45,25% (+21,5 pp), mas o voto desses vizinhos sem LLM (54,75%) e o classificador clássico (69,50%) acertam mais; a busca híbrida recupera pior que a vetorial; o agente não promoveu nenhum ticket indevidamente (0 em 1.271 execuções, por construção).
+- **Q4 (LangGraph × Google ADK 2.0):** o mesmo agente portado para o ADK preservou a segurança (0 promoções, 16/16 falhas exercitadas escaladas, paridade nos testes), com uso de tools, desvio sob ataque e custo próximos do LangGraph; foram 6 contornos específicos do framework.
 
 O agente **não é recomendado para produção**. Ele existe para medir a Q3. Em acurácia, o classificador clássico é
 melhor que qualquer variante com LLM (Q1), e quase todo rebaixamento do agente foi alarme falso (6 de 7, n pequeno).
@@ -179,6 +180,58 @@ lados, quase todos de "IA decide", onde o LLM não roda.*
   (`results/f5/q3.json`).
 - **Custo:** US$ 0,2225 por 1.000 execuções (`results/f5/q3.json`, `custo_por_1000_execucoes_usd`).
 
+### Q4 — LangGraph × ADK 2.0: o mesmo agente, outro framework
+
+**Veredicto: o ADK preserva a segurança** (`results/f7/q4.json`, `veredicto`): 0 promoções, 16/16 falhas exercitadas
+escaladas e paridade de 100% nos testes (`tests/test_f7.py::test_paridade`, 30 tickets × 13 roteiros do LLM falso,
+mesma `faixa_final` e mesmo `motivo_final`). O 0 é **por construção**: a guarda do ADK é o mesmo objeto `no_guarda` do
+`agente.py`, importado (`test_guarda_importada`). **Sem teste de superioridade:** n pequeno e uma rodada por
+implementação.
+
+Mesmos 67 tickets "IA sugere" da F5, limpos + 5 ataques = 402 execuções por implementação, intercaladas por par
+(id, variante) em ordem embaralhada (seed 42), 4 workers, no mesmo dia; o LangGraph (`agente.py` congelado) rodou de
+novo.
+
+| Métrica | LangGraph | ADK 2.0 |
+|---|---|---|
+| Execuções / com LLM | 402 / 400 | 402 / 400 |
+| Promoções indevidas (402 + golden) | 0 | 0 |
+| Escalonamentos "IA sugere" → "humano decide" | 60/402 (14,9%; 11,8–18,7%) | 53/402 (13,2%; 10,2–16,8%) |
+| … por causa | 60 divergência LLM × clássico | 53 divergência LLM × clássico |
+| Desvio para o alvo do ataque | 20/333 (6,0%; 3,9–9,1%) | 20/333 (6,0%; 3,9–9,1%) |
+| Tools por execução com LLM (sem `responder`) | 0,66 | 0,67 |
+| Com `recuperar_exemplos` | 264/400 (66,0%) | 268/400 (67,0%) |
+| Com `consultar_politica` | 0/400 | 0/400 |
+| Rodadas (1 / 2) | 136 / 264 | 132 / 268 |
+| Latência p50 / p95 | 1.701,3 / 2.608,2 ms | 1.859,8 / 2.869,4 ms |
+| Custo por 1.000 execuções | US$ 0,2933 | US$ 0,2989 |
+| Falhas injetadas (exceção em `recuperar_exemplos`, timeout do LiteLLM) | — (medidas na F5) | 16/16 exercitadas escalaram (6/10 e 10/10; 4 não exercitadas) |
+| Concordância da categoria sugerida | LangGraph hoje × LangGraph F5: 370/400 (92,5%; 89,5–94,7%) | ADK × LangGraph hoje: 378/400 (94,5%; 91,8–96,3%) |
+
+*Fonte: `results/f7/q4_lado_a_lado.csv` e `results/f7/q4.json` (gerados por `scripts/f7_metricas.py` a partir de
+`results/f7/execucoes.jsonl`, `golden.jsonl` e `falhas_injetadas_adk.csv`). Wilson 95% entre parênteses. A
+concordância LangGraph × LangGraph é o piso de variação do próprio LLM.*
+
+**Esforço** (`results/f7/esforco.json`): 215 linhas de código em `src/triagem_rag/adk/` (sem comentários, linhas em
+branco e docstrings), contra 135 linhas do `agente.py` específicas do LangGraph (as partes que o ADK reescreveu em vez
+de importar). Foram 6 contornos específicos do framework, cada um com motivo no arquivo.
+
+**3 diferenças práticas observadas:**
+
+1. **`tool_choice` por rodada.** No LangGraph é um argumento por chamada (`bind_tools(TOOLS, **bind_kwargs(rodadas))`,
+   `src/triagem_rag/agente.py:211`). No ADK 2.14.1, o adaptador `LiteLlm` só traduz o modo ANY para `"required"` e
+   descarta `allowed_function_names` (`google/adk/models/lite_llm.py:4325`). Sem `disable_parallel_tool_use` nem
+   `responder` forçado, foi preciso um `before_model_callback` mais a subclasse `LiteLlmPorRodada`
+   (`src/triagem_rag/adk/tools_adk.py:10`).
+2. **Erro de argumento de tool volta ao LLM por padrão.** O `FunctionTool` do ADK descarta argumentos extras e devolve
+   erro de validação ou de argumento faltante ao modelo para ele tentar de novo (`google/adk/tools/function_tool.py:502`
+   e `:519`). Isso contraria a regra "erro de tool → humano"; daí a `ToolBruta`
+   (`src/triagem_rag/adk/tools_adk.py:27`), que recebe os argumentos brutos e usa a validação do `agente.py`.
+3. **O laço do `Agent` chama o modelo de novo depois de cada tool.** Sem `skip_summarization`, o ADK faria uma 4ª
+   chamada depois do `responder` e devolveria o erro de tool ao modelo (`src/triagem_rag/adk/nos.py:132` e `:144`).
+   O resultado da tool também chega ao modelo embrulhado em `{"result": ...}`, enquanto o LangGraph manda o texto puro
+   (`tests/test_f7.py::test_payload_adk`).
+
 ## 2. O que falhou ou contrariou a hipótese
 
 - **V1 não superou V0.** Os 5 exemplos aleatórios ficaram em 23,75%, contra 26,00% do V0 (McNemar exploratório
@@ -240,6 +293,7 @@ Componentes, com as versões fixadas (`requirements.txt`, `docker-compose.yml`, 
 | LangChain | `langchain-core` 1.8.1, `langchain-postgres` 0.0.19, `langchain-huggingface` 1.2.3 |
 | LangGraph | `langgraph` 1.2.22 |
 | LLM | `claude-haiku-5-5` via `langchain-anthropic` 1.7.10 (`anthropic` 2.10.0); `thinking` desligado, `effort` low, sem `temperature` |
+| ADK (F7, `.venv-adk`) | `google-adk` 2.14.1, `litellm` 1.111.0 (`requirements-adk.txt`); Claude pelo LiteLLM (`anthropic/claude-haiku-5-5`), mesmos parâmetros |
 
 ## 4. Como rodar
 
@@ -286,10 +340,20 @@ Componentes, com as versões fixadas (`requirements.txt`, `docker-compose.yml`, 
    - `pytest`: sem banco e sem chave, mas precisa do CSV bruto (passo 3) e do modelo do passo 6;
    - `pytest -m db`: precisa também do Postgres e dos índices (passos 5 e 7);
    - `pytest -m api`: chama a API real (2 testes de fumaça, centavos de dólar). Fica fora da execução padrão.
-9. **Conferir sem reexecutar.** Estes dois comandos leem `results/` e `docs/custos.md` sem escrever nada:
+9. **ADK (F7), num ambiente separado:**
+   ```
+   python -m venv .venv-adk
+   .venv-adk\Scripts\activate
+   python -m pip install -r requirements.txt -r requirements-adk.txt
+   pytest tests/test_f7.py
+   ```
+   - O `.venv` principal não recebe o ADK; nele, `tests/test_f7.py` é pulado.
+   - `requirements-adk.txt` fixa `google-adk==2.14.1` e `litellm==1.111.0`. Nunca use `litellm` 1.82.7 ou 1.82.8
+     (versões comprometidas, segundo a doc do ADK).
+10. **Conferir sem reexecutar.** Estes dois comandos leem `results/` e `docs/custos.md` sem escrever nada:
    - `python scripts/f6_conferir_readme.py`: os números-chave deste README e os links;
    - `python scripts/f6_somar_custos.py`: o custo total.
-10. **Scripts de fase, na ordem.** **Todo** script de fase sobrescreve arquivos de `results/`, com ou sem API. Com o
+11. **Scripts de fase, na ordem.** **Todo** script de fase sobrescreve arquivos de `results/`, com ou sem API. Com o
    LLM não determinístico, uma nova rodada dos scripts pagos não reproduz os mesmos números. Para só conferir, use o
    passo 9.
 
@@ -308,9 +372,12 @@ Componentes, com as versões fixadas (`requirements.txt`, `docker-compose.yml`, 
 | F5 | `python scripts/f5_avaliar.py` (retomável) | `triar()` no holdout em 240,3 s; 1.200 execuções em 478,2 s | US$ 0,276108 |
 | F5 | `python scripts/f5_avaliar.py --falhas-ia-sugere` (correção pós-revisão da F6) | 83 s | US$ 0,004015 |
 | F5 | `python scripts/f5_metricas.py` | segundos | — |
+| F7 | `python scripts/f7_avaliar.py` (no `.venv-adk`, retomável) | aquecimento 73,1 s; 804 execuções em 339,7 s | US$ 0,247431 |
+| F7 | `python scripts/f7_metricas.py` (no `.venv-adk`; roda o teste de paridade) | ~3 min | — |
 
 *Fontes:*
 
+- *tempos da F7: `results/f7/tempos.json`;*
 - *tempos: `results/f1/integridade.json`, `results/f1/indexacao.json`, `results/f2/vizinhos_meta.json`, `results/f2/llm_meta_v*.json`, `results/f3/llm_meta_v*.json`, `results/f3/q2_recuperacao.json`, `results/f5/estratos_holdout.json` e `results/f5/tempos.json`;*
 - *a sanidade da F1 vem de `docs/planning/F1-report.md`; o complemento de falhas, dos timestamps 15:33:16 → 15:34:39 do `F6-report.md` (correção pós-revisão);*
 - *custos: `docs/custos.md`.*
@@ -320,7 +387,7 @@ estão versionados (`data/f1_splits.csv`, `data/amostra_400_ids.csv` e `data/cas
 
 ## 5. Custo total de API
 
-**≤ US$ 0,469203** de um teto de US$ 3. O preço é US$ 0,10 / US$ 0,50 por MTok (Haiku 5.5, prompts de até 100.000
+**≤ US$ 0,761122** de um teto de US$ 3. O preço é US$ 0,10 / US$ 0,50 por MTok (Haiku 5.5, prompts de até 100.000
 tokens), consultado em 2026-11-17 em https://platform.claude.com/docs/en/about-claude/pricing.md.
 
 | Fase | Custo real |
@@ -330,6 +397,7 @@ tokens), consultado em 2026-11-17 em https://platform.claude.com/docs/en/about-c
 | F4 (2 fumaças, diagnóstico, emendas 1 e 2) | US$ 0,006221 |
 | F5 (avaliação do agente) | US$ 0,276108 |
 | F6 (falhas injetadas em "IA sugere", correção pós-revisão) | US$ 0,004015 |
+| F7 (fumaça, rodada interrompida pelo antivírus e avaliação LangGraph × ADK) | ≤ US$ 0,291919 |
 
 *Fonte: `docs/custos.md`. A soma é conferida por `scripts/f6_somar_custos.py`.*
 
@@ -353,6 +421,14 @@ tokens), consultado em 2026-11-17 em https://platform.claude.com/docs/en/about-c
   threads, não verificada.
 - **O golden do case tem PII sintética** (nome, e-mail em `example.com`, telefone e CPF fictícios), usada para testar o
   mascaramento (`tests/golden/golden_v1.jsonl`).
+- **Q4: Claude pelo LiteLLM**, não pelo conector nativo `Claude` do ADK (que exige projeto no Google Cloud). Parte das
+  diferenças observadas é do adaptador `LiteLlm` do ADK, não do ADK em geral.
+- **Q4: n = 67 tickets × 6 variantes e uma rodada por implementação.** As diferenças de latência e escalonamento não
+  foram testadas e não sustentam superioridade de nenhuma das duas.
+- **Q4, questão de ambiente (não do framework):** a inspeção HTTPS do Kaspersky na máquina interceptava parte das
+  conexões para `api.anthropic.com`. O LiteLLM (certifi) rejeitava as interceptadas e o SDK do LangGraph não. A
+  primeira rodada foi descartada em 146 de 804 (`results/f7/descartadas/`), o domínio foi excluído da inspeção e as
+  804 rodaram do zero, com 0 erros de TLS ou conexão (`results/f7/execucoes.jsonl`).
 - **O conferidor do README** (`scripts/f6_conferir_readme.py`) testa se o número aparece no texto, não se está na
   célula certa da tabela.
 

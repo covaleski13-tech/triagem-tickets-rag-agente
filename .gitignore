@@ -7,3 +7,5 @@ results/**/*.log
 runtime_agente/
 results/f4/diagnostico_json.jsonl
 runtime_f5/
+.venv-adk/
+runtime_f7/

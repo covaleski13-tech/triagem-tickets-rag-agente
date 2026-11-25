@@ -21,6 +21,10 @@ PARCELAS = [
     ("F4", "fumaça da emenda 2", "US$ 0,001318"),
     ("F5", "avaliação do agente", "US$ 0,276108"),
     ("F6", "falhas injetadas em IA sugere (correção pós-revisão)", "US$ 0,004015"),
+    # fechamento da F7 (adendo da F7-spec: única mudança permitida em arquivos da F6)
+    ("F7", "fumaça do passo 0", "US$ 0,000349"),
+    ("F7", "rodada interrompida, aquecimentos avulsos e diagnóstico (teto)", "≤ US$ 0,044139"),
+    ("F7", "avaliação final", "US$ 0,247431"),
 ]
 
 

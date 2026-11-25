@@ -22,7 +22,7 @@ def test_readme_numeros():
 
 def test_custos_somados():
     s = _carregar("f6_somar_custos").somar()
-    assert abs(s["total"] - 0.4692028) < 5e-7
+    assert abs(s["total"] - 0.7611218) < 5e-7  # F1–F6 0,4692028 + F7 0,291919 (fechamento da F7)
 
 
 def test_adaptador_data_dir_padrao(tmp_path):

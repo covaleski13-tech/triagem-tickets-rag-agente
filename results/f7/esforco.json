@@ -1,0 +1,66 @@
+{
+  "regra_de_contagem": "linhas com código, sem comentários, linhas em branco e docstrings (scripts/f7_metricas.py, linhas_codigo); testes fora",
+  "adk_linhas": {
+    "total": 215,
+    "por_arquivo": {
+      "__init__.py": 2,
+      "nos.py": 112,
+      "tools_adk.py": 26,
+      "workflow.py": 75
+    }
+  },
+  "agente_py_especifico_langgraph": {
+    "linhas": 135,
+    "defs": [
+      "Estado",
+      "_invocar",
+      "bind_kwargs",
+      "cliente_agente",
+      "construir_grafo",
+      "consultar_politica",
+      "no_sugerir",
+      "recuperar_exemplos",
+      "responder",
+      "triar_agente",
+      "imports langchain/langgraph"
+    ],
+    "agente_py_total": 261
+  },
+  "contornos": [
+    {
+      "contorno": "subclasse LiteLlmPorRodada",
+      "onde": "src/triagem_rag/adk/tools_adk.py",
+      "motivo": "o adaptador LiteLlm do ADK traduz só o modo ANY -> \"required\" e descarta allowed_function_names; sem ela não há disable_parallel_tool_use nas rodadas 1-2 nem responder forçado na 3ª"
+    },
+    {
+      "contorno": "regras por resposta dentro de um BaseLlm (ModeloSugerir)",
+      "onde": "src/triagem_rag/adk/nos.py",
+      "motivo": "o ADK não tem ponto para repetir uma chamada ao modelo (1 nova tentativa, chamada múltipla, responder inválido) sem passar pelo fluxo de tools; a RetryConfig do nó repetiria o nó inteiro"
+    },
+    {
+      "contorno": "ToolBruta (BaseTool com argumentos brutos e declaração da tool LangChain)",
+      "onde": "src/triagem_rag/adk/tools_adk.py",
+      "motivo": "o FunctionTool descarta argumentos extras e devolve erro de validação ou de argumento faltante ao LLM (function_tool.py, run_async), contra a regra erro de tool -> humano"
+    },
+    {
+      "contorno": "skip_summarization=True na tool responder (e após erro de tool)",
+      "onde": "src/triagem_rag/adk/nos.py",
+      "motivo": "sem isso o ADK faz mais uma chamada ao modelo depois da resposta de cada tool (4ª chamada com responder forçado; ou erro de tool devolvido ao modelo)"
+    },
+    {
+      "contorno": "campo reg: Any no BaseLlm",
+      "onde": "src/triagem_rag/adk/nos.py",
+      "motivo": "BaseLlm é pydantic: um campo dict é copiado na validação e o registro da execução se perdia (achado na 1ª prova do workflow)"
+    },
+    {
+      "contorno": "include_contents=\"none\" e mensagem de entrada sem o ticket",
+      "onde": "src/triagem_rag/adk/workflow.py",
+      "motivo": "o Agent leva o histórico da sessão ao modelo; assim ele vê só system + <ticket>mascarado</ticket>, como no LangGraph"
+    }
+  ],
+  "tempo": {
+    "inicio": "2026-11-25 16:46:24",
+    "avaliacao_s": 431.6,
+    "fim": "horário do commit da F7 (ver F7-report.md §8)"
+  }
+}

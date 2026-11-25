@@ -7,6 +7,7 @@ Teto total: **US$ 3** (`CLAUDE.md` §3).
 | Consulta | URL | Modelo | Entrada | Saída |
 |---|---|---|---|---|
 | 2026-11-17 | https://platform.claude.com/docs/en/about-claude/pricing.md | `claude-haiku-5-5` (prompts de até 100.000 tokens) | US$ 0,10 / MTok | US$ 0,50 / MTok |
+| 2026-11-25 (F7) | https://platform.claude.com/docs/en/about-claude/pricing.md | `claude-haiku-5-5` (prompts de até 100.000 tokens) | US$ 0,10 / MTok | US$ 0,50 / MTok |
 
 - Igual ao preço usado no case (US$ 0,10 / US$ 0,50, consultado em 2026-11-03): sem divergência.
 - A página também lista US$ 0,50 / US$ 2,50 para prompts acima de 100.000 tokens. Nenhuma chamada deste projeto
@@ -193,3 +194,72 @@ Fonte: tokens de `results/f5/falhas_injetadas_ia_sugere.csv` (30 execuções, 1 
 **US$ 0,004015** (estimativa: ≤ US$ 0,010).
 
 - **Acumulado do projeto: ≤ US$ 0,469203** de US$ 3.
+
+## F7, passo 0 — fumaça ADK: estimativa (antes da chamada)
+
+1 execução real (1 ticket do treino, `Workflow` ADK com nó `Agent` + `LiteLlm`), até 3 rodadas.
+Custo médio por execução com LLM na F5: US$ 0,000334 (`results/f5/q3.json`); com folga de 3×: **≤ US$ 0,001**.
+Teto da F7: US$ 1. Acumulado antes: ≤ US$ 0,469203; acumulado + estimativa ≤ US$ 0,4702 < US$ 3.
+
+## F7, passo 0 — fumaça ADK: custo real
+
+Fonte: `usage_metadata` dos eventos do ADK (tokens da Anthropic repassados pelo LiteLLM), 1 execução, 2 respostas do
+modelo: 3.066 de entrada e 84 de saída = **US$ 0,000349** (estimativa: ≤ US$ 0,001).
+
+- **Acumulado da F7: US$ 0,000349** de US$ 1 (F1–F6 ≤ US$ 0,469203 + F7 = ≤ US$ 0,469552 de US$ 3; o acumulado do
+  projeto entra só no fechamento da F7, adendo da spec).
+
+## F7 — avaliação LangGraph × ADK: estimativa (antes das chamadas)
+
+Execuções com LLM previstas: 804 da avaliação principal (67 tickets "IA sugere" × 6 variantes × 2 implementações),
+6 de aquecimento (3 tickets do treino × 2), até 20 do golden (10 casos × 2; os que param na política não chamam o
+LLM) e 10 de falha em `recuperar_exemplos` no ADK (1 rodada cada; as 10 de timeout não chegam a ser faturadas).
+Custo médio por execução com LLM na F5: US$ 0,000334 (`results/f5/q3.json`, premissa).
+840 × US$ 0,000334 = US$ 0,281; com folga de 1,5×: **≤ US$ 0,42**.
+
+- F7: acumulado US$ 0,000349 + estimativa ≤ US$ 0,42 = ≤ US$ 0,421 < US$ 1 (teto da fase).
+- Projeto: ≤ US$ 0,469203 (F1–F6) + ≤ US$ 0,421 = ≤ US$ 0,890 < US$ 3.
+
+## F7 — avaliação LangGraph × ADK: custo real até a interrupção
+
+A avaliação foi interrompida em 146 de 804 execuções (erros de TLS só no lado ADK; F7-report). Parcelas:
+
+| Rodada | Fonte | Custo |
+|---|---|---|
+| Aquecimento da 1ª tentativa (abortada no aquecimento) | tokens impressos pelo script: 8.720 de entrada, 250 de saída | US$ 0,000997 |
+| Aquecimento avulso (`--so-aquecimento`) | 11.886 / 334 | US$ 0,001356 |
+| Aquecimento da 2ª tentativa | 11.886 / 334 | US$ 0,001356 |
+| 146 execuções da avaliação (73 por implementação) | `results/f7/execucoes.jsonl`: LangGraph 193.509 / 5.671; ADK 127.149 / 3.595 | US$ 0,036698 |
+| Diagnóstico sem contagem de tokens (6 execuções com LLM) | teto: 6 × US$ 0,000622 (maior custo por execução no log) | ≤ US$ 0,003732 |
+
+- **Acumulado da F7: ≤ US$ 0,044488** de US$ 1 (fumaça US$ 0,000349 + parcelas acima). F1–F6 ≤ US$ 0,469203 + F7 =
+  ≤ US$ 0,513691 de US$ 3; o acumulado do projeto entra só no fechamento da F7.
+
+## F7 — avaliação refeita do zero (opção a do Gustavo): estimativa (antes das chamadas)
+
+Mesmas execuções da estimativa anterior (≈ 840 com LLM, US$ 0,000334 cada, premissa da F5): **≤ US$ 0,42**.
+F7: ≤ US$ 0,044488 + ≤ US$ 0,42 = ≤ US$ 0,465 < US$ 1. Projeto: ≤ US$ 0,469203 + ≤ US$ 0,465 = ≤ US$ 0,934 < US$ 3.
+
+## F7 — avaliação refeita do zero: custo real
+
+Fonte: tokens de `results/f7/execucoes.jsonl`, `results/f7/golden.jsonl` e `results/f7/falhas_injetadas_adk.csv`
+(`scripts/f7_metricas.py` → `results/f7/q4.json`, `custo`) e do aquecimento (`results/f7/tempos.json`).
+
+| Rodada | Tokens (entrada / saída) | Custo |
+|---|---|---|
+| LangGraph: 402 execuções + golden | 1.055.101 / 31.237 | US$ 0,121129 |
+| ADK: 402 execuções + golden | 1.077.948 / 31.343 | US$ 0,123466 |
+| Falhas injetadas no ADK (20) | 12.933 / 374 | US$ 0,001480 |
+| Aquecimento (3 + 3) | 11.886 / 334 | US$ 0,001356 |
+| **Avaliação final** | | **US$ 0,247431** (estimativa: ≤ US$ 0,42) |
+
+## F7 — fechamento
+
+| Parcela da F7 | Custo |
+|---|---|
+| Fumaça do passo 0 | US$ 0,000349 |
+| Rodada interrompida pelo Kaspersky, aquecimentos avulsos e diagnóstico | ≤ US$ 0,044139 |
+| Avaliação final | US$ 0,247431 |
+| **Total da F7** | **≤ US$ 0,291919** de US$ 1 |
+
+- **Acumulado do projeto: ≤ US$ 0,761122** de US$ 3.

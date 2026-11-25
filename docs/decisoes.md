@@ -175,3 +175,24 @@ Achados A1 e A3 da revisão independente sobre o HEAD `effdc6b`. Nada acima foi 
   escalar não muda a faixa. O complemento repetiu as mesmas falhas em 10 tickets de "IA sugere"
   (`results/f5/falhas_injetadas_ia_sugere.csv`). O veredicto recalculado com as duas tabelas está no campo novo
   `veredicto_com_complemento` de `results/f5/veredicto_q3.json`; o campo antigo não mudou.
+
+## F7 (2026-11-25): agente em Google ADK 2.0 (Q4)
+
+- **Ambiente separado:** `.venv-adk` com `requirements.txt` + `requirements-adk.txt` (`google-adk==2.14.1`,
+  `litellm==1.111.0` e as dependências que eles trazem). `pip check` limpo; o `.venv` principal não recebeu o ADK.
+- **Claude pelo LiteLLM** (`anthropic/claude-haiku-5-5`), não pelo conector nativo `Claude` do ADK, que exige projeto
+  GCP (fora de escopo na spec).
+- **Custos durante a fase (adendo, opção b):** só linhas "Acumulado da F7" em `docs/custos.md`; o "Acumulado do
+  projeto", o total do README e o valor esperado em `f6_somar_custos.py` e no teste mudam só no fechamento.
+- **Contornos do framework** (lista com motivo em `results/f7/esforco.json`): `LiteLlmPorRodada`, regras por resposta
+  num `BaseLlm`, `ToolBruta`, `skip_summarization`, `reg: Any` e `include_contents="none"`.
+- **Pastas de runtime separadas com as duas implementações intercaladas:** `TRIAGEM_RUNTIME_DIR` é global do processo,
+  então `scripts/f7_avaliar.py` troca `triagem.runtime_dir` do case por uma função que lê uma `ContextVar` fixada em
+  cada tarefa (`runtime_f7/langgraph` e `runtime_f7/adk`). A lógica do case não muda; o script confere no fim que
+  cada pasta tem só as chaves da própria implementação.
+- **Kaspersky (questão de ambiente, Gustavo, opção a):** a inspeção HTTPS do antivírus interceptava parte das conexões
+  para `api.anthropic.com`. O LiteLLM (certifi) rejeitava as interceptadas; o SDK do LangGraph não. A primeira
+  rodada foi interrompida em 146 de 804 (`results/f7/descartadas/`). O Gustavo excluiu `api.anthropic.com` da
+  inspeção; o ajuste de TLS que tinha sido posto no ADK saiu, e cada implementação ficou com a verificação padrão
+  dela. Antes da nova rodada: 20 + 20 handshakes (certifi e repositório do Windows), todos com emissor Google Trust
+  Services. Regra de parada da rodada: 3 ou mais erros de TLS ou conexão numa implementação.

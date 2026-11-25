@@ -1,0 +1,21 @@
+id,falha,exercitada,faixa_final,tentativas,causa,excecao,llm_rodou,faixa_politica,tokens_entrada,tokens_saida
+653,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,RuntimeError,True,IA sugere,1271,20
+653,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+884,recuperar_exemplos,False,IA sugere,0,,,True,IA sugere,1230,62
+884,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+1380,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,RuntimeError,True,IA sugere,1234,20
+1380,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+1742,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,RuntimeError,True,IA sugere,1224,20
+1742,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+2336,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,RuntimeError,True,IA sugere,1230,20
+2336,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+2533,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,RuntimeError,True,IA sugere,1214,20
+2533,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+3007,recuperar_exemplos,True,humano decide,1,escalado: erro de tool: RuntimeError,RuntimeError,True,IA sugere,1251,20
+3007,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+3045,recuperar_exemplos,False,IA sugere,0,,,True,IA sugere,1432,64
+3045,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+3292,recuperar_exemplos,False,IA sugere,0,,,True,IA sugere,1421,64
+3292,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
+3348,recuperar_exemplos,False,IA sugere,0,,,True,IA sugere,1426,64
+3348,timeout,True,humano decide,2,escalado: timeout,Timeout,True,IA sugere,0,0
